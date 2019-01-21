@@ -1,10 +1,14 @@
 <template>
   <div class="aside">
     <el-row style="margin-top: 15%">
-      <span style="font-size: 30px;font-style: inherit">{{ courseId }}</span>
+      <el-col>
+        <span style="font-size: 30px;font-style: inherit">{{ courseId }}</span>
+      </el-col>
     </el-row>
     <el-row style="margin-top: 10%">
-      <span class="subtitle">{{ assignmentDetail.name }}</span>
+      <el-col>
+        <span class="subtitle">{{ assignmentDetail.name }}</span>
+      </el-col>
     </el-row>
     <el-row style="margin-top: 15%">
       <el-col :span="5">
@@ -13,16 +17,6 @@
       <el-col :span="18">
         <el-breadcrumb>
           <el-breadcrumb-item :to="{ path: '/home/course/'+ this.assignmentDetail.uid}" style="font-size: 25px;">CourseList</el-breadcrumb-item>
-        </el-breadcrumb>
-      </el-col>
-    </el-row>
-    <el-row style="margin-top: 10%">
-      <el-col :span="5">
-        <i class="el-icon-star-on" style="margin-left: 10px"></i>
-      </el-col>
-      <el-col :span="15">
-        <el-breadcrumb>
-          <el-breadcrumb-item :to="{ path: '/home/course/' + this.assignmentDetail.uid + '/assignment/' + this.assignmentDetail.name }" style="font-size: 25px;color: black!important">Assignment</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
     </el-row>
