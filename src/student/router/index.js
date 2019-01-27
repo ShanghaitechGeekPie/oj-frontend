@@ -1,19 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/components/Home/Index'
-import course from '@/components/Course/Index'
-import score from '@/components/ScoreBoard/Index'
-import student from '@/components/StudentInfo'
-import submission from '@/components/Submission/Index'
-import instructor from '@/components/AddAssignment/Index'
+import index from '../components/Home/Index'
+import course from '../components/Course/Index'
+import score from '../components/ScoreBoard/Index'
+import student from '../components/StudentInfo'
+import submission from '../components/Submission/Index'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '*', // todo: page not found
-      name: 'HelloWorld',
+      path: '*',
+      name: 'notFound',
       component: index
     },
     {
@@ -40,11 +40,6 @@ export default new Router({
       path: '/home/course/:id/submission/:id',
       name: 'submissionHistory',
       component: submission
-    },
-    {
-      path: '/home/course/:id/instructor/:id',
-      name: 'instructorAddHomework',
-      component: instructor
     }
   ]
 })

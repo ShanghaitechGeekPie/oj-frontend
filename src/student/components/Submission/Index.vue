@@ -23,14 +23,14 @@
 </template>
 
 <script>
-import nav from '../Navigation'
+import nav from '../../../public/Navigation'
 import main from './Main'
 import aside from './Aside'
 
 export default {
   data () {
     return {
-      img: require('../../assets/logo.png'),
+      img: require('../../../assets/logo.png'),
       isCollapse: false,
       submission: [
       ],

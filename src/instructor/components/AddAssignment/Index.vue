@@ -9,7 +9,7 @@
       </el-row>
       <el-row :gutter="2">
         <el-col :span="4">
-          <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" style="float: left;margin: 0 5% 0 0">
+          <el-menu class="el-menu-vertical-demo" style="float: left;margin: 0 5% 0 0">
             <v-aside></v-aside>
         </el-menu>
         </el-col>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import nav from '../Navigation'
+import nav from '../../../public/Navigation'
 import state from './State'
 import aside from './Aside'
 import add from './Add'
@@ -30,7 +30,7 @@ import add from './Add'
 export default {
   data () {
     return {
-      img: require('../../assets/logo.png'),
+      img: require('../../../assets/logo.png'),
       change: true
     }
   },
@@ -41,12 +41,6 @@ export default {
     'v-add': add
   },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
-    },
     changeState: function (value) {
       this.change = value
     },
@@ -55,7 +49,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.change)
   }
 }
 </script>
