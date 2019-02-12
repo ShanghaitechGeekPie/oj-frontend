@@ -34,10 +34,10 @@ export default {
         uid: '',
         name: '',
         code: '',
-        semester: '',
-        year: 0,
+        semester: 'WinterFall',
+        year: 2013,
         homepage: '',
-        instructor: ['']
+        instructor: ['0', '0']
       }],
       student_id: 0
     }
@@ -48,16 +48,17 @@ export default {
       this.$router.push('home/course/' + course.uid)
     }
   },
-  props: ['coInfo'],
+  props: ['passCoInfo'],
   watch: {
-    coInfo: function name (newValue) {
+    passCoInfo: function name (newValue) {
       this.courseInfo = newValue
     }
+  },
+  created () {
+    this.courseInfo = this.passCoInfo
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this public only -->
 <style scoped>
   .home {
     display: flex;

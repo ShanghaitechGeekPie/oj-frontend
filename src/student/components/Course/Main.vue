@@ -1,16 +1,18 @@
 <template>
   <div>
-    <el-row style="margin: 4% 0 10px 0">
-      <el-col>
-        <div class="tle">
+    <el-row class="tle">
+      <el-col :span="7">
           <div style="margin-right: 5%;">
             <span style="font-size: 30px;" >{{ coInfo.name }}</span>
           </div>
-          <div class="blackline" style="margin-right: 5%"></div>
-          <div style="margin-top: 5px">
-            <span style="font-size: 20px;font-style: normal;">{{ coInfo.semester }}</span>
+      </el-col>
+      <el-col :span="2">
+          <div class="blackline"></div>
+      </el-col>
+      <el-col :span="15">
+          <div>
+            <span style="font-size: 35px;">{{ coInfo.semester }}</span>
           </div>
-        </div>
       </el-col>
     </el-row>
     <el-row>
@@ -29,8 +31,8 @@
           label="STATUS"
           width="180">
           <template slot-scope="scope">
-            <el-button :style="colors(scope.row.state)">
-              <router-link :to="getstate(scope.row.name)" style="text-decoration: none;color: white;">{{ scope.row.state }}</router-link>
+            <el-button :style="colors(scope.row.state)" @click="updateAss(scope.row)">
+              <router-link :to="getstate(scope.row)" style="text-decoration: none;color: white;">{{ scope.row.state }}</router-link>
             </el-button>
           </template>
         </el-table-column>
@@ -82,6 +84,8 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -94,9 +98,6 @@ export default {
         descr_link: ''
       }],
       coInfo: {
-        name: '',
-        group: '',
-        instructors: ['']
       },
       student_id: 0,
       show: false,
@@ -113,7 +114,7 @@ export default {
       window.location.href = scope.row.descr_link
     },
     getstate (path) {
-      return this.$route.path + '/submission/' + path
+      return this.$route.path + '/submission/' + path.uid
     },
     colors (situation) { // don't use state as the variable name
       if (situation === 'Failed') {
@@ -126,17 +127,19 @@ export default {
     },
     showPending () {
       this.show = !this.show
+    },
+    updateAss (info) {
+      this.$store.commit('updateAss', info)
     }
   },
-  props: ['courseInformation'],
   mounted () {
-    this.coInfo = this.courseInformation
-    this.student_id = this.$store.state.student_id
-    this.instructor = this.$store.state.instructor
+    this.coInfo = this.getCoInfo
+    this.student_id = this.getID
+    this.instructor = this.getInstr
   },
   created () {
-    if (this.$store.state.authorized) {
-      this.axios.get(`/course/${this.$store.state.student_id}/assignment/`)
+    if (this.getAuth) {
+      this.axios.get(`/course/${this.getID}/assignment/`)
         .then((response) => {
           this.coState = response.data
         })
@@ -144,8 +147,8 @@ export default {
           console.log(err)
         })
     }
-    if (this.$store.state.authorized) {
-      this.axios.get(`/course/${this.$store.state.coInfo.uid}/queue/`)
+    if (this.getAuth) {
+      this.axios.get(`/course/${this.getUid}/queue/`)
         .then((response) => {
           this.pendingList = response.data
         })
@@ -153,7 +156,14 @@ export default {
           console.log(err)
         })
     }
-  }
+  },
+  computed: mapState({
+    getAuth: state => state.isAuthorized,
+    getID: state => state.student_id,
+    getUid: state => state.coInfo.uid,
+    getInstr: state => state.instructor,
+    getCoInfo: state => state.coInfo
+  })
 }
 </script>
 <style scoped>
@@ -162,10 +172,12 @@ export default {
     background-color: black;
     width: 1px;
     margin-top: 5px;
+    margin-right: 5%;
   }
   .tle {
     display: flex;
     flex-direction: row;
+    margin: 4% 0 10px 0;
   }
   .name{
     border: none!important;

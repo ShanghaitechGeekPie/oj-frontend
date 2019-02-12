@@ -46,55 +46,82 @@ const returnCourseAssignment = function () {
   return assignments
 }
 
-const returnSubmissionHistory = function () {
-  let submissionHistorys = []
-  for (let i = 0; i <= 7; i++) {
-    let submissionHistory = {
-      'git_commit_id': Random.word(25, 40),
-      'course_uid': Random.word(25, 40),
-      'message': Random.sentence(30, 100),
-      'score': Random.natural(10, 100),
-      'overall_score': Random.natural(100, 120),
-      'submission_time': Random.date(),
-      'delta': Random.natural(0, 20)
+const returnInstructors = function () {
+  let instructors = []
+  for (let i = 0; i <= 4; i++) {
+    let instructor = {
+      'uid': Random.guid(),
+      'name': Random.name(),
+      'email': Random.email()
     }
-    submissionHistorys.push(submissionHistory)
+    instructors.push(instructor)
   }
-  return submissionHistorys
+  return instructors
 }
 
-const returnAssignmentScoreboard = function () {
-  let scoreBoard = []
-  for (let i = 0; i <= 34; i++) {
+const returnAssignments = function () {
+  let list = []
+  for (let i = 0; i <= 6; i++) {
     let scores = {
-      'nickname': Random.name(),
-      'score': Random.natural(10, 100),
-      'overall_score': Random.natural(100, 120),
-      'submission_time': Random.date(),
-      'delta': Random.natural(0, 10)
+      'uid': Random.guid(),
+      'course_id': Random.guid(),
+      'name': Random.name(),
+      'deadline': Random.date(),
+      'release_date': Random.date(),
+      'descr_link': Random.url()
     }
-    scoreBoard.push(scores)
+    list.push(scores)
   }
-  return scoreBoard
+  return list
 }
 
-const returnPendingAssignment = function () {
-  let pendingList = []
+const returnStudentList = function () {
+  let studentList = []
   for (let i = 0; i <= 12; i++) {
     let list = {
-      'submitter': Random.name(),
-      'git_commit_id': Random.word(25, 40),
-      'course_id': Random.word(25, 40),
-      'submission_time': Random.date()
+      'name': Random.name(),
+      'uid': Random.guid(),
+      'email': Random.email(),
+      'student_id': Random.natural(2018000000, 2018999999)
     }
-    pendingList.push(list)
+    studentList.push(list)
   }
-  return pendingList
+  return studentList
 }
 
-// Mock.mock( url, post/get , 返回的数据)；
-Mock.mock(/course\/[0-9]+\/assignment\/[0-9]+\/scores/, 'get', returnAssignmentScoreboard())
-Mock.mock(/student\/[0-9]+\/course\/[0-9]+\/assignment\/[0-9]+\/history/, 'get', returnSubmissionHistory)
-Mock.mock(/student\/[0-9]+\/course/, 'get', returnStudentCourseList)
+const returnInstructor = function () {
+  return {
+    'uid': Random.guid(),
+    'name': Random.name(),
+    'email': Random.email()
+  }
+}
+
+const returnAddAssignment = function () {
+  return {
+    'uid': Random.guid()
+  }
+}
+
+const returnJudges = function () {
+  let judgeList = []
+  for (let i = 0; i <= 12; i++) {
+    let judge = {
+      'uid': Random.guid(),
+      'host': Random.ip(),
+      'cert': Random.name(),
+      'max_job': Random.natural(1, 6)
+    }
+    judgeList.push(judge)
+  }
+  return judgeList
+}
+// Mock.mock( url, post/get , 返回的数据);
+Mock.mock(/judge/, 'get', returnJudges)
+Mock.mock(/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+/, 'post', returnAddAssignment)
+Mock.mock(/course\/[-0-9a-zA-Z]+\/instructor\/[-0-9a-zA-Z]+/, 'get', returnInstructor)
+Mock.mock(/instructor\/[0-9a-zA-Z]+\/course/, 'get', returnStudentCourseList)
+Mock.mock(/course\/[0-9]+\/students/, 'get', returnStudentList())
+Mock.mock(/course\/[-0-9a-zA-Z]+\/assignment/, 'get', returnAssignments())
+Mock.mock(/course\/[-0-9a-zA-Z]+\/instructor/, 'get', returnInstructors)
 Mock.mock(/course\/[a-zA-Z0-9]+\/assignment/, 'get', returnCourseAssignment)
-Mock.mock(/course\/[-a-zA-Z0-9]+\/queue/, 'get', returnPendingAssignment())

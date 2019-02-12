@@ -10,11 +10,11 @@ const vuexLocal = new VuexPersistence({
 
 const store = new Vuex.Store({
   state: {
-    authorized: true,
+    isAuthorized: true,
     root: false,
     courseId: 'CS110',
     student_id: '2018533110',
-    instructor: false,
+    isInstructor: false,
     coInfo: {
       uid: '',
       instructor: [''],
@@ -23,11 +23,21 @@ const store = new Vuex.Store({
       semester: '',
       year: 0,
       homepage: ''
+    },
+    assignments: {
+      name: '',
+      uid: '',
+      deadline: 0,
+      release_date: 0,
+      descr_link: ''
     }
   },
   mutations: {
     updateCoInfo (state, value) {
       state.coInfo = value
+    },
+    updateAss (state, value) {
+      state.assignments = value
     }
   },
   plugins: [vuexLocal.plugin]
