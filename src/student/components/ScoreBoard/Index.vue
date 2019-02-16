@@ -1,8 +1,8 @@
 <template>
   <div class="index">
-    <el-row style="height: 100%" :gutter="2">
-      <el-col :span="4" style="margin-right: 10%">
-          <el-menu style="float: left;margin-right: 5%;width: 200px;min-height: 400px;">
+    <el-row class="row-height" :gutter="2">
+      <el-col :span="4" class="col-one">
+          <el-menu class="menu-only">
             <v-aside></v-aside>
           </el-menu>
       </el-col>
@@ -20,11 +20,8 @@ import aside from './Aside'
 export default {
   data () {
     return {
-      img: require('../../../assets/logo.png'),
       coInfo: {
-      },
-      scoreInfo: [
-      ]
+      }
     }
   },
   components: {
@@ -40,4 +37,16 @@ export default {
 }
 </script>
 <style scoped>
+  .row-height {
+    height: 100%;
+  }
+  .col-one {
+    margin-right: 10%;
+  }
+  .menu-only {
+    float: left;
+    margin-right: 5%;
+    width: 200px;
+    min-height: 400px;
+  }
 </style>

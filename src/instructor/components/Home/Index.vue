@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-row style="height: 100%" :gutter="2">
-      <el-col :span="4" style="margin-right: 5%">
-          <el-menu class="el-menu-vertical-demo" style="float: left;margin: 0 5% 0 0">
+    <el-row class="row-main" :gutter="2">
+      <el-col :span="4" class="col-quarter">
+          <el-menu class="el-menu-vertical-demo">
             <v-aside></v-aside>
           </el-menu>
       </el-col>
@@ -21,7 +21,6 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      img: require('../../../assets/logo.png'),
       courseInfo: {}
     }
   },
@@ -32,10 +31,11 @@ export default {
   },
   computed: mapState({
     getAuth: state => state.isAuthorized,
-    getID: state => state.student_id
+    getID: state => state.baseInfo.uid,
+    getState: state => state.baseInfo.isInstructor
   }),
   created () {
-    if (this.getAuth) {
+    if (this.getAuth && this.getState) {
       this.axios({
         method: 'GET',
         url: `/instructor/${this.getID}/course/`
@@ -55,5 +55,15 @@ export default {
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     min-width: 100px;
     min-height: 1000px;
+  }
+  .row-main {
+    height: 100%;
+  }
+  .el-menu-vertical-demo {
+    float: left!important;
+    margin: 0 5% 0 0!important;
+  }
+  .col-quarter {
+    margin-right: 5%;
   }
 </style>

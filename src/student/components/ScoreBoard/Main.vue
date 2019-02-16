@@ -1,15 +1,15 @@
 <template>
   <div>
-    <el-row style="margin: 5% 0 2% 0">
+    <el-row class="row-main">
       <el-col>
-        <span style="font-size: 35px;font-style: inherit ">ScoreBoard</span>
+        <span class="title-main">ScoreBoard</span>
       </el-col>
     </el-row>
     <el-row>
       <el-col>
         <el-table
         :data="scoreInfo.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-        style="width: 100%;background-color: #606266"
+        class="table-only"
         highlight-current-row
         border-top
         v-loading="loading"
@@ -42,7 +42,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col style="position: center!important;">
+      <el-col>
         <el-pagination
         background
         :page-size="pagesize"
@@ -56,6 +56,8 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -68,15 +70,13 @@ export default {
       }],
       loading: false, // todo:loading related functions
       currentPage: 1,
-      pagesize: 10,
+      pagesize: 20,
       total: 0
     }
   },
   created () {
-    let courseId = 0
-    let assignmentId = 0 // todo:specified axios
     if (this.getAuth) {
-      this.axios.get(`/course/${courseId}/assignment/${assignmentId}/scores/`)
+      this.axios.get(`/course/${this.getUid}/assignment/${this.getAssUid}/scores/`)
         .then((response) => {
           this.scoreInfo = response.data
           // 很诡异 只有这种写法跑的起来(非同步跟新)
@@ -93,12 +93,25 @@ export default {
     },
     handleSizeChange (val) {
       this.pagesize = val
-    },
-    getAuth () {
-      return this.$store.state.isAuthorized
     }
-  }
+  },
+  computed: mapState({
+    getAuth: state => state.isAuthorized,
+    getUid: state => state.coInfo.uid,
+    getAssUid: state => state.assignments.uid
+  })
 }
 </script>
-<style>
+<style scoped>
+  .row-main {
+    margin: 5% 0 2% 0;
+  }
+  .title-main {
+    font-size: 35px;
+    font-style: inherit;
+  }
+  .table-only {
+    width: 100%;
+    background-color: #606266;
+  }
 </style>
