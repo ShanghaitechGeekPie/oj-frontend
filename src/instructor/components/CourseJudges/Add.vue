@@ -10,9 +10,15 @@
     </el-row>
     <el-row class="row-quarter">
       <el-col>
-        <el-form :model="judgeInfo" status-icon :rules="rules" ref="judgeInfo" label-width="100px">
+        <el-form :model="judgeInfo" status-icon :rules="rules" ref="judgeInfo">
           <el-form-item label="Uid:" prop="uid">
-            <el-input type="text" v-model="judgeInfo.uid" autocomplete="off"></el-input>
+            <el-select v-model="judgeInfo.uid" placeholder="请选择服务器">
+              <el-option
+                v-for="item in judgeInfo"
+                :key="item.uid"
+                :value="item.uid">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('judgeInfo')">提交</el-button>
@@ -41,16 +47,7 @@ export default {
         uid: ''
       },
       rules: {
-        name: [
-          {validator: check, trigger: 'blur'}
-        ],
         uid: [
-          { validator: check, trigger: 'blur' }
-        ],
-        email: [
-          { validator: check, trigger: 'blur' }
-        ],
-        student_id: [
           { validator: check, trigger: 'blur' }
         ]
       }
@@ -80,8 +77,11 @@ export default {
             }).then((response) => {
               if (response.status === 200) {
                 alert('submit!')
-              } else if (response.status === 403) {
-                // todo: 跳转报错页面（%参数加上当前页面地址）
+                window.location.reload()
+              } else if (response.status === 401) {
+                this.$router.push('/unauthorized')
+              } else {
+                this.$router.push('/error')
               }
             })
           }
@@ -93,6 +93,23 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    }
+  },
+  created () {
+    if (this.getAuth) {
+      this.axios.get(`/judge/`)
+        .then((response) => {
+          if (response.status === 200) {
+            this.judgeInfo = response.data
+          } else if (response.status === 401) {
+            this.$router.push('/unauthorized')
+          } else {
+            this.$router.push('/error')
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   computed: mapState({
@@ -121,5 +138,8 @@ export default {
   }
   .title-back {
     color: white;
+  }
+  .title-sub {
+    font-size: 20px;
   }
 </style>

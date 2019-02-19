@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       judgeList: [{
-        uid: '3545'
+        uid: ''
       }],
       childChange: false
     }
@@ -61,14 +61,14 @@ export default {
         if (this.getAuth) {
           this.axios({
             methods: 'delete',
-            url: `/course/${this.getUid}/judge/${rows.uid}`,
-            data: rows.splice(index, 1)
+            url: `/course/${this.getUid}/judge/${rows.uid}`
           })
             .then((response) => {
               this.$message({
                 type: 'success',
                 message: '删除成功!'
               })
+              rows.splice(index, 1)
             })
             .catch((err) => {
               console.log(err)
@@ -98,7 +98,13 @@ export default {
     if (this.getAuth) {
       this.axios.get(`/course/${this.getUid}/judge/`)
         .then((response) => {
-          this.judgeList = response.data
+          if (response.status === 200) {
+            this.judgeList = response.data
+          } else if (response.status === 401) {
+            this.$router.push('/unauthorized')
+          } else {
+            this.$router.push('/error')
+          }
         })
         .catch((err) => {
           console.log(err)

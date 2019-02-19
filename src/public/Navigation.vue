@@ -24,12 +24,12 @@
                   <el-menu-item index="/profile" v-if="!profilePage">Profile</el-menu-item>
                   <el-menu-item index="/" v-else>Dashboard</el-menu-item>
                   <el-menu-item index="/" v-if="profilePage" @click="goBack">Go back</el-menu-item>
-                  <el-menu-item index="/" @click="logout">Log out</el-menu-item>
+                  <el-menu-item index="/" @click="logout">Logout</el-menu-item>
                 </el-submenu>
               </el-menu>
           </el-col>
          <el-col v-else>
-           <el-button @click="login" class="button-login">Login in</el-button>
+           <el-button @click="login" class="button-login">Login</el-button>
          </el-col>
    </el-row>
  </div>
@@ -41,8 +41,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      img: require('../assets/logo.png'),
-      isAuth: false
+      img: require('../assets/logo.png')
     }
   },
   computed: mapState({
@@ -50,6 +49,7 @@ export default {
     getID: state => state.baseInfo.uid,
     getUid: state => state.coInfo.uid,
     getCoInfo: state => state.coInfo,
+    getReq: state => state.isRequest,
     profilePage () {
       return (this.$route.name === 'instrProfile') || (this.$route.name === 'profile')
     }
@@ -57,14 +57,49 @@ export default {
   methods: {
     logout () {
       this.$store.commit('logOut')
+      this.$store.commit('changeRequest')
       window.location.reload()
     },
     goBack () {
       this.$router.go(-2)
     },
     login () {
-      this.$store.commit('login')
-      window.location.reload() // another solution: vuex + watch
+      if (!this.getAuth) {
+        this.axios({
+          method: 'get',
+          url: `/user/login/oauth/param`
+        }).then((response) => {
+          if (response.status === 200) {
+            this.$store.commit('login')
+            window.location.href = response.data.login_url
+          } else {
+            this.$router.push('/error')
+          }
+        })
+      }
+    }
+  },
+  created () {
+    if (this.getAuth && !this.getReq) {
+      this.axios({
+        method: 'get',
+        url: `/user/role`
+      }).then((response) => {
+        if (response.status === 200) {
+          this.$store.commit('changeRequest')
+          if (response.data.is_student) {
+            this.$store.commit('updateStudent', response.data.uid)
+            window.location.href = 'http://localhost:8080/#/' // todo: add url
+          } else {
+            this.$store.commit('updateInstructor', response.data.uid)
+            window.location.href = 'http://localhost:8080/instructor.html#/' // todo: add url
+          }
+        } else if (response.status === 401) {
+          this.$router.push('/unauthorized')
+        } else {
+          this.$router.push('/error')
+        }
+      })
     }
   }
 }

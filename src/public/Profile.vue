@@ -89,9 +89,10 @@ export default {
         }).then((response) => {
           if (response.status === 200) {
             this.Info = response.data
+          } else if (response.status === 401) {
+            this.$router.push('/unauthorized')
           } else {
-            // （todo: 跳转报错页面（%参数加上当前页面地址)） 未测试
-            this.$router.push({path: '/403', query: { path: this.$route.path }})
+            this.$router.push('/error')
           }
         })
       } else {
@@ -101,9 +102,10 @@ export default {
         }).then((response) => {
           if (response.status === 200) {
             this.Info = response.data
+          } else if (response.status === 401) {
+            this.$router.push('/unauthorized')
           } else {
-            // （todo: 跳转报错页面（%参数加上当前页面地址)） 未测试
-            this.$router.push({path: '/403', query: { path: this.$route.path }})
+            this.$router.push('/error')
           }
         })
       }

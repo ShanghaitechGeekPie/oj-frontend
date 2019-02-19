@@ -54,10 +54,10 @@ export default {
   data () {
     return {
       studentList: [{
-        uid: '3545',
-        name: 'willion',
-        email: 'jbk@qq.com',
-        student_id: '23565765875'
+        uid: '',
+        name: '',
+        email: '',
+        student_id: ''
       }],
       childChange: false
     }
@@ -72,14 +72,14 @@ export default {
         if (this.getAuth) {
           this.axios({
             methods: 'delete',
-            url: `/course/${this.getUid}/students/${rows.uid}`,
-            data: rows.splice(index, 1) // todo: Is data required?
+            url: `/course/${this.getUid}/students/${rows.uid}`
           })
             .then((response) => {
               this.$message({
                 type: 'success',
                 message: '删除成功!'
               })
+              rows.splice(index, 1)
             })
             .catch((err) => {
               console.log(err)
@@ -109,7 +109,13 @@ export default {
     if (this.getAuth) {
       this.axios.get(`/course/${this.getUid}/students/`)
         .then((response) => {
-          this.studentList = response.data
+          if (response.status === 200) {
+            this.studentList = response.data
+          } else if (response.status === 401) {
+            this.$router.push('/unauthorized')
+          } else {
+            this.$router.push('/error')
+          }
         })
         .catch((err) => {
           console.log(err)
