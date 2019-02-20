@@ -1,6 +1,6 @@
 FROM node:10.15-stretch
 
-RUN apt update && apt install nginx
+RUN apt update && apt upgrade -y && apt install -y nginx
 COPY nginx.conf /etc/nginx/
 COPY site.conf /etc/nginx/sites-enabled
 EXPOSE 80
