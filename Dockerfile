@@ -5,5 +5,7 @@ COPY nginx.conf /etc/nginx/
 COPY site.conf /etc/nginx/sites-enabled
 EXPOSE 80
 
+
+COPY . /oj-frontend
 WORKDIR /oj-frontend
 RUN npm install && npm run build
