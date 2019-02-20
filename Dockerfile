@@ -10,4 +10,4 @@ COPY . /oj-frontend
 WORKDIR /oj-frontend
 RUN npm install && npm run build
 
-CMD nginx -g daemon off
+CMD nginx -g "daemon off;"
