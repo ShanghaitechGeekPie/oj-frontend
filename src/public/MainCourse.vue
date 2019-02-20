@@ -13,10 +13,10 @@
        <el-card class="box-card" v-for="a in courseInfo" :key="a.uid">
          <el-button class="button-course" @click="toCourse(a)">
                 <el-row class="row-button">
-                  <span class="title-sub">{{ a.name }}</span>
+                  <span class="title-sub">{{ a.code }}</span>
                 </el-row>
                 <el-row class="row-seb">
-                    <span class="title-forth">{{ a.code }}</span>
+                    <span class="title-forth">{{ a.name }}</span>
                 </el-row>
                 <el-row class="button-third" type="flex">
                     <span class="title-fifth">{{ a.instructor[0] }} {{ a.instructor[1] }}</span>
@@ -100,7 +100,7 @@ export default {
     margin: 20px 0 0 4%;
   }
   .button-third {
-    background-color: black;
+    background-color: #303133;
     height: 80px;
   }
   .title-forth {

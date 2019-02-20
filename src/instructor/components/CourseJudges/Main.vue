@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       judgeList: [{
-        uid: ''
+        uid: '3545'
       }],
       childChange: false
     }
