@@ -82,7 +82,7 @@ export default {
     margin: 3% 2% 5% 0!important;
   }
   .button-course {
-    background-color: #fff1f1;
+    background-color: #f6f0f0;
     height: 250px;
     width: 400px;
     padding: 0 0 0 0;
@@ -100,7 +100,7 @@ export default {
     margin: 20px 0 0 4%;
   }
   .button-third {
-    background-color: #303133;
+    background-color: #870d0d;
     height: 80px;
   }
   .title-forth {

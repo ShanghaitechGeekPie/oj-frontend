@@ -48,6 +48,12 @@
             </el-date-picker>
           </el-form-item>
           <el-form-item>
+            <el-collapse v-model="assignmentInfo" @change="handleChange" class="collapse">
+              <el-collapse-item title="Existing Judges" name="1">
+              </el-collapse-item>
+            </el-collapse>
+          </el-form-item>
+          <el-form-item>
             <el-button type="primary" @click="submitForm('assignmentInfo')">提交</el-button>
             <el-button @click="resetForm('assignmentInfo')">重置</el-button>
           </el-form-item>
@@ -133,7 +139,7 @@ export default {
           if (this.getAuth) {
             this.axios({
               method: 'post',
-              url: `/course/${this.getUid}/assignment/`,
+              url: `${this.Api}/course/${this.getUid}/assignment/`,
               data: this.assignmentInfo
             }).then((response) => {
               if (response.status === 200) {
@@ -172,7 +178,7 @@ export default {
       this.steps += 1
       this.axios({
         method: 'post',
-        url: `/course/${this.getUid}/assignment/${this.reply.uid}`,
+        url: `${this.Api}/course/${this.getUid}/assignment/${this.reply.uid}`,
         data: {state: 2}
       })
       const loading = this.$loading({
@@ -190,7 +196,8 @@ export default {
   computed: mapState({
     getUid: state => state.coInfo.uid,
     getAuth: state => state.isAuthorized,
-    getID: state => state.baseInfo.uid
+    getID: state => state.baseInfo.uid,
+    Api: state => state.api
   })
 }
 </script>
@@ -227,5 +234,8 @@ export default {
     background-color: #A40004;
     float: right;
     color: white;
+  }
+  .collapse {
+    width: 200px;
   }
 </style>

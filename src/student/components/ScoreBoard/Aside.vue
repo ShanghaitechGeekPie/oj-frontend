@@ -36,12 +36,14 @@
         <i class="el-icon-info"></i>
       </el-col>
       <el-col :span="18">
-        <router-link class="instr" :to="{ path: '/instrProfile', query: { instr_uid: a.uid }}">{{ a.name }}</router-link>
+        <router-link class="instr" :to="{ path: '/instrProfile', query: { instr_uid: a.email }}">{{ a.name }}</router-link>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -59,7 +61,7 @@ export default {
     if (this.getAuth) {
       this.axios({
         method: 'GET',
-        url: `/course/${this.coInfo.uid}/instructor/`
+        url: `${this.Api}/course/${this.coInfo.uid}/instructor/`
       }).then((response) => {
         if (response.status === 200) {
           this.instructors = response.data
@@ -71,14 +73,11 @@ export default {
       })
     }
   },
-  computed: {
-    getCoInfo () {
-      return this.$store.state.coInfo
-    },
-    getAuth () {
-      return this.$store.state.isAuthorized
-    }
-  }
+  computed: mapState({
+    getAuth: state => state.isAuthorized,
+    getCoInfo: state => state.coInfo,
+    Api: state => state.api
+  })
 }
 </script>
 <style scoped>
@@ -107,9 +106,6 @@ export default {
     margin-top: 10%;
   }
   .el-icon-menu {
-    margin-left: 10px!important;
-  }
-  .el-icon-star-on {
     margin-left: 10px!important;
   }
   .row-quarter {

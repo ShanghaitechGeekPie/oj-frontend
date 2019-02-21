@@ -10,6 +10,29 @@
           </el-tooltip>
         </el-col>
       </el-row>
+      <el-row class="row-only">
+        <el-col>
+          <el-card class="card-only">
+            <el-collapse :v-model="judgeInfo">
+              <el-collapse-item title="Host" name="1">
+                <span>{{ judgeInfo.host}}</span>
+              </el-collapse-item>
+              <el-collapse-item title="Client cert" name="2">
+                <span>{{ judgeInfo.client_cert}}</span>
+              </el-collapse-item>
+              <el-collapse-item title="Cert CA" name="3">
+                <span>{{ judgeInfo.cert_ca}}</span>
+              </el-collapse-item>
+              <el-collapse-item title="Client key" name="4">
+                <span>{{ judgeInfo.client_key}}</span>
+              </el-collapse-item>
+              <el-collapse-item title="Max job" name="5">
+                <span>{{ judgeInfo.max_job}}</span>
+              </el-collapse-item>
+            </el-collapse>
+          </el-card>
+        </el-col>
+      </el-row>
       <el-row class="row-quarter">
         <el-col>
           <el-table
@@ -30,6 +53,13 @@
             :formatter="timestampToTime2"
             label="DUE"
             >
+          </el-table-column>
+            <el-table-column
+            label="Judges"
+            width="120">
+            <template slot-scope="scope">
+              <v-judge :passAssUID="scope.row.uid" v-on:reJudges="loadJudges"></v-judge>
+            </template>
           </el-table-column>
           <el-table-column
             fixed="right"
@@ -52,18 +82,27 @@
 
 <script>
 import { mapState } from 'vuex'
+import request from './AssJudges'
 
 export default {
   data () {
     return {
       childChange: false,
-      coState: [{
-        name: '',
-        descr_link: '',
-        release_date: '',
-        deadline: '',
-        uid: '',
-        course_uid: ''
+      store: [],
+      coState: [],
+      judgeInfo: {
+        host: 'Please choose on of your judges',
+        client_cert: 'Please choose on of your judges',
+        cert_ca: 'Please choose on of your judges',
+        client_key: 'Please choose on of your judges',
+        max_job: 'Please choose on of your judges'
+      },
+      judgeList: [{
+        host: '',
+        client_cert: '',
+        cert_ca: '',
+        client_key: '',
+        max_job: ''
       }]
     }
   },
@@ -109,7 +148,7 @@ export default {
         if (this.getAuth) {
           this.axios({
             methods: 'delete',
-            url: `/course/${this.getUid}/assignment/${rows.uid}/`
+            url: `${this.Api}/course/${this.getUid}/assignment/${rows[index].uid}/`
           })
             .then((response) => {
               this.$message({
@@ -131,11 +170,17 @@ export default {
     },
     getpath (scope) {
       window.location.href = scope.row.descr_link
+    },
+    loadJudges (data) {
+      this.judgeInfo = data
     }
+  },
+  components: {
+    'v-judge': request
   },
   created () {
     if (this.getAuth) {
-      this.axios.get(`/course/${this.getUid}/assignment/`)
+      this.axios.get(`${this.Api}/course/${this.getUid}/assignment/`)
         .then((response) => {
           if (response.status === 200) {
             this.coState = response.data
@@ -150,9 +195,15 @@ export default {
         })
     }
   },
+  watch: {
+    coState: function name (newValue) {
+      this.coState = newValue
+    }
+  },
   computed: mapState({
     getAuth: state => state.isAuthorized,
-    getUid: state => state.coInfo.uid
+    getUid: state => state.coInfo.uid,
+    Api: state => state.api
   })
 }
 </script>
@@ -176,5 +227,12 @@ export default {
   .name{
     border: none!important;
     padding: 0 0 2px 0!important;
+  }
+  .row-only {
+    margin-top: 2%;
+    margin-right: 10%;
+  }
+  .card-only {
+    padding: 0 10px 0 10px;
   }
 </style>
