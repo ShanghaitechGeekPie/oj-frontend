@@ -74,7 +74,7 @@ const returnStudentList = function () {
     let list = {
       'name': Random.name(),
       'uid': Random.guid(),
-      'email': Random.email(),
+      'enroll_email': Random.email(),
       'student_id': Random.natural(2018000000, 2018999999)
     }
     studentList.push(list)
@@ -86,7 +86,7 @@ const returnInstructor = function () {
   return {
     'uid': Random.guid(),
     'name': Random.name(),
-    'email': Random.email()
+    'enroll_email': Random.email()
   }
 }
 
@@ -118,7 +118,7 @@ const returnInstructorList = function () {
     let list = {
       'name': Random.name(),
       'uid': Random.guid(),
-      'email': Random.email()
+      'enroll_email': Random.email()
     }
     List.push(list)
   }
@@ -129,7 +129,12 @@ const returnCourseJudge = function () {
   let List = []
   for (let i = 0; i <= 6; i++) {
     let list = {
-      'uid': Random.guid()
+      'uid': Random.guid(),
+      'host': Random.ip(),
+      'cert_ca': Random.name(),
+      'client_cert': Random.name(),
+      'client_key': Random.name(),
+      'max_job': Random.natural(1, 6)
     }
     List.push(list)
   }
@@ -144,11 +149,6 @@ const returnRole = function () {
   }
 }
 
-const login = function () {
-  return {
-    'login_url': Random.url()
-  }
-}
 
 const returnJudgeInfo = function () {
   return {
@@ -166,7 +166,6 @@ Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+\/judg
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+\/judge/, 'get', returnJudges)
 Mock.mock(/[-0-9a-zA-Z]+\/judge\/[-0-9a-zA-Z]+/, 'get', returnJudgeInfo)
 Mock.mock(/[-0-9a-zA-Z]+\/instructor\/[-0-9a-zA-Z]+\/course/, 'post', 'success')
-Mock.mock(/[-0-9a-zA-Z:]+\/user\/login\/oauth\/param/, 'get', login)
 Mock.mock(/[-0-9a-zA-Z]+\/user\/role/, 'get', returnRole)
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/students/, 'post', 'success')
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/instructor\/[-0-9a-zA-Z]+/, 'post', 'success')

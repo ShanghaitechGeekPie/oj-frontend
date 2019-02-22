@@ -35,6 +35,7 @@ const returnCourseAssignment = function () {
     let assignment = {
       'uid': Random.guid(),
       'course_uid': courseId,
+      'short_name': Random.name(),
       'name': Random.name(),
       'descr_link': 'http://www.baidu.com',
       'score': Random.natural(0, 5),
@@ -121,14 +122,7 @@ const returnRole = function () {
   }
 }
 
-const login = function () {
-  return {
-    'login_url': Random.url()
-  }
-}
-
 // Mock.mock( url, post/get , 返回的数据)
-Mock.mock(/[-0-9a-zA-Z:]+\/user\/login\/oauth\/param/, 'get', login)
 Mock.mock(/[-0-9a-zA-Z]+\/user\/role/, 'get', returnRole)
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+\/scores/, 'get', returnAssignmentScoreboard())
 Mock.mock(/[-0-9a-zA-Z]+\/student\/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+\/history/, 'get', returnSubmissionHistory)
