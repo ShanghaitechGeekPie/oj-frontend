@@ -40,15 +40,15 @@
           style="width: 100%"
           stripe>
           <el-table-column
-            prop="host"
-            label="Host">
+            prop="uid"
+            label="UID">
           </el-table-column>
             <el-table-column
             label="显示详情"
             width="120">
             <template slot-scope="scope">
               <el-button
-                @click="showData(scope.$index)"
+                @click="showData(scope.row)"
                 type="text"
                 size="small">
                 显示详情
@@ -135,8 +135,22 @@ export default {
         this.$emit('changeState', this.childChange)
       }, 500)
     },
-    showData (index) {
-      this.judgeInfo = this.judgeList[index]
+    showData (judge) {
+      if (this.getAuth) {
+        this.axios.get(`${this.Api}/judge/${judge.uid}`)
+          .then((response) => {
+            if (response.status === 200) {
+              this.judgeInfo = response.data
+            } else if (response.status === 401) {
+              this.$router.push('/unauthorized')
+            } else {
+              this.$router.push('/error')
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
     }
   },
   created () {
