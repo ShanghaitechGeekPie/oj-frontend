@@ -37,7 +37,8 @@
         <el-col>
           <el-table
           :data="coState"
-          style="width: 90%">
+          style="width: 90%"
+          class="table-only">
           <el-table-column label="NAME" fix>
           <template slot-scope="scope" >
             <el-button @click="getpath(scope)" class="name">{{ scope.row.name }}</el-button>
@@ -234,5 +235,8 @@ export default {
   }
   .card-only {
     padding: 0 10px 0 10px;
+  }
+  .table-only {
+
   }
 </style>
