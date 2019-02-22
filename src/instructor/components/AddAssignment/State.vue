@@ -222,11 +222,11 @@ export default {
     background-color: #A40004;
   }
   .el-icon-plus {
-    color: white!important;
+    color: white !important;
   }
   .name{
-    border: none!important;
-    padding: 0 0 2px 0!important;
+    border: none !important;
+    padding: 0 0 2px 0 !important;
   }
   .row-only {
     margin-top: 2%;
