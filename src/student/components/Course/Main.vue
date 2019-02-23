@@ -51,7 +51,7 @@
     <el-row style="margin-top: 10%">
       <el-col>
         <el-tooltip class="item" effect="dark" content="A list for those who made some mistakes" placement="left">
-          <el-button size="mini" @click="showPending" class="button-shot">Show shot list</el-button>
+          <el-button size="mini" @click="showPending" class="button-shot">Show list</el-button>
         </el-tooltip>
       </el-col>
     </el-row>
@@ -156,7 +156,7 @@ export default {
         })
     }
     if (this.getAuth) {
-      this.axios.get(`${this.Api}/course/${this.getUid}/queue/`)
+      this.axios.get(`${this.Api}/course/${this.getUid}/queue`)
         .then((response) => {
           if (response.status === 200) {
             this.pendingList = response.data
