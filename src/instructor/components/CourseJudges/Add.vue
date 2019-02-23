@@ -58,7 +58,6 @@ export default {
       }, 500)
     },
     submitForm () {
-      console.log([{uid: this.resultUID}])
       if (this.getAuth) {
         this.axios({
           method: 'post',
