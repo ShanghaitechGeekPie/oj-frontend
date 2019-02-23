@@ -21,7 +21,7 @@
             label="name">
           </el-table-column>
           <el-table-column
-            prop="email"
+            prop="enroll_email"
             label="email">
           </el-table-column>
             <el-table-column
@@ -52,7 +52,7 @@ export default {
       instructorList: [{
         uid: '',
         name: '',
-        email: ''
+        enroll_email: ''
       }],
       childChange: false
     }
