@@ -90,7 +90,7 @@ export default {
           if (this.getAuth) {
             this.axios({
               method: 'post',
-              url: `${this.Api}/course/${this.getUid}/student/`,
+              url: `${this.Api}/course/${this.getUid}/students/`,
               data: this.studentInfo
             }).then((response) => {
               if (response.status === 200) {
