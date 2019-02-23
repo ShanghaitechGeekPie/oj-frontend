@@ -149,7 +149,7 @@ export default {
         if (this.getAuth) {
           this.axios({
             methods: 'delete',
-            url: `${this.Api}/course/${this.getUid}/assignment/${rows[index].uid}/`
+            url: `${this.Api}/course/${this.getUid}/assignment/${rows[index].uid}`
           })
             .then((response) => {
               this.$message({
@@ -157,6 +157,7 @@ export default {
                 message: '删除成功!'
               })
               rows.splice(index, 1)
+              window.location.reload() // todo: bug here
             })
             .catch((err) => {
               console.log(err)
