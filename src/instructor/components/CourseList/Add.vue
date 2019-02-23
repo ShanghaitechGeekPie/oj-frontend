@@ -55,7 +55,7 @@ export default {
     return {
       studentInfo: {
         name: '',
-        enroll_email: '@shanghaitech.edu.cn',
+        enroll_email: '',
         student_id: ''
       },
       rules: {
@@ -90,7 +90,7 @@ export default {
           if (this.getAuth) {
             this.axios({
               method: 'post',
-              url: `${this.Api}/course/${this.getUid}/students/`,
+              url: `${this.Api}/course/${this.getUid}/student/`,
               data: this.studentInfo
             }).then((response) => {
               if (response.status === 200) {

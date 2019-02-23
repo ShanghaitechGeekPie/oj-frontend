@@ -42,7 +42,7 @@ export default {
     return {
       instructorInfo: {
         name: '',
-        enroll_email: '@shanghaitech.edu.cn'
+        enroll_email: ''
       },
       rules: {
         name: [
