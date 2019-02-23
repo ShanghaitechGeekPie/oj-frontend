@@ -137,7 +137,8 @@ export default {
             this.axios({
               method: 'post',
               url: `${this.Api}/course/${this.getUid}/assignment/`,
-              data: this.assignmentInfo
+              data: this.assignmentInfo,
+              headers: {'X-CSRFToken': this.getCookie('csrftoken')}
             }).then((response) => {
               if (response.status === 200) {
                 this.reply = response.data
@@ -155,6 +156,11 @@ export default {
           return false
         }
       })
+    },
+    getCookie (name) {
+      let value = '; ' + document.cookie
+      let parts = value.split('; ' + name + '=')
+      if (parts.length === 2) return parts.pop().split(';').shift()
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

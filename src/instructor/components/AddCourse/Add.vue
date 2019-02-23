@@ -97,6 +97,11 @@ export default {
         this.$emit('goBack')
       }, 500)
     },
+    getCookie (name) {
+      let value = '; ' + document.cookie
+      let parts = value.split('; ' + name + '=')
+      if (parts.length === 2) return parts.pop().split(';').shift()
+    },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -104,7 +109,8 @@ export default {
             this.axios({
               method: 'post',
               url: `${this.Api}/instructor/${this.getID}/course/`,
-              data: this.courseInfo
+              data: this.courseInfo,
+              headers: {'X-CSRFToken': this.getCookie('csrftoken')}
             }).then((response) => {
               if (response.status === 200) {
                 alert('submit!')
