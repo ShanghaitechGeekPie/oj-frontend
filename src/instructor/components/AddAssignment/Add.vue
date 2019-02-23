@@ -34,8 +34,7 @@
               v-model="assignmentInfo.deadline"
               type="date"
               placeholder="选择日期"
-              format="yyyy-MM-dd"
-              value-format="timestamp">
+              format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="Release date:" prop="release_date">
@@ -43,8 +42,7 @@
               v-model="assignmentInfo.release_date"
               type="date"
               placeholder="选择日期"
-              format="yyyy-MM-dd"
-              value-format="timestamp">
+              format="yyyy-MM-dd">
             </el-date-picker>
           </el-form-item>
           <el-form-item>

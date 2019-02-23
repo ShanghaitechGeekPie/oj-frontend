@@ -37,12 +37,10 @@
         </el-table-column>
           <el-table-column
             prop="release_date"
-            :formatter="timestampToTime1"
             label="RELEASE">
           </el-table-column>
           <el-table-column
             prop="deadline"
-            :formatter="timestampToTime2"
             label="DUE"
             >
           </el-table-column>
@@ -107,26 +105,6 @@ export default {
         loading.close()
         this.$emit('changeState', this.childChange)
       }, 500)
-    },
-    timestampToTime1 (row) {
-      let date = new Date(row.release_date * 1000)
-      let Y = date.getFullYear() + '-'
-      let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
-      let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
-      return Y + M + D + h + m + s
-    },
-    timestampToTime2 (row) {
-      let date = new Date(row.deadline * 1000)
-      let Y = date.getFullYear() + '-'
-      let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-      let D = date.getDate() + ' '
-      let h = date.getHours() + ':'
-      let m = date.getMinutes() + ':'
-      let s = date.getSeconds()
-      return Y + M + D + h + m + s
     },
     deleteRow (index, rows) {
       this.$confirm('此操作将永久删除该作业, 是否继续?', '提示', {
