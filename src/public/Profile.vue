@@ -38,15 +38,6 @@
               </el-col>
               <el-col :span="2"></el-col>
             </el-row>
-            <el-row type="flex" align="middle" class="card-row2">
-              <el-col :span="4">
-                <span class="sub-title">Public Key:</span>
-              </el-col>
-              <el-col :span="18">
-                <el-input class="shortInput" v-model="Info.rsa_pub_key" :disabled="true"></el-input>
-              </el-col>
-              <el-col :span="2"></el-col>
-            </el-row>
           </el-card>
         </el-col>
       </el-row>
@@ -67,8 +58,7 @@ export default {
         name: '王大锤',
         nickname: 'hammerwang',
         email: 'sjbdkjas@shanghaitech.edu.cn',
-        student_id: 0,
-        rsa_pub_key: 'vakbhjgfbivgagkrhjafgiyrf'
+        student_id: 0
       }
     }
   },
@@ -86,7 +76,7 @@ export default {
       if (this.getState) {
         this.axios({
           method: 'GET',
-          url: `${this.Api}/instructor/${this.getID}/`
+          url: `${this.Api}/instructor/${this.getID}`
         }).then((response) => {
           if (response.status === 200) {
             this.Info = response.data
@@ -99,7 +89,7 @@ export default {
       } else {
         this.axios({
           method: 'GET',
-          url: `${this.Api}/student/${this.getID}/`
+          url: `${this.Api}/student/${this.getID}`
         }).then((response) => {
           if (response.status === 200) {
             this.Info = response.data
