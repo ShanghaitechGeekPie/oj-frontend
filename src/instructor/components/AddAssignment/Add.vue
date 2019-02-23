@@ -90,11 +90,11 @@ export default {
     }
     return {
       assignmentInfo: {
-        course_uid: '1',
-        name: '1',
-        deadline: '1',
-        release_date: '1',
-        descr_link: '1',
+        course_uid: '',
+        name: '',
+        deadline: '',
+        release_date: '',
+        descr_link: '',
         state: 1
       },
       rules: {

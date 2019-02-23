@@ -30,31 +30,20 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      transData: [{
-        key: 1,
-        label: '233',
-        disabled: true
-      },
-      {
-        key: 3,
-        label: '123123',
-        disabled: false
-      },
-      {
-        key: 7,
-        label: '123123',
-        disabled: true
-      }],
+      transData: [],
       value: []
     }
   },
   methods: {
     submit () {
       if (this.getAuth) {
+        let result = this.value.map(function (value) {
+          return {uid: value}
+        })
         this.axios({
           method: 'post',
           url: `${this.Api}/course/${this.getUid}/assignment/${this.passReply.uid}/judge/`,
-          data: this.value
+          data: result
         }).then((response) => {
           if (response.status === 200) {
             alert('submit!')
