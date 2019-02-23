@@ -29,11 +29,9 @@
           <el-form-item label="Instructor Email:" prop="instructor" v-for="item in courseInfo.instructor" :key="item.enroll_email">
             <el-input v-model="item.enroll_email" disabled></el-input>
           </el-form-item>
-          <el-form-item label="Add Instructor:">
-            <template slot-scope="scope">
-              <el-input v-model="scope.tem_instr" class="input-short" prop="Instructor" placeholder="instructor's email"></el-input>
-              <el-button @click="AddInstructor(scope.tem_instr)"><i class="el-icon-plus"></i></el-button>
-            </template>
+          <el-form-item label="Add Instructor:" prop="tem_instr">
+            <el-input v-model="courseInfo.tem_instr" class="input-short" placeholder="instructor's email"></el-input>
+            <el-button @click="AddInstructor(courseInfo.tem_instr)"><i class="el-icon-plus"></i></el-button>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('courseInfo')">提交</el-button>
@@ -64,9 +62,9 @@ export default {
         semester: '',
         year: '',
         homepage: '',
-        instructor: []
+        instructor: [],
+        tem_instr: ''
       },
-      tem_instr: '',
       rules: {
         name: [
           {validator: check, trigger: 'blur'}
@@ -110,7 +108,7 @@ export default {
             }).then((response) => {
               if (response.status === 200) {
                 alert('submit!')
-                // window.location.reload()
+                window.location.reload()
               } else if (response.status === 401) {
                 this.$router.push('/unauthorized')
               } else {
