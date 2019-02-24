@@ -29,12 +29,16 @@
           <el-form-item label="Describe link:" prop="descr_link">
             <el-input v-model="assignmentInfo.descr_link" autocomplete="off"></el-input>
           </el-form-item>
+          <el-form-item label="Grade:" prop="grade">
+            <el-input v-model="assignmentInfo.grade" autocomplete="off"></el-input>
+          </el-form-item>
           <el-form-item label="Deadline:" prop="deadline">
             <el-date-picker
               v-model="assignmentInfo.deadline"
               type="date"
               placeholder="选择日期"
-              format="yyyy-MM-dd">
+              format="yyyy-MM-dd"
+              value-format="yyyy/MM/dd">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="Release date:" prop="release_date">
@@ -42,7 +46,8 @@
               v-model="assignmentInfo.release_date"
               type="date"
               placeholder="选择日期"
-              format="yyyy-MM-dd">
+              format="yyyy-MM-dd"
+              value-format="yyyy/MM/dd">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -88,11 +93,12 @@ export default {
     }
     return {
       assignmentInfo: {
-        course_uid: '',
-        name: '',
+        course_uid: '1',
+        name: '1',
         deadline: '',
         release_date: '',
-        descr_link: '',
+        descr_link: '1',
+        grade: '1',
         state: 1
       },
       rules: {
@@ -133,7 +139,10 @@ export default {
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
+          this.assignmentInfo.release_date += ' 23:59:59'
+          this.assignmentInfo.deadline += ' 23:59:59'
           if (this.getAuth) {
+            console.log(this.assignmentInfo)
             this.axios({
               method: 'post',
               url: `${this.Api}/course/${this.getUid}/assignment/`,

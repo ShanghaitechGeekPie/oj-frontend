@@ -23,7 +23,6 @@
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('judgeInfo')">提交</el-button>
-            <el-button @click="resetForm('judgeInfo')">重置</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -80,9 +79,6 @@ export default {
           }
         })
       }
-    },
-    resetForm (formName) {
-      this.$refs[formName].resetFields()
     }
   },
   created () {
