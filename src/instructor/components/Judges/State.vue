@@ -92,9 +92,7 @@ export default {
           this.axios({
             method: 'delete',
             url: `${this.Api}/judge/${rows[index].uid}`,
-            config: {
-              headers: {'X-CSRFToken': this.getCookie('csrftoken')}
-            }
+            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
           }).then((response) => {
             this.$message({
               type: 'success',

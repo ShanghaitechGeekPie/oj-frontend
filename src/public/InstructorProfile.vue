@@ -57,7 +57,7 @@ export default {
     if (this.getAuth) {
       this.axios({
         method: 'GET',
-        url: `${this.Api}/course/${this.getCourseUid}/instructor/${this.$route.query.instr_uid}/`
+        url: `${this.Api}/course/${this.getCourseUid}/instructor/${this.$route.query.instr_uid}`
       }).then((response) => {
         if (response.status === 200) {
           this.Info = response.data
