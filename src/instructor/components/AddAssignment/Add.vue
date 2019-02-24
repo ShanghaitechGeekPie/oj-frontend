@@ -139,10 +139,9 @@ export default {
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
-          this.assignmentInfo.release_date += '23:59'
-          this.assignmentInfo.deadline += '23:59'
+          this.assignmentInfo.release_date += '23:59:59+08:00'
+          this.assignmentInfo.deadline += '23:59:59+08:00'
           if (this.getAuth) {
-            console.log(this.assignmentInfo)
             this.axios({
               method: 'post',
               url: `${this.Api}/course/${this.getUid}/assignment/`,
