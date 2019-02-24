@@ -82,11 +82,11 @@ export default {
     }
   },
   created () {
-    this.$store.commit('updateApi', 'https://' + location.hostname)
+    this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
     if (this.getAuth && !this.getReq) {
       this.axios({
         method: 'get',
-        url: `https://${location.hostname}/user/role`
+        url: `https://${location.hostname}/api/user/role`
       }).then((response) => {
         if (response.status === 200) {
           this.$store.commit('changeRequest')
