@@ -101,7 +101,7 @@ export default {
             this.axios({
               method: 'post',
               url: `${this.Api}/judge/`,
-              data: this.JudgeInfo,
+              data: this.judgeInfo,
               headers: {'X-CSRFToken': this.getCookie('csrftoken')}
             }).then((response) => {
               if (response.status === 200) {

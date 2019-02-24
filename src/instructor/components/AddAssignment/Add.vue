@@ -26,6 +26,9 @@
           <el-form-item label="Name:" prop="name">
             <el-input v-model="assignmentInfo.name" autocomplete="off"></el-input>
           </el-form-item>
+          <el-form-item label="Short Name:" prop="short_name">
+            <el-input v-model="assignmentInfo.short_name" autocomplete="off"></el-input>
+          </el-form-item>
           <el-form-item label="Describe link:" prop="descr_link">
             <el-input v-model="assignmentInfo.descr_link" autocomplete="off"></el-input>
           </el-form-item>
@@ -99,6 +102,7 @@ export default {
         release_date: '',
         descr_link: '',
         grade: '',
+        short_name: '',
         state: 1
       },
       rules: {
@@ -118,6 +122,12 @@ export default {
           { validator: check, trigger: 'blur' }
         ],
         release_date: [
+          { validator: check, trigger: 'blur' }
+        ],
+        grade: [
+          { validator: check, trigger: 'blur' }
+        ],
+        short_name: [
           { validator: check, trigger: 'blur' }
         ]
       },
