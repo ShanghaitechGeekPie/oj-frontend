@@ -36,7 +36,7 @@
         <i class="el-icon-info"></i>
       </el-col>
       <el-col :span="18">
-        <router-link class="instr" :to="{ path: '/instrProfile', query: { instr_uid: a.enroll_email }}">{{ a.enroll_email }}</router-link>
+        <router-link class="instr" :to="{ path: '/instrProfile', query: { instr_uid: a.enroll_email }}">{{ getEmail(a) }}</router-link>
       </el-col>
     </el-row>
   </div>
@@ -54,6 +54,16 @@ export default {
         name: '',
         enroll_email: ''
       }]
+    }
+  },
+  methods: {
+    getEmail (instr) {
+      let email = instr.enroll_email
+      if (instr.name) {
+        return instr.name
+      } else {
+        return email.slice(0, 14) + '...'
+      }
     }
   },
   created () {

@@ -31,7 +31,7 @@ const store = new Vuex.Store({
       overall_socre: 0
     },
     baseInfo: {
-      uid: '23123',
+      uid: '',
       isInstructor: false
     },
     api: ''

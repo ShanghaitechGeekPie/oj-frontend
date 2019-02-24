@@ -133,7 +133,11 @@ export default {
       this.$store.commit('updateAss', info)
     },
     getScore (row) {
-      return row.score + '/' + row.overall_score
+      if (row.score) {
+        return row.score + '/' + row.overall_score
+      } else {
+        return 'no result'
+      }
     }
   },
   mounted () {
