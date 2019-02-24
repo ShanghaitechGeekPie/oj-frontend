@@ -38,7 +38,7 @@
               type="date"
               placeholder="选择日期"
               format="yyyy-MM-dd"
-              value-format="YYYY-MM-DDT">
+              value-format="MM-DDT">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="Release date:" prop="release_date">
@@ -47,7 +47,7 @@
               type="date"
               placeholder="选择日期"
               format="yyyy-MM-dd"
-              value-format="YYYY-MM-DDT">
+              value-format="MM-DDT">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -130,6 +130,8 @@ export default {
   },
   methods: {
     submitForm (formName) {
+      let myDate = new Date()
+      let year = myDate.getFullYear() + '-'
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.steps += 1
@@ -139,9 +141,10 @@ export default {
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
-          this.assignmentInfo.release_date += '23:59:59+08:00'
-          this.assignmentInfo.deadline += '23:59:59+08:00'
+          this.assignmentInfo.release_date = year + this.assignmentInfo.release_date + '23:59:59+08:00'
+          this.assignmentInfo.deadline = year + this.assignmentInfo.deadline + '23:59:59+08:00'
           if (this.getAuth) {
+            console.log(this.assignmentInfo)
             this.axios({
               method: 'post',
               url: `${this.Api}/course/${this.getUid}/assignment/`,
