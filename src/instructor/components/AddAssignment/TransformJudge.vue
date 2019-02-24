@@ -11,6 +11,7 @@
           style="text-align: left; display: inline-block"
           v-model="value"
           :titles="['Available Judges', 'Existing Judges']"
+          @change="handleChange"
           :data="transData">
         </el-transfer>
       </el-col>
@@ -36,21 +37,6 @@ export default {
   },
   methods: {
     submit () {
-      if (this.getAuth) {
-        let result = this.value.map(function (value) {
-          return {uid: value}
-        })
-        this.axios({
-          method: 'post',
-          url: `${this.Api}/course/${this.getUid}/assignment/${this.passReply.uid}/judge/`,
-          data: result,
-          headers: {'X-CSRFToken': this.getCookie('csrftoken')}
-        }).then((response) => {
-          if (response.status === 200) {
-            alert('submit!')
-          }
-        })
-      }
       this.steps += 1
       this.axios({
         method: 'post',
@@ -73,6 +59,35 @@ export default {
       let value = '; ' + document.cookie
       let parts = value.split('; ' + name + '=')
       if (parts.length === 2) return parts.pop().split(';').shift()
+    },
+    handleChange (cv, direction, value) {
+      let that = this
+      if (direction === 'right') {
+        value.map(function (uid) {
+          that.axios({
+            method: 'post',
+            url: `${that.Api}/course/${that.getUid}/assignment/${that.passReply.uid}/judge/`,
+            data: {uid},
+            headers: {'X-CSRFToken': that.getCookie('csrftoken')}
+          }).then((response) => {
+            if (response.status === 200) {
+              alert('submit!')
+            }
+          })
+        })
+      } else {
+        value.map(function (uid) {
+          that.axios({
+            method: 'delete',
+            url: `${that.Api}/course/${that.getUid}/assignment/${that.passReply.uid}/judge/${uid}`,
+            headers: {'X-CSRFToken': that.getCookie('csrftoken')}
+          }).then((response) => {
+            if (response.status === 200) {
+              alert('delete!')
+            }
+          })
+        })
+      }
     }
   },
   props: ['passReply'],
