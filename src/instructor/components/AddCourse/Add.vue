@@ -21,7 +21,7 @@
             <el-input type="text" v-model="courseInfo.semester" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Year:" prop="year">
-            <el-input type="text" v-model="courseInfo.year" autocomplete="off"></el-input>
+            <el-input type="number" v-model="courseInfo.year" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Homepage:" prop="homepage">
             <el-input v-model="courseInfo.homepage"></el-input>
@@ -60,7 +60,7 @@ export default {
         name: '',
         code: '',
         semester: '',
-        year: '',
+        year: 0,
         homepage: '',
         instructor: [],
         tem_instr: ''

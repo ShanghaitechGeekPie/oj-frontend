@@ -59,6 +59,7 @@ export default {
     logout () {
       this.$store.commit('logOut')
       this.$store.commit('changeRequest')
+      // todo: clear cookie
       window.location.reload()
     },
     goBack () {
@@ -81,20 +82,20 @@ export default {
     }
   },
   created () {
-    this.$store.commit('updateApi', 'https://' + location.hostname + '/api') // todo:add 'https://'
+    this.$store.commit('updateApi', 'https://' + location.hostname)
     if (this.getAuth && !this.getReq) {
       this.axios({
         method: 'get',
-        url: `https://${location.hostname}/api/user/role` // todo:add 'https://'
+        url: `https://${location.hostname}/user/role`
       }).then((response) => {
         if (response.status === 200) {
           this.$store.commit('changeRequest')
-          if (response.data.is_student) {
-            this.$store.commit('updateStudent', response.data.uid)
-            window.location.href = 'https://' + location.hostname + '/#/'
-          } else {
+          if (!response.data.is_student) {
             this.$store.commit('updateInstructor', response.data.uid)
             window.location.href = 'https://' + location.hostname + '/instructor.html#/'
+          } else {
+            this.$store.commit('updateStudent', response.data.uid)
+            window.location.href = 'https://' + location.hostname + '/#/'
           }
         } else if (response.status === 401) {
           this.$router.push('/unauthorized')
