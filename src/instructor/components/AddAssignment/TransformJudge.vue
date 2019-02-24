@@ -43,14 +43,11 @@ export default {
         this.axios({
           method: 'post',
           url: `${this.Api}/course/${this.getUid}/assignment/${this.passReply.uid}/judge/`,
-          data: result
+          data: result,
+          headers: {'X-CSRFToken': this.getCookie('csrftoken')}
         }).then((response) => {
           if (response.status === 200) {
             alert('submit!')
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
         })
       }
@@ -58,7 +55,8 @@ export default {
       this.axios({
         method: 'post',
         url: `${this.Api}/course/${this.getUid}/assignment/${this.passReply.uid}`,
-        data: {state: 2}
+        data: {state: 2},
+        headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
       const loading = this.$loading({
         lock: true,
@@ -70,6 +68,11 @@ export default {
         loading.close()
         window.location.href = this.passReply.ssh_url_to_repo
       }, 500)
+    },
+    getCookie (name) {
+      let value = '; ' + document.cookie
+      let parts = value.split('; ' + name + '=')
+      if (parts.length === 2) return parts.pop().split(';').shift()
     }
   },
   props: ['passReply'],

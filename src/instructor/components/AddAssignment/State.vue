@@ -106,6 +106,11 @@ export default {
         this.$emit('changeState', this.childChange)
       }, 500)
     },
+    getCookie (name) {
+      let value = '; ' + document.cookie
+      let parts = value.split('; ' + name + '=')
+      if (parts.length === 2) return parts.pop().split(';').shift()
+    },
     deleteRow (index, rows) {
       this.$confirm('此操作将永久删除该作业, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -115,7 +120,8 @@ export default {
         if (this.getAuth) {
           this.axios({
             methods: 'delete',
-            url: `${this.Api}/course/${this.getUid}/assignment/${rows[index].uid}`
+            url: `${this.Api}/course/${this.getUid}/assignment/${rows[index].uid}`,
+            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
           })
             .then((response) => {
               this.$message({

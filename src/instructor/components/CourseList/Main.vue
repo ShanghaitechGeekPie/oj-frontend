@@ -72,7 +72,8 @@ export default {
         if (this.getAuth) {
           this.axios({
             methods: 'delete',
-            url: `${this.Api}/course/${this.getUid}/students/${rows[index].enroll_email}`
+            url: `${this.Api}/course/${this.getUid}/students/${rows[index].enroll_email}`,
+            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
           })
             .then((response) => {
               this.$message({
@@ -91,6 +92,11 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    getCookie (name) {
+      let value = '; ' + document.cookie
+      let parts = value.split('; ' + name + '=')
+      if (parts.length === 2) return parts.pop().split(';').shift()
     },
     addStudent () {
       const loading = this.$loading({
