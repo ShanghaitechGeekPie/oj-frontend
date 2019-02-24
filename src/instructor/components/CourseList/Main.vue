@@ -71,9 +71,11 @@ export default {
       }).then(() => {
         if (this.getAuth) {
           this.axios({
-            methods: 'delete',
+            method: 'delete',
             url: `${this.Api}/course/${this.getUid}/students/${rows[index].enroll_email}`,
-            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+            config: {
+              headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+            }
           })
             .then((response) => {
               this.$message({

@@ -90,9 +90,11 @@ export default {
       }).then(() => {
         if (this.getAuth) {
           this.axios({
-            methods: 'delete',
+            method: 'delete',
             url: `${this.Api}/judge/${rows[index].uid}`,
-            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+            config: {
+              headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+            }
           }).then((response) => {
             this.$message({
               type: 'success',
