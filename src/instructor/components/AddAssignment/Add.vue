@@ -38,7 +38,7 @@
               type="date"
               placeholder="选择日期"
               format="yyyy-MM-dd"
-              value-format="yyyy/MM/dd">
+              value-format="YYYY-MM-DDT">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="Release date:" prop="release_date">
@@ -47,7 +47,7 @@
               type="date"
               placeholder="选择日期"
               format="yyyy-MM-dd"
-              value-format="yyyy/MM/dd">
+              value-format="YYYY-MM-DDT">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -93,12 +93,12 @@ export default {
     }
     return {
       assignmentInfo: {
-        course_uid: '1',
-        name: '1',
+        course_uid: '',
+        name: '',
         deadline: '',
         release_date: '',
-        descr_link: '1',
-        grade: '1',
+        descr_link: '',
+        grade: '',
         state: 1
       },
       rules: {
@@ -139,8 +139,8 @@ export default {
             spinner: 'el-icon-loading',
             background: 'rgba(0, 0, 0, 0.7)'
           })
-          this.assignmentInfo.release_date += ' 23:59:59'
-          this.assignmentInfo.deadline += ' 23:59:59'
+          this.assignmentInfo.release_date += '23:59'
+          this.assignmentInfo.deadline += '23:59'
           if (this.getAuth) {
             console.log(this.assignmentInfo)
             this.axios({
