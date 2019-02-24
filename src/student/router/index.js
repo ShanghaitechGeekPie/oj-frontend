@@ -10,6 +10,7 @@ import instructorProfile from '../../public/InstructorProfile'
 import unAuth from '../../public/Unauthorized'
 import store from '../store'
 import forbidden from '../../public/Forbidden'
+import changePro from '../../public/ChangeProfile'
 Vue.use(Router)
 
 const router = new Router({
@@ -52,6 +53,12 @@ const router = new Router({
       path: '/instrProfile',
       name: 'instrProfile',
       component: instructorProfile,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/changeProfile',
+      name: 'changeProfile',
+      component: changePro,
       meta: { requiresAuth: true }
     },
     {

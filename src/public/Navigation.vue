@@ -24,6 +24,7 @@
                   <el-menu-item index="/profile" v-if="!profilePage">Profile</el-menu-item>
                   <el-menu-item index="/" v-else>Dashboard</el-menu-item>
                   <el-menu-item index="/" v-if="profilePage" @click="goBack">Go back</el-menu-item>
+                  <el-menu-item index="/changeProfile">Change profile</el-menu-item>
                   <el-menu-item index="/" @click="logout">Logout</el-menu-item>
                 </el-submenu>
               </el-menu>
@@ -59,6 +60,10 @@ export default {
     logout () {
       this.$store.commit('logOut')
       this.$store.commit('changeRequest')
+      this.axios({
+        method: 'post',
+        url: `https://${location.hostname}/oidc/logout`
+      })
       // todo: clear cookie
       window.location.reload()
     },
@@ -82,11 +87,11 @@ export default {
     }
   },
   created () {
-    this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
+    this.$store.commit('updateApi', 'https://' + location.hostname + '/api') // todo:warning
     if (this.getAuth && !this.getReq) {
       this.axios({
         method: 'get',
-        url: `https://${location.hostname}/api/user/role`
+        url: `https://${location.hostname}/api/user/role` // todo:warning
       }).then((response) => {
         if (response.status === 200) {
           this.$store.commit('changeRequest')

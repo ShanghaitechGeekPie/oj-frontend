@@ -13,6 +13,7 @@ import unAuth from '../../public/Unauthorized'
 import store from '../../student/store'
 import forbidden from '../../public/Forbidden'
 import addcourse from '../components/AddCourse/Index'
+import changePro from '../../public/ChangeProfile'
 
 Vue.use(Router)
 
@@ -44,6 +45,12 @@ const router = new Router({
       path: '/profile',
       name: 'profile',
       component: profile,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/changeProfile',
+      name: 'changeProfile',
+      component: changePro,
       meta: { requiresAuth: true }
     },
     {

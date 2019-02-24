@@ -126,7 +126,4 @@ export default {
   .title-back {
     color: white;
   }
-  .title-sub {
-    font-size: 20px;
-  }
 </style>
