@@ -27,24 +27,7 @@ import car from '../../../public/Carousel'
 export default {
   data () {
     return {
-      courseInfo: [{
-        uid: '',
-        name: '',
-        code: '',
-        semester: 'fall',
-        year: 0,
-        homepage: '',
-        instructor: []
-      },
-      {
-        uid: '',
-        name: '',
-        code: '',
-        semester: 'fall',
-        year: 0,
-        homepage: '',
-        instructor: []
-      }]
+      courseInfo: []
     }
   },
   components: {

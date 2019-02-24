@@ -10,7 +10,23 @@
           </el-row>
         </el-card>
       </el-col>
-      <el-row>
+      <el-row class="row-only">
+        <el-col>
+          <el-card>
+            <el-row class="margins">
+              <el-col>
+                <span>
+                  <span class="code-two">git@git.geekpie.club/{{this.getCoInfo.code}}-{{this.getCoInfo.year + this.getCoInfo.semester}}/{{this.getAss.short_name}}/{{this.email}}.git </span>
+                    is the repo for your homework. To access
+                  your repo and submit your homework, clone it use
+                  <span class="code-two"> git clone git@oj.geekpie.club/{{this.getCoInfo.code}}-{{this.getCoInfo.year + this.getCoInfo.semester}}/{{this.getAss.short_name}}/{{this.email}}.git </span>
+                  {{this.getAss.short_name}} and follow the instruction of your TAs in discussion.</span>
+              </el-col>
+            </el-row>
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row class="row-only">
         <el-col>
           <el-card class="card-only">
             <el-row class="margins">
@@ -21,13 +37,12 @@
           </el-card>
         </el-col>
       </el-row>
-      <el-row>
+      <el-row class="row-only">
         <el-col>
             <el-table
             :data="submission"
             class="table-only"
-            :default-sort = "{prop: 'date', order: 'descending'}"
-            >
+            :default-sort = "{prop: 'date', order: 'descending'}">
             <el-table-column
               prop="submission_time"
               label="When"
@@ -65,6 +80,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
@@ -87,13 +104,27 @@ export default {
         release_date: 0,
         descr_link: ''
       },
-      message: ''
+      message: '',
+      email: ''
     }
   },
+  computed: mapState({
+    getAss: state => state.assignments,
+    getCoInfo: state => state.coInfo,
+    getID: state => state.baseInfo.uid,
+    Api: state => state.api
+  }),
   props: ['deliverDetail', 'deliverInfo'],
   mounted () {
     this.submission = this.deliverDetail
     this.assignmentDetail = this.deliverInfo
+    this.axios({
+      method: 'GET',
+      url: `${this.Api}/student/${this.getID}`
+    }).then((response) => {
+      let index = response.data.email.indexOf('@')
+      this.email = response.data.email.slice(0, index)
+    })
   },
   methods: {
     showMessage (data) {
@@ -129,5 +160,12 @@ export default {
   }
   .table-only {
     width: 100%;
+  }
+  .row-only {
+    margin-top: 2%;
+  }
+  .code-two {
+    font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+    font-size: 15px;
   }
 </style>

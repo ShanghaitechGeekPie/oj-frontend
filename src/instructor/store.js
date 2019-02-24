@@ -27,6 +27,7 @@ const store = new Vuex.Store({
       deadline: 0,
       release_date: 0,
       descr_link: '',
+      short_name: '',
       score: 0,
       overall_socre: 0
     },

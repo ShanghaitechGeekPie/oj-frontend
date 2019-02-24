@@ -88,17 +88,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      coState: [{
-        uid: '',
-        course_uid: '',
-        name: '',
-        short_name: '',
-        deadline: 0,
-        release_date: 0,
-        descr_link: '',
-        score: 0,
-        overall_score: 0
-      }],
+      coState: [],
       coInfo: {
       },
       show: false,
@@ -131,6 +121,7 @@ export default {
     },
     updateAss (info) {
       this.$store.commit('updateAss', info)
+      this.$router.push(`${this.$route.path}/submission/${info.uid}`)
     },
     getScore (row) {
       if (row.score) {
