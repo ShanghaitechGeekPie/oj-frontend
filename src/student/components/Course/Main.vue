@@ -30,8 +30,8 @@
           label="STATUS"
           width="180">
           <template slot-scope="scope">
-            <el-button :style="colors(scope.row.state)" @click="updateAss(scope.row)">
-              <router-link :to="getstate(scope.row)" class="fake-href">{{ getScore(scope.row) }}</router-link>
+            <el-button :style="colors(scope.row.state)" @click="updateAss(scope.row)" class="fake-href">
+              {{ getScore(scope.row) }}
             </el-button>
           </template>
         </el-table-column>
@@ -48,7 +48,7 @@
         </el-table>
       </el-col>
     </el-row>
-    <el-row style="margin-top: 10%">
+    <el-row class="row-half" v-if="show">
       <el-col>
         <el-tooltip class="item" effect="dark" content="A list for those who made some mistakes" placement="left">
           <el-button size="mini" @click="showPending" class="button-shot">Show list</el-button>
@@ -104,9 +104,6 @@ export default {
     getpath (scope) {
       window.location.href = scope.row.descr_link
     },
-    getstate (path) {
-      return this.$route.path + '/submission/' + path.uid
-    },
     colors (situation) { // don't use state as the variable name
       if (situation === 'Failed') {
         return 'background-color: #ed3f14;width: 100px;'
@@ -124,10 +121,10 @@ export default {
       this.$router.push(`${this.$route.path}/submission/${info.uid}`)
     },
     getScore (row) {
-      if (row.score) {
-        return row.score + '/' + row.overall_score
-      } else {
+      if (row.score === null) {
         return 'no result'
+      } else {
+        return row.score + '/' + row.overall_score
       }
     }
   },
@@ -149,7 +146,7 @@ export default {
           })
         })
     }
-    if (this.getAuth) {
+    if (!this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/queue`)
         .then((response) => {
           if (response.status === 200) {
@@ -208,5 +205,8 @@ export default {
   }
   .table-only {
     width: 100%;
+  }
+  .row-half{
+    margin-top: 10%;
   }
 </style>

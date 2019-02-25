@@ -62,7 +62,7 @@ export default {
       this.$store.commit('changeRequest')
       this.axios({
         method: 'post',
-        url: `https://${location.hostname}/oidc/logout`,
+        url: `https://${location.hostname}/oidc/logout/`,
         headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
       // todo: clear cookie
