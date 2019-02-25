@@ -58,8 +58,11 @@ const store = new Vuex.Store({
       state.baseInfo.uid = uid
       state.baseInfo.isInstructor = false
     },
-    changeRequest (state) {
-      state.isRequest = !state.isRequest
+    requested (state) {
+      state.isRequest = true
+    },
+    refreshReq (state) {
+      state.isRequest = false
     },
     updateApi (state, value) {
       state.api = value

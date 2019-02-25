@@ -39,24 +39,24 @@ export default {
   computed: mapState({
     getAuth: state => state.isAuthorized,
     getID: state => state.baseInfo.uid,
-    Api: state => state.api
+    Api: state => state.api,
+    getReq: state => state.isRequest
   }),
   mounted () {
     if (this.getAuth) {
-      let UID = ''
       if (!this.getReq) {
         this.axios({
           method: 'get',
-          url: `https://${location.hostname}/user/role` // todo:warning
+          url: `https://${location.hostname}/api/user/role`
         }).then((response) => {
           if (response.status === 200) {
-            this.$store.commit('changeRequest')
-            UID = response.data.uid
+            this.$store.commit('requested')
             if (!response.data.is_student) {
               this.$store.commit('updateInstructor', response.data.uid)
             } else {
               this.$store.commit('updateStudent', response.data.uid)
             }
+            window.location.reload()
           }
         }).catch((err) => {
           this.$message({
@@ -68,7 +68,7 @@ export default {
       }
       this.axios({
         method: 'GET',
-        url: `${this.Api}/student/${UID}/course/`
+        url: `${this.Api}/student/${this.getID}/course/`
       }).then((response) => {
         if (response.status === 200) {
           this.courseInfo = response.data

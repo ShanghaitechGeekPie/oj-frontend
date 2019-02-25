@@ -40,10 +40,33 @@ export default {
     getAuth: state => state.isAuthorized,
     getID: state => state.baseInfo.uid,
     getState: state => state.baseInfo.isInstructor,
+    getReq: state => state.isRequest,
     Api: state => state.api
   }),
   created () {
     if (this.getAuth) {
+      if (!this.getReq) {
+        this.axios({
+          method: 'get',
+          url: `https://${location.hostname}/api/user/role`
+        }).then((response) => {
+          if (response.status === 200) {
+            this.$store.commit('requested')
+            if (!response.data.is_student) {
+              this.$store.commit('updateInstructor', response.data.uid)
+            } else {
+              this.$store.commit('updateStudent', response.data.uid)
+            }
+            window.location.reload()
+          }
+        }).catch((err) => {
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
+        })
+      }
       this.axios({
         method: 'GET',
         url: `${this.Api}/instructor/${this.getID}/course/`
