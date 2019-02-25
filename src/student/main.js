@@ -17,6 +17,7 @@ Vue.use(Vuex)
 // axios.defaults.baseURL = ''
 Vue.prototype.axios = axios
 Vue.component(CollapseTransition.name, CollapseTransition)
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 /* eslint-disable no-new */
 
 new Vue({
