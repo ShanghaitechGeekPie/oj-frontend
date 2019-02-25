@@ -62,7 +62,8 @@ export default {
       this.$store.commit('changeRequest')
       this.axios({
         method: 'post',
-        url: `https://${location.hostname}/oidc/logout`
+        url: `https://${location.hostname}/oidc/logout`,
+        headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
       // todo: clear cookie
       window.location.reload()
@@ -74,16 +75,22 @@ export default {
       if (!this.getAuth) {
         this.axios({
           method: 'get',
-          url: `${this.Api}/user/login/oauth/param`
-        }).then((response) => {
-          if (response.status === 200) {
-            this.$store.commit('login')
-            window.location.href = response.data.login_url
-          } else {
-            this.$router.push('/error')
+          url: `${this.Api}/user/login/oauth/param`,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Headers': 'x-requested-with,content-type'
           }
+        }).then((response) => {
+          this.$store.commit('login')
+          window.location.href = response.data.login_url
         })
       }
+    },
+    getCookie (name) {
+      let value = '; ' + document.cookie
+      let parts = value.split('; ' + name + '=')
+      if (parts.length === 2) return parts.pop().split(';').shift()
     }
   },
   created () {
@@ -102,11 +109,13 @@ export default {
             this.$store.commit('updateStudent', response.data.uid)
             window.location.href = 'https://' + location.hostname + '/#/'
           }
-        } else if (response.status === 401) {
-          this.$router.push('/unauthorized')
-        } else {
-          this.$router.push('/error')
         }
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
       })
     }
   }
