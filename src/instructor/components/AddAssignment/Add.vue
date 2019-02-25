@@ -165,12 +165,15 @@ export default {
                 this.reply = response.data
                 loading.close()
                 alert('submit!')
-              } else if (response.status === 401) {
-                this.$router.push('/unauthorized')
-              } else {
-                this.$router.push('/error')
               }
             })
+              .catch((err) => {
+                this.$message({
+                  type: 'error',
+                  message: err,
+                  showClose: true
+                })
+              })
           }
         } else {
           console.log('error submit!!')

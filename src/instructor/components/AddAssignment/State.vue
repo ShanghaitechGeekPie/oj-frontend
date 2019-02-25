@@ -132,7 +132,11 @@ export default {
               window.location.reload() // todo: bug here
             })
             .catch((err) => {
-              console.log(err)
+              this.$message({
+                type: 'error',
+                message: err,
+                showClose: true
+              })
             })
         }
       }).catch(() => {
@@ -158,14 +162,14 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.coState = response.data
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
         })
         .catch((err) => {
-          console.log(err)
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
         })
     }
   },

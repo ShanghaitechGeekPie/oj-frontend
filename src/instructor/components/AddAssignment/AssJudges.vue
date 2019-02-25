@@ -39,14 +39,14 @@ export default {
           .then((response) => {
             if (response.status === 200) {
               that.$set(that.Judges, i, response.data)
-            } else if (response.status === 401) {
-              that.$router.push('/unauthorized')
-            } else {
-              that.$router.push('/error')
             }
           })
           .catch((err) => {
-            console.log(err)
+            this.$message({
+              type: 'error',
+              message: err,
+              showClose: true
+            })
           })
       }
       this.show = false
@@ -77,14 +77,14 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.JudgeUid = response.data
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
         })
         .catch((err) => {
-          console.log(err)
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
         })
     }
   }

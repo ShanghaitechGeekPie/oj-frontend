@@ -61,11 +61,13 @@ export default {
       }).then((response) => {
         if (response.status === 200) {
           this.Info = response.data
-        } else if (response.status === 401) {
-          this.$router.push('/unauthorized')
-        } else {
-          this.$router.push('/error')
         }
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
       })
     }
   }

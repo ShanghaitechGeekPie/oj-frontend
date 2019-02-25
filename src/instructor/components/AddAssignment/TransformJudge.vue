@@ -73,6 +73,12 @@ export default {
             if (response.status === 200) {
               alert('submit!')
             }
+          }).catch((err) => {
+            this.$message({
+              type: 'error',
+              message: err,
+              showClose: true
+            })
           })
         })
       } else {
@@ -85,6 +91,12 @@ export default {
             if (response.status === 200) {
               alert('delete!')
             }
+          }).catch((err) => {
+            this.$message({
+              type: 'error',
+              message: err,
+              showClose: true
+            })
           })
         })
       }
@@ -109,24 +121,24 @@ export default {
                       label: response2.data.host,
                       disable: false
                     })
-                  } else if (response2.status === 401) {
-                    that.$router.push('/unauthorized')
-                  } else {
-                    that.$router.push('/error')
                   }
                 })
                 .catch((err) => {
-                  console.log(err)
+                  this.$message({
+                    type: 'error',
+                    message: err,
+                    showClose: true
+                  })
                 })
             }
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
         })
         .catch((err) => {
-          console.log(err)
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
         })
       this.axios.get(`${this.Api}/judge/`)
         .then((response) => {
@@ -138,14 +150,13 @@ export default {
                 disable: false
               })
             }
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
-        })
-        .catch((err) => {
-          console.log(err)
+        }).catch((err) => {
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
         })
     }
   },

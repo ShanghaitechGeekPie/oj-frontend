@@ -54,9 +54,13 @@ export default {
         if (response.status === 200) {
           this.$store.commit('login')
           window.location.href = response.data.login_url
-        } else {
-          this.$router.push('/error')
         }
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
       })
     }
   }

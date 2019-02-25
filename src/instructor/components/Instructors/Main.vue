@@ -77,7 +77,11 @@ export default {
             rows.splice(index, 1)
           })
             .catch((err) => {
-              console.log(err)
+              this.$message({
+                type: 'error',
+                message: err,
+                showClose: true
+              })
             })
         }
       }).catch(() => {
@@ -111,14 +115,14 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.instructorList = response.data
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
         })
         .catch((err) => {
-          console.log(err)
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
         })
     }
   },

@@ -78,7 +78,11 @@ export default {
               rows.splice(index, 1)
             })
             .catch((err) => {
-              console.log(err)
+              this.$message({
+                type: 'error',
+                message: err,
+                showClose: true
+              })
             })
         }
       }).catch(() => {
@@ -117,24 +121,24 @@ export default {
                 .then((response2) => {
                   if (response2.status === 200) {
                     that.judgeList.push(response2.data)
-                  } else if (response2.status === 401) {
-                    that.$router.push('/unauthorized')
-                  } else {
-                    that.$router.push('/error')
                   }
                 })
                 .catch((err) => {
-                  console.log(err)
+                  this.$message({
+                    type: 'error',
+                    message: err,
+                    showClose: true
+                  })
                 })
             }
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
         })
         .catch((err) => {
-          console.log(err)
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
         })
     }
   },

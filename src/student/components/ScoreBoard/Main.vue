@@ -76,14 +76,13 @@ export default {
           if (response.status === 200) {
             this.scoreInfo = response.data
             this.total = response.data.length
-          } else if (response.status === 401) {
-            this.$router.push('/unauthorized')
-          } else {
-            this.$router.push('/error')
           }
-        })
-        .catch((err) => {
-          console.log(err)
+        }).catch((err) => {
+          this.$message({
+            type: 'error',
+            message: err,
+            showClose: true
+          })
         })
     }
   },

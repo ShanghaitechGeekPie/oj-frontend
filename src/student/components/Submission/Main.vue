@@ -124,6 +124,12 @@ export default {
     }).then((response) => {
       let index = response.data.email.indexOf('@')
       this.email = response.data.email.slice(0, index)
+    }).catch((err) => {
+      this.$message({
+        type: 'error',
+        message: err,
+        showClose: true
+      })
     })
   },
   methods: {
