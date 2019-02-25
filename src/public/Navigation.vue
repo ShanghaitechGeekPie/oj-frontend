@@ -84,6 +84,21 @@ export default {
         }).then((response) => {
           this.$store.commit('login')
           window.location.href = response.data.login_url
+        }).catch((response) => {
+          if (response.status === 403) {
+            this.$message({
+              type: 'error',
+              message: 'session time out',
+              showClose: true
+            })
+            window.location.href = response.data.refresh_url
+          } else {
+            this.$message({
+              type: 'error',
+              message: response,
+              showClose: true
+            })
+          }
         })
       }
     },
