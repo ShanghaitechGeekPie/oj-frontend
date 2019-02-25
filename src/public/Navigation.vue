@@ -78,7 +78,7 @@ export default {
           url: `${this.Api}/user/login/oauth/param`,
           headers: {
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Methods': 'get',
             'Access-Control-Allow-Headers': 'x-requested-with,content-type'
           }
         }).then((response) => {
