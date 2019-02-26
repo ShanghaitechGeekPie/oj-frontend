@@ -73,10 +73,8 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/assignment/${this.getAssUid}/scores/`)
         .then((response) => {
-          if (response.status === 200) {
-            this.scoreInfo = response.data
-            this.total = response.data.length
-          }
+          this.scoreInfo = response.data
+          this.total = response.data.length
         }).catch((err) => {
           this.$message({
             type: 'error',

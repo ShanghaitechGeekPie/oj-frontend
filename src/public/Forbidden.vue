@@ -57,12 +57,8 @@ export default {
         method: 'get',
         url: `/user/login/oauth/param`
       }).then((response) => {
-        if (response.status === 200) {
-          this.$store.commit('login')
-          window.location.href = response.data.login_url
-        } else {
-          this.$router.push('/error')
-        }
+        this.$store.commit('login')
+        window.location.href = response.data.login_url
       })
     }
   }

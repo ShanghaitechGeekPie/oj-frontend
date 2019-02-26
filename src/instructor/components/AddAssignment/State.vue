@@ -160,9 +160,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/assignment/`)
         .then((response) => {
-          if (response.status === 200) {
-            this.coState = response.data
-          }
+          this.coState = response.data
         })
         .catch((err) => {
           this.$message({

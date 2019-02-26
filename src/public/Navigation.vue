@@ -85,20 +85,10 @@ export default {
           this.$store.commit('login')
           window.location.href = response.data.login_url
         }).catch((error) => {
-          if (error.response.status === 403) {
-            this.$message({
-              type: 'error',
-              message: 'session time out',
-              showClose: true
-            })
-            window.location.href = error.response.data.refresh_url
-          } else {
-            this.$message({
-              type: 'error',
-              message: error,
-              showClose: true
-            })
-          }
+          this.$message({type: 'error',
+            message: error,
+            showClose: true
+          })
         })
       }
     },
@@ -115,15 +105,13 @@ export default {
         method: 'get',
         url: `https://${location.hostname}/api/user/role` // todo:warning
       }).then((response) => {
-        if (response.status === 200) {
-          this.$store.commit('requested')
-          if (!response.data.is_student) {
-            this.$store.commit('updateInstructor', response.data.uid)
-            window.location.href = 'https://' + location.hostname + '/instructor.html#/'
-          } else {
-            this.$store.commit('updateStudent', response.data.uid)
-            window.location.href = 'https://' + location.hostname + '/#/'
-          }
+        this.$store.commit('requested')
+        if (!response.data.is_student) {
+          this.$store.commit('updateInstructor', response.data.uid)
+          window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo:warning
+        } else {
+          this.$store.commit('updateStudent', response.data.uid)
+          window.location.href = 'https://' + location.hostname + '/#/' // todo:warning
         }
       }).catch((err) => {
         this.$message({

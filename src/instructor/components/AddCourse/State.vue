@@ -148,9 +148,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/instructor/${this.getID}/course/`)
         .then((response) => {
-          if (response.status === 200) {
-            this.courseList = response.data
-          }
+          this.courseList = response.data
         })
         .catch((err) => {
           this.$message({

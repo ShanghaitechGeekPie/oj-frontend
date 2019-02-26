@@ -120,9 +120,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/judge/`)
         .then((response) => {
-          if (response.status === 200) {
-            this.judges = response.data
-          }
+          this.judges = response.data
         })
         .catch((err) => {
           this.$message({

@@ -15,3 +15,7 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+
+src/instructor/mock\.js
+
+src/student/mock\.js

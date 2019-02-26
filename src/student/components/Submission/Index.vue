@@ -49,9 +49,7 @@ export default {
         method: 'GET',
         url: `${this.Api}/student/${this.getID}/course/${this.getUID}/assignment/${this.getAssUID}/history/`
       }).then((response) => {
-        if (response.status === 200) {
-          this.submission = response.data
-        }
+        this.submission = response.data
       }).catch((err) => {
         this.$message({
           type: 'error',

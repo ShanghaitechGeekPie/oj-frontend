@@ -50,15 +50,13 @@ export default {
           method: 'get',
           url: `https://${location.hostname}/api/user/role`
         }).then((response) => {
-          if (response.status === 200) {
-            this.$store.commit('requested')
-            if (!response.data.is_student) {
-              this.$store.commit('updateInstructor', response.data.uid)
-            } else {
-              this.$store.commit('updateStudent', response.data.uid)
-            }
-            window.location.reload()
+          this.$store.commit('requested')
+          if (!response.data.is_student) {
+            this.$store.commit('updateInstructor', response.data.uid)
+          } else {
+            this.$store.commit('updateStudent', response.data.uid)
           }
+          window.location.reload()
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -71,9 +69,7 @@ export default {
         method: 'GET',
         url: `${this.Api}/instructor/${this.getID}/course/`
       }).then((response) => {
-        if (response.status === 200) {
-          this.courseInfo = response.data
-        }
+        this.courseInfo = response.data
       }).catch((err) => {
         this.$message({
           type: 'error',

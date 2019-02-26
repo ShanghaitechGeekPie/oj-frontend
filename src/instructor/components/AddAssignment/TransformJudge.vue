@@ -70,9 +70,7 @@ export default {
             data: {uid},
             headers: {'X-CSRFToken': that.getCookie('csrftoken')}
           }).then((response) => {
-            if (response.status === 200) {
-              alert('submit!')
-            }
+            alert('submit!')
           }).catch((err) => {
             this.$message({
               type: 'error',
@@ -88,9 +86,7 @@ export default {
             url: `${that.Api}/course/${that.getUid}/assignment/${that.passReply.uid}/judge/${uid}`,
             headers: {'X-CSRFToken': that.getCookie('csrftoken')}
           }).then((response) => {
-            if (response.status === 200) {
-              alert('delete!')
-            }
+            alert('delete!')
           }).catch((err) => {
             this.$message({
               type: 'error',
@@ -109,28 +105,24 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/judge/`)
         .then((response) => {
-          if (response.status === 200) {
-            len = response.data.length
-            for (let i = 0; i < response.data.length; i++) {
-              that.axios.get(`${this.Api}/judge/${response.data[i].uid}`)
-                .then((response2) => {
-                  if (response2.status === 200) {
-                    that.value.push(response2.data.uid)
-                    that.$set(that.transData, i + len, {
-                      key: response2.data.uid,
-                      label: response2.data.host,
-                      disable: false
-                    })
-                  }
+          len = response.data.length
+          for (let i = 0; i < response.data.length; i++) {
+            that.axios.get(`${this.Api}/judge/${response.data[i].uid}`)
+              .then((response2) => {
+                that.value.push(response2.data.uid)
+                that.$set(that.transData, i + len, {
+                  key: response2.data.uid,
+                  label: response2.data.host,
+                  disable: false
                 })
-                .catch((err) => {
-                  this.$message({
-                    type: 'error',
-                    message: err,
-                    showClose: true
-                  })
+              })
+              .catch((err) => {
+                this.$message({
+                  type: 'error',
+                  message: err,
+                  showClose: true
                 })
-            }
+              })
           }
         })
         .catch((err) => {
@@ -142,14 +134,12 @@ export default {
         })
       this.axios.get(`${this.Api}/judge/`)
         .then((response) => {
-          if (response.status === 200) {
-            for (let i = 0; i < response.data.length; i++) {
-              that.$set(that.transData, i, {
-                key: response.data[i].uid,
-                label: response.data[i].host,
-                disable: false
-              })
-            }
+          for (let i = 0; i < response.data.length; i++) {
+            that.$set(that.transData, i, {
+              key: response.data[i].uid,
+              label: response.data[i].host,
+              disable: false
+            })
           }
         }).catch((err) => {
           this.$message({

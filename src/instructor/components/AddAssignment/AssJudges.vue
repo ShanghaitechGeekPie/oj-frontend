@@ -37,9 +37,7 @@ export default {
       for (let i = 0; i < this.JudgeUid.length; i++) {
         that.axios.get(`${that.Api}/judge/${that.JudgeUid[i].uid}`)
           .then((response) => {
-            if (response.status === 200) {
-              that.$set(that.Judges, i, response.data)
-            }
+            that.$set(that.Judges, i, response.data)
           })
           .catch((err) => {
             this.$message({
@@ -75,9 +73,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/assignment/${this.passAssUID}/judge/`)
         .then((response) => {
-          if (response.status === 200) {
-            this.JudgeUid = response.data
-          }
+          this.JudgeUid = response.data
         })
         .catch((err) => {
           this.$message({

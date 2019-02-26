@@ -51,10 +51,8 @@ export default {
         method: 'get',
         url: `${this.Api}/user/login/oauth/param`
       }).then((response) => {
-        if (response.status === 200) {
-          this.$store.commit('login')
-          window.location.href = response.data.login_url
-        }
+        this.$store.commit('login')
+        window.location.href = response.data.login_url
       }).catch((err) => {
         this.$message({
           type: 'error',

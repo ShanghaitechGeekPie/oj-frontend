@@ -104,10 +104,8 @@ export default {
               data: this.judgeInfo,
               headers: {'X-CSRFToken': this.getCookie('csrftoken')}
             }).then((response) => {
-              if (response.status === 200) {
-                alert('submit!')
-                window.location.reload()
-              }
+              alert('submit!')
+              window.location.reload()
             }).catch((err) => {
               this.$message({
                 type: 'error',

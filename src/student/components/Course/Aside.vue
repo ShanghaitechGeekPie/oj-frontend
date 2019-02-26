@@ -64,9 +64,7 @@ export default {
         method: 'GET',
         url: `${this.Api}/course/${this.coInfo.uid}/instructor/`
       }).then((response) => {
-        if (response.status === 200) {
-          this.instructors = response.data
-        }
+        this.instructors = response.data
       }).catch((err) => {
         this.$message({
           type: 'error',

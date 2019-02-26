@@ -69,10 +69,8 @@ export default {
           data: {uid: this.resultUID},
           headers: {'X-CSRFToken': this.getCookie('csrftoken')}
         }).then((response) => {
-          if (response.status === 200) {
-            alert('submit!')
-            window.location.reload()
-          }
+          alert('submit!')
+          window.location.reload()
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -87,9 +85,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/judge/`)
         .then((response) => {
-          if (response.status === 200) {
-            this.judgeInfo = response.data
-          }
+          this.judgeInfo = response.data
         })
         .catch((err) => {
           this.$message({

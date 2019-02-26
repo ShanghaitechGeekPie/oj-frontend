@@ -115,22 +115,18 @@ export default {
       let that = this
       this.axios.get(`${this.Api}/course/${this.getUid}/judge/`)
         .then((response) => {
-          if (response.status === 200) {
-            for (let i = 0; i < response.data.length; i++) {
-              that.axios.get(`${this.Api}/judge/${response.data[i].uid}`)
-                .then((response2) => {
-                  if (response2.status === 200) {
-                    that.judgeList.push(response2.data)
-                  }
+          for (let i = 0; i < response.data.length; i++) {
+            that.axios.get(`${this.Api}/judge/${response.data[i].uid}`)
+              .then((response2) => {
+                that.judgeList.push(response2.data)
+              })
+              .catch((err) => {
+                this.$message({
+                  type: 'error',
+                  message: err,
+                  showClose: true
                 })
-                .catch((err) => {
-                  this.$message({
-                    type: 'error',
-                    message: err,
-                    showClose: true
-                  })
-                })
-            }
+              })
           }
         })
         .catch((err) => {

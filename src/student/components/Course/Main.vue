@@ -121,10 +121,10 @@ export default {
       this.$router.push(`${this.$route.path}/submission/${info.uid}`)
     },
     getScore (row) {
-      if (row.score === null) {
+      if (row.grade === null) {
         return 'no result'
       } else {
-        return row.score + '/' + row.overall_score
+        return row.grade + '/' + row.overall_grade
       }
     }
   },
@@ -135,9 +135,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/student/${this.getID}/course/${this.getUid}/assignment/`)
         .then((response) => {
-          if (response.status === 200) {
-            this.coState = response.data
-          }
+          this.coState = response.data
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -149,9 +147,7 @@ export default {
     if (!this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/queue`)
         .then((response) => {
-          if (response.status === 200) {
-            this.pendingList = response.data
-          }
+          this.pendingList = response.data
         }).catch((err) => {
           this.$message({
             type: 'error',

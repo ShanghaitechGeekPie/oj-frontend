@@ -96,9 +96,7 @@ export default {
           data: this.Info,
           headers: {'X-CSRFToken': this.getCookie('csrftoken')}
         }).then((response) => {
-          if (response.status === 200) {
-            alert('submit!')
-          }
+          alert('submit!')
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -113,9 +111,7 @@ export default {
           data: this.Info,
           headers: {'X-CSRFToken': this.getCookie('csrftoken')}
         }).then((response) => {
-          if (response.status === 200) {
-            alert('submit!')
-          }
+          alert('submit!')
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -147,9 +143,7 @@ export default {
           method: 'GET',
           url: `${this.Api}/instructor/${this.getID}`
         }).then((response) => {
-          if (response.status === 200) {
-            this.Info = response.data
-          }
+          this.Info = response.data
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -162,9 +156,7 @@ export default {
           method: 'GET',
           url: `${this.Api}/student/${this.getID}`
         }).then((response) => {
-          if (response.status === 200) {
-            this.Info = response.data
-          }
+          this.Info = response.data
         }).catch((err) => {
           this.$message({
             type: 'error',

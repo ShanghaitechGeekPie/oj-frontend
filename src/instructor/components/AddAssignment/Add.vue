@@ -145,27 +145,17 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.steps += 1
-          const loading = this.$loading({
-            lock: true,
-            text: 'Loading',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.7)'
-          })
           this.assignmentInfo.release_date = year + this.assignmentInfo.release_date + '23:59:59+08:00'
           this.assignmentInfo.deadline = year + this.assignmentInfo.deadline + '23:59:59+08:00'
           if (this.getAuth) {
-            console.log(this.assignmentInfo)
             this.axios({
               method: 'post',
               url: `${this.Api}/course/${this.getUid}/assignment/`,
               data: this.assignmentInfo,
               headers: {'X-CSRFToken': this.getCookie('csrftoken')}
             }).then((response) => {
-              if (response.status === 200) {
-                this.reply = response.data
-                loading.close()
-                alert('submit!')
-              }
+              this.reply = response.data
+              alert('submit!')
             })
               .catch((err) => {
                 this.$message({
