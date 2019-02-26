@@ -44,6 +44,7 @@ export default {
   }),
   mounted () {
     if (this.getAuth) {
+      console.log('26 9:24')
       if (!this.getReq) {
         this.axios({
           method: 'get',
