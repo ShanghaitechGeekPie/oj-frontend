@@ -67,7 +67,7 @@ export default {
       }
       this.axios({
         method: 'GET',
-        url: `${this.Api}/student/${this.getID}/courjjjjse/`
+        url: `${this.Api}/student/${this.getID}/course/`
       }).then((response) => {
         this.courseInfo = response.data
       }).catch((err) => {
