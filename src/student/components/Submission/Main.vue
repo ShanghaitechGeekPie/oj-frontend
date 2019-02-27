@@ -112,10 +112,7 @@ export default {
     getAss: state => state.assignments,
     getCoInfo: state => state.coInfo,
     getID: state => state.baseInfo.uid,
-    Api: state => state.api,
-    lower (word) {
-      return word.toLowerCase()
-    }
+    Api: state => state.api
   }),
   props: ['deliverDetail', 'deliverInfo'],
   mounted () {
@@ -138,6 +135,9 @@ export default {
   methods: {
     showMessage (data) {
       this.message = data.message
+    },
+    lower (word) {
+      return word.toLowerCase()
     }
   },
   watch: {
