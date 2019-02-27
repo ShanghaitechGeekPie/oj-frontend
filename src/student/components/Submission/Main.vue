@@ -16,10 +16,10 @@
             <el-row class="margins">
               <el-col>
                 <span>
-                  <span class="code-two">git@git.geekpie.club/{{this.getCoInfo.code}}-{{this.getCoInfo.year + this.getCoInfo.semester}}/{{this.getAss.short_name}}/{{this.email}}.git </span>
+                  <span class="code-two">git@git.geekpie.club:{{this.lower(this.getCoInfo.code)}}-{{this.lower(this.getCoInfo.year + this.getCoInfo.semester)}}/{{this.lower(this.getAss.short_name)}}/{{this.lower(this.email)}}.git </span>
                     is the repo for your homework. To access
                   your repo and submit your homework, clone it use
-                  <span class="code-two"> git clone git@oj.geekpie.club/{{this.getCoInfo.code}}-{{this.getCoInfo.year + this.getCoInfo.semester}}/{{this.getAss.short_name}}/{{this.email}}.git </span>
+                  <span class="code-two"> git clone git@oj.geekpie.club:{{this.lower(this.getCoInfo.code)}}-{{this.lower(this.getCoInfo.year + this.getCoInfo.semester)}}/{{this.lower(this.getAss.short_name)}}/{{this.lower(this.email)}}.git </span>
                   {{this.getAss.short_name}} and follow the instruction of your TAs in discussion.</span>
               </el-col>
             </el-row>
@@ -112,7 +112,10 @@ export default {
     getAss: state => state.assignments,
     getCoInfo: state => state.coInfo,
     getID: state => state.baseInfo.uid,
-    Api: state => state.api
+    Api: state => state.api,
+    lower (word) {
+      return word.toLowerCase()
+    }
   }),
   props: ['deliverDetail', 'deliverInfo'],
   mounted () {
