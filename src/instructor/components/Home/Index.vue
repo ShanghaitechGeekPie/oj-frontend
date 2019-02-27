@@ -55,6 +55,10 @@ export default {
             this.$store.commit('updateInstructor', response.data.uid)
           } else {
             this.$store.commit('updateStudent', response.data.uid)
+            if (this.$route.name === 'indexInstructor' || this.$route.name === 'homeInstructor') {
+            } else {
+              window.location.href = `https://${location.hostname}/instructor.html#/`
+            }
           }
           window.location.reload()
         }).catch((err) => {

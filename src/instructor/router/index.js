@@ -21,12 +21,12 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'indexInstructor',
       component: index
     },
     {
       path: '/home',
-      name: 'Home',
+      name: 'homeInstructor',
       component: index
     },
     {

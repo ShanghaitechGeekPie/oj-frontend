@@ -17,7 +17,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'indexStudent',
       component: index
     },
     {
@@ -34,7 +34,7 @@ const router = new Router({
     },
     {
       path: '/home',
-      name: 'Home',
+      name: 'homeStudent',
       component: index
     },
     {
