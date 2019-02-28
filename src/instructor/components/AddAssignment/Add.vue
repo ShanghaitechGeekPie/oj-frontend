@@ -86,9 +86,19 @@ import transform from './TransformJudge'
 
 export default {
   data () {
-    var check = (rule, value, callback) => {
+    let check = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('不能为空'))
+      }
+      setTimeout(() => {
+        callback()
+      }, 500)
+    }
+    let checkUrl = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('不能为空'))
+      } else if (!value.includes('http')) {
+        return callback(new Error('请输入正确网址'))
       }
       setTimeout(() => {
         callback()
@@ -119,7 +129,7 @@ export default {
           { validator: check, trigger: 'blur' }
         ],
         descr_link: [
-          { validator: check, trigger: 'blur' }
+          { validator: checkUrl, trigger: 'blur' }
         ],
         release_date: [
           { validator: check, trigger: 'blur' }

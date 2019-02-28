@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="aside">
       <el-row class="row-one">
         <el-col>
           <span class="title-welcome">Welcome</span>
@@ -66,6 +66,9 @@ export default {
 </script>
 
 <style scoped>
+  .aside {
+    padding: 0 20px 0 20px;
+  }
  .sub-title {
    font-size: 25px;
    text-decoration: none;

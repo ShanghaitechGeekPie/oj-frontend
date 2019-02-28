@@ -108,6 +108,7 @@ export default {
 <style scoped>
   .img-profile {
     padding: 2%;
+    height: 500px !important;
   }
   .cards {
     width: 700px;

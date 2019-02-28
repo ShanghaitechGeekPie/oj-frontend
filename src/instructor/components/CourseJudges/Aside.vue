@@ -67,7 +67,7 @@ export default {
     margin-top: 10%;
   }
   .aside {
-    padding-left: 4%;
+    padding: 0 20px 0 20px;
   }
   .subtitle {
     font-size: 15px;

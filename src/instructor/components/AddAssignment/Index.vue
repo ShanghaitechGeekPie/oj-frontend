@@ -1,7 +1,7 @@
 <template>
     <div>
-      <el-row :gutter="2">
-        <el-col :span="4">
+      <el-row :gutter="1">
+        <el-col :span="5">
           <el-menu class="el-menu-vertical-demo">
             <v-aside></v-aside>
         </el-menu>

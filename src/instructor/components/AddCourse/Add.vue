@@ -18,16 +18,25 @@
             <el-input type="text" v-model="courseInfo.code" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Semester:" prop="semester">
-            <el-input type="text" v-model="courseInfo.semester" autocomplete="off"></el-input>
+            <el-select v-model="courseInfo.semester" placeholder="请选择">
+              <el-option
+                v-for="item in seasons"
+                :key="item.value"
+                :label="item.label"
+                :value="item.label">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="Year:" prop="year">
             <el-input type="number" v-model="courseInfo.year" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Homepage:" prop="homepage">
-            <el-input v-model="courseInfo.homepage"></el-input>
+            <el-input v-model="courseInfo.homepage" placeholder="https://github.com"></el-input>
           </el-form-item>
           <el-form-item label="Instructor Email:" prop="instructor" v-for="item in courseInfo.instructor" :key="item.enroll_email">
-            <el-input v-model="item.enroll_email" disabled></el-input>
+            <el-input v-model="item.enroll_email">
+              <el-button slot="append" class="el-icon-close" @click="DeleteEmail(item.enroll_email)"></el-button>
+            </el-input>
           </el-form-item>
           <el-form-item label="Add Instructor:" prop="tem_instr">
             <el-input v-model="courseInfo.tem_instr" class="input-short" placeholder="instructor's email"></el-input>
@@ -47,13 +56,23 @@ import { mapState } from 'vuex'
 
 export default {
   data () {
-    var check = (rule, value, callback) => {
+    let check = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('不能为空'))
       }
       setTimeout(() => {
         callback()
       }, 500)
+    }
+    let checkUrl = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('不能为空'))
+      } else if (!value.includes('http')) {
+        return callback(new Error('请输入正确网址'))
+      }
+      setTimeout(() => {
+        callback()
+      }, 1000)
     }
     return {
       courseInfo: {
@@ -65,6 +84,24 @@ export default {
         instructor: [],
         tem_instr: ''
       },
+      seasons: [
+        {
+          value: 1,
+          label: 'Spring'
+        },
+        {
+          value: 2,
+          label: 'Summer'
+        },
+        {
+          value: 3,
+          label: 'Fall'
+        },
+        {
+          value: 4,
+          label: 'Winter'
+        }
+      ],
       rules: {
         name: [
           {validator: check, trigger: 'blur'}
@@ -79,7 +116,7 @@ export default {
           { validator: check, trigger: 'blur' }
         ],
         homepage: [
-          { validator: check, trigger: 'blur' }
+          { validator: checkUrl, trigger: 'blur' }
         ]
       }
     }
@@ -128,11 +165,20 @@ export default {
         }
       })
     },
+    DeleteEmail (email) {
+      let that = this
+      this.courseInfo.instructor.map(function (currentValue, index) {
+        if (currentValue.enroll_email === email) {
+          that.courseInfo.instructor.splice(index, 1)
+        }
+      })
+    },
     resetForm (formName) {
       this.$refs[formName].resetFields()
     },
     AddInstructor (value) {
       this.courseInfo.instructor.push({enroll_email: value})
+      this.courseInfo.tem_instr = ''
     }
   },
   computed: mapState({

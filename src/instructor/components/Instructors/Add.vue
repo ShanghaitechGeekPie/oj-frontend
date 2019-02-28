@@ -31,9 +31,19 @@ import { mapState } from 'vuex'
 
 export default {
   data () {
-    var check = (rule, value, callback) => {
+    let check = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('不能为空'))
+      }
+      setTimeout(() => {
+        callback()
+      }, 500)
+    }
+    let checkEmail = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('不能为空'))
+      } else if (!value.includes('@shanghaitech.edu.cn')) {
+        return callback(new Error('请输入正确邮箱'))
       }
       setTimeout(() => {
         callback()
@@ -49,7 +59,7 @@ export default {
           {validator: check, trigger: 'blur'}
         ],
         enroll_email: [
-          { validator: check, trigger: 'blur' }
+          { validator: checkEmail, trigger: 'blur' }
         ]
       }
     }

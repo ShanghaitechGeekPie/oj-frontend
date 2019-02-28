@@ -89,7 +89,6 @@ export default {
   methods: {
     updateInfo () {
       if (this.getState) {
-        console.log(this.Info)
         this.axios({
           method: 'post',
           url: `${this.Api}/instructor/${this.getID}`,

@@ -27,6 +27,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     margin-top: 20px;
+    padding: 0 20px 0 20px;
   }
   .title1 {
     font-size: 30px;

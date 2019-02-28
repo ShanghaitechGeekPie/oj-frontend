@@ -86,7 +86,7 @@ export default {
     margin-top: 10%;
   }
   .aside {
-    padding-left: 4%;
+    padding: 0 20px 0 20px;
   }
   .subtitle {
     font-size: 15px;
@@ -110,6 +110,7 @@ export default {
     font-style: inherit;
   }
   .el-icon-menu {
+    margin-top: 5px!important;
     margin-left: 10px!important;
   }
   .row-half {

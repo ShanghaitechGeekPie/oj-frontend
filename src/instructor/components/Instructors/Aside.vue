@@ -63,11 +63,11 @@ export default {
 }
 </script>
 <style scoped>
+  .aside {
+    padding: 0 20px 0 20px;
+  }
   .mt-10percent {
     margin-top: 10%;
-  }
-  .aside {
-    padding-left: 4%;
   }
   .subtitle {
     font-size: 15px;

@@ -34,7 +34,7 @@ import { mapState } from 'vuex'
 
 export default {
   data () {
-    var check = (rule, value, callback) => {
+    let check = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('不能为空'))
       }
@@ -42,7 +42,7 @@ export default {
         callback()
       }, 500)
     }
-    var checkEmail = (rule, value, callback) => {
+    let checkEmail = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('不能为空'))
       } else if (!value.includes('@shanghaitech.edu.cn')) {
@@ -50,7 +50,7 @@ export default {
       }
       setTimeout(() => {
         callback()
-      }, 1000)
+      }, 500)
     }
     return {
       studentInfo: {

@@ -57,6 +57,9 @@ export default {
 }
 </script>
 <style scoped>
+  .aside {
+    padding: 0 20px 0 20px;
+  }
   .subtitle {
     font-size: 20px;
     font-style: italic;
@@ -78,5 +81,6 @@ export default {
   }
   .el-icon-menu {
     margin-left: 10px!important;
+    margin-top: 5px!important;
   }
 </style>

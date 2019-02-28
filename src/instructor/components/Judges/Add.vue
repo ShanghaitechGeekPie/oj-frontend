@@ -24,7 +24,7 @@
             <el-input type="text" v-model="judgeInfo.cert_ca" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Max job:" prop="max_job">
-            <el-input v-model.number="judgeInfo.max_job"></el-input>
+            <el-input type="number" v-model.number="judgeInfo.max_job"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('judgeInfo')">提交</el-button>
@@ -132,10 +132,10 @@ export default {
 }
 </script>
 <style scoped>
-.rows {
-  margin-top: 5%;
-  margin-left: 5%;
-}
+  .rows {
+    margin-top: 5%;
+    margin-left: 5%;
+  }
   .row-main {
     margin-top: 5%;
     margin-left: 5%;
