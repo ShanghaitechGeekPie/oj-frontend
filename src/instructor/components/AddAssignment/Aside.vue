@@ -69,11 +69,11 @@ export default {
   .aside {
     padding: 0 20px 0 20px;
   }
- .sub-title {
-   font-size: 25px;
-   text-decoration: none;
-   color: black;
- }
+  .sub-title {
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+  }
   .title-welcome {
     margin-top: 20px;
     font-size: 50px;
@@ -96,6 +96,7 @@ export default {
     font-size: 20px;
   }
   .el-icon-menu {
-    margin: 5px 0 0 10px!important;
+    margin: 3px 0 0 10px!important;
+    font-size: 20px !important;
   }
 </style>

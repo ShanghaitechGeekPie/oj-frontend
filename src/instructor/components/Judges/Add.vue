@@ -15,13 +15,13 @@
             <el-input type="text" v-model="judgeInfo.host" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Client Key:" prop="client_key">
-            <el-input type="text" v-model="judgeInfo.client_key" autocomplete="off"></el-input>
+            <el-input type="textarea" v-model="judgeInfo.client_key" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Client Cert:" prop="client_cert">
-            <el-input type="text" v-model="judgeInfo.client_cert" autocomplete="off"></el-input>
+            <el-input type="textarea" v-model="judgeInfo.client_cert" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Cert CA:" prop="cert_ca">
-            <el-input type="text" v-model="judgeInfo.cert_ca" autocomplete="off"></el-input>
+            <el-input type="textarea" v-model="judgeInfo.cert_ca" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Max job:" prop="max_job">
             <el-input type="number" v-model.number="judgeInfo.max_job"></el-input>
@@ -95,6 +95,7 @@ export default {
       if (parts.length === 2) return parts.pop().split(';').shift()
     },
     submitForm (formName) {
+      console.log(this.judgeInfo)
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (this.getAuth) {

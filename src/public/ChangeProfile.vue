@@ -52,7 +52,7 @@
                 <span class="sub-title">Public Key:</span>
               </el-col>
               <el-col :span="18">
-                <el-input class="shortInput" v-model="Info.rsa_pub_key"></el-input>
+                <el-input type="textarea" class="shortInput" v-model="Info.rsa_pub_key"></el-input>
               </el-col>
               <el-col :span="2"></el-col>
             </el-row>
@@ -172,6 +172,7 @@ export default {
 <style scoped>
   .img-profile {
     padding: 2%;
+    height: 500px !important;
   }
   .cards {
     width: 700px;

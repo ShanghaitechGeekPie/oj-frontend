@@ -110,15 +110,16 @@ export default {
     font-style: inherit;
   }
   .el-icon-menu {
-    margin-top: 5px!important;
-    margin-left: 10px!important;
+    margin-left: 10px !important;
+    margin-top: 3px !important;
+    font-size: 20px !important;
   }
   .row-half {
     margin-top: 10%;
   }
   .el-icon-info {
-    margin-left: 10px!important;
-    height: 17px!important;
+    margin-left: 10px !important;
+    font-size: 20px !important;
   }
   .row-quarter {
     margin-top: 5%;

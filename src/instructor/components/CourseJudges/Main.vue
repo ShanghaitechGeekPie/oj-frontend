@@ -152,11 +152,12 @@ export default {
   }
   .title-main {
     font-family: inherit;
-    font-size: 30px;
+    font-size: 40px;
   }
   .col-one {
     float: right;
     margin-top: 5%;
+    padding-left: 35px !important;
   }
   .button-only {
     background-color: #A40004;
@@ -166,8 +167,5 @@ export default {
   }
   .row-half {
     margin-top: 2%;
-  }
-  .card-only {
-    padding: 0 10px 0 10px;
   }
 </style>

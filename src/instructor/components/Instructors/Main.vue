@@ -143,6 +143,7 @@ export default {
   .col-one {
     float: right;
     margin-top: 5%;
+    padding-left: 35px !important;
   }
   .button-only {
     background-color: #A40004;

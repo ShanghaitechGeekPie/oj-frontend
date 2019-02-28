@@ -119,7 +119,8 @@ export default {
     margin-top: 10%;
   }
   .el-icon-menu {
-    margin-top: 5px!important;
+    margin-top: 3px !important;
+    font-size: 20px !important;
     margin-left: 10px!important;
   }
   .row-quarter {
@@ -127,5 +128,6 @@ export default {
   }
   .el-icon-info {
     margin-left: 10px!important;
+    font-size: 20px !important;
   }
 </style>

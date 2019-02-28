@@ -12,7 +12,7 @@
       </el-row>
       <el-row class="row-quarter" type="flex" align="middle" justify="center">
         <el-col>
-          <span class="title-msg">You can check all the judges here and manage your judges.</span>
+          <span class="title-msg">You can check all the courses here and manage your courses.</span>
         </el-col>
       </el-row>
       <el-row class="row-half">
@@ -67,6 +67,7 @@ export default {
     margin-top: 10%;
   }
   .el-icon-menu {
-    margin: 5px 0 0 10px!important;
+    margin: 3px 0 0 10px!important;
+    font-size: 20px !important;
   }
 </style>

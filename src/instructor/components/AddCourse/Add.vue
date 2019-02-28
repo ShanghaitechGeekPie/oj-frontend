@@ -10,7 +10,7 @@
     </el-row>
     <el-row class="rows">
       <el-col>
-        <el-form :model="courseInfo" status-icon :rules="rules" ref="courseInfo" label-width="100px">
+        <el-form :model="courseInfo" status-icon :rules="rules" ref="courseInfo" label-width="140px">
           <el-form-item label="Name:" prop="name">
             <el-input type="text" v-model="courseInfo.name" autocomplete="off"></el-input>
           </el-form-item>
@@ -200,6 +200,7 @@ export default {
   }
   .title-main {
     font-size: 30px;
+    margin-left: 20px;
   }
   .col-one {
     float: right;

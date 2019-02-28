@@ -189,7 +189,7 @@ export default {
   margin-top: 5%;
 }
   .title-main {
-    font-size: 30px;
+    font-size: 40px;
   }
   .col-one {
     float: right;
