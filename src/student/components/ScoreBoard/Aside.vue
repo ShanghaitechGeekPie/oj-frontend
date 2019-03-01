@@ -23,7 +23,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="15">
-        <router-link :to="{ path: `/home/course/${this.coInfo.uid}` }" class="sub-title">Assignment</router-link>
+        <router-link :to="{ path: `/home/course/${this.coInfo.name}` }" class="sub-title">Assignment</router-link>
       </el-col>
     </el-row>
     <el-row class="row-half">

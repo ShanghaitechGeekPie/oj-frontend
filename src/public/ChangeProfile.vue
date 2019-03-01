@@ -106,7 +106,7 @@ export default {
       } else {
         this.axios({
           method: 'post',
-          url: `${this.Api}/instructor/${this.getID}`,
+          url: `${this.Api}/student/${this.getID}`,
           data: this.Info,
           headers: {'X-CSRFToken': this.getCookie('csrftoken')}
         }).then((response) => {

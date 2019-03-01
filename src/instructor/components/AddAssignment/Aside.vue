@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     getCourseUid () {
-      return this.$store.state.coInfo.uid
+      return this.$store.state.coInfo.code
     }
   }
 }

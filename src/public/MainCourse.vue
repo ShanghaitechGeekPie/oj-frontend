@@ -7,7 +7,7 @@
     </el-row>
     <el-row class="row-main">
       <el-col>
-         <span class="subtitle">{{ courseInfo[0].semester + ' ' + courseInfo[0].year }}</span>
+         <span class="subtitle">{{ getYear(this.courseInfo) }}</span>
       </el-col>
     </el-row>
        <el-card class="box-card" v-for="a in courseInfo" :key="a.uid">
@@ -19,7 +19,7 @@
                     <span class="title-forth">{{ a.name }}</span>
                 </el-row>
                 <el-row class="button-third" type="flex">
-                    <span class="title-fifth">{{ a.instructor[0] }} {{ a.instructor[1] }}</span>
+                    <span class="title-fifth">{{ getInstr(a.instructor) }}</span>
                 </el-row>
          </el-button>
        </el-card>
@@ -37,7 +37,21 @@ export default {
   methods: {
     toCourse (course) {
       this.$store.commit('updateCoInfo', course)
-      this.$router.push('home/course/' + course.uid)
+      this.$router.push('home/course/' + course.code)
+    },
+    getYear (info) {
+      if (info.length === 0) {
+        return ''
+      } else {
+        return info[0].semester + ' ' + info[0].year
+      }
+    },
+    getInstr (instr) {
+      if (instr.length === 0) {
+        return ''
+      } else {
+        return instr[0].slice(0, 14) + '...' + ' ' + instr[1].slice(0, 14) + '...'
+      }
     }
   },
   props: ['passCoInfo'],

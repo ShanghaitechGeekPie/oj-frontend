@@ -52,6 +52,7 @@ export default {
     getCoInfo: state => state.coInfo,
     getReq: state => state.isRequest,
     Api: state => state.api,
+    getLogout: state => state.logout_url,
     profilePage () {
       return (this.$route.name === 'instrProfile') || (this.$route.name === 'profile')
     }
@@ -62,7 +63,7 @@ export default {
       this.$store.commit('refreshReq')
       this.axios({
         method: 'post',
-        url: `https://${location.hostname}/oidc/logout/`,
+        url: `${this.getLogout}`,
         headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
       // todo: clear cookie
@@ -75,14 +76,14 @@ export default {
       if (!this.getAuth) {
         this.axios({
           method: 'get',
-          url: `${this.Api}/user/login/oauth/param`,
+          url: `${this.Api}/user/login/oauth/param`, // todo: warning
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'get',
             'Access-Control-Allow-Headers': 'x-requested-with,content-type'
           }
         }).then((response) => {
-          this.$store.commit('login')
+          this.$store.commit('login', response.data.logout_url)
           window.location.href = response.data.login_url
         }).catch((error) => {
           this.$message({type: 'error',
@@ -149,6 +150,5 @@ export default {
   }
   .menu-top {
     width: auto;
-    height: 60px;
   }
 </style>

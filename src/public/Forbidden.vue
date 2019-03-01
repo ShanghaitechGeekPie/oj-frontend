@@ -44,20 +44,27 @@ export default {
   },
   computed: mapState({
     getAuth: state => state.isAuthorized,
-    Api: state => state.api
+    Api: state => state.api,
+    getLogout: state => state.logout_url
   }),
   methods: {
     logout () {
       this.$store.commit('logOut')
       this.$store.commit('refreshReq')
-      this.$router.push('/')
+      this.axios({
+        method: 'post',
+        url: `${this.getLogout}`,
+        headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+      })
+      // todo: clear cookie
+      window.location.reload()
     },
     login () {
       this.axios({
         method: 'get',
-        url: `/user/login/oauth/param`
+        url: `${this.Api}/user/login/oauth/param`
       }).then((response) => {
-        this.$store.commit('login')
+        this.$store.commit('login', response.data.logout_url)
         window.location.href = response.data.login_url
       })
     }

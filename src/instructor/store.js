@@ -35,7 +35,8 @@ const store = new Vuex.Store({
       uid: '',
       isInstructor: false
     },
-    api: ''
+    api: '',
+    logout_url: ''
   },
   mutations: {
     updateCoInfo (state, value) {
@@ -44,8 +45,9 @@ const store = new Vuex.Store({
     updateAss (state, value) {
       state.assignments = value
     },
-    login (state) {
+    login (state, url) {
       state.isAuthorized = true
+      state.logout_url = url
     },
     logOut (state) {
       state.isAuthorized = false

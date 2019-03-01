@@ -118,7 +118,7 @@ export default {
     },
     updateAss (info) {
       this.$store.commit('updateAss', info)
-      this.$router.push(`${this.$route.path}/submission/${info.uid}`)
+      this.$router.push(`${this.$route.path}/submission/${info.name}`)
     },
     getScore (row) {
       if (row.grade === null) {

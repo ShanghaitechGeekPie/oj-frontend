@@ -1,12 +1,12 @@
 <template>
   <div>
     <el-row class="row-main" :gutter="2" v-if="this.getAuth">
-      <el-col :span="4" class="col-quarter">
+      <el-col :span="5" class="col-quarter">
           <el-menu class="el-menu-vertical-demo">
             <v-aside></v-aside>
           </el-menu>
       </el-col>
-      <el-col :span="18">
+      <el-col :span="17">
          <v-main :passCoInfo="courseInfo"></v-main>
       </el-col>
     </el-row>
