@@ -57,14 +57,14 @@ export default {
             if (this.$route.name === 'indexInstructor' || this.$route.name === 'homeInstructor') {
               window.location.reload()
             } else {
-              window.location.href = `${this.Api}/instructor.html#/`
+              window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo: warning
             }
           } else if (response.data.is_student && !response.data.is_instructor) {
             this.$store.commit('updateState', response.data.uid, 1)
             if (this.$route.name === 'indexStudent' || this.$route.name === 'homeStudent') {
               window.location.reload()
             } else {
-              window.location.href = `${this.Api}/#/`
+              window.location.href = 'https://' + location.hostname + '/#/' // todo: warning
             }
           } else if (!response.data.is_student && !response.data.is_instructor) {
             this.$store.commit('updateState', response.data.uid, 4)
