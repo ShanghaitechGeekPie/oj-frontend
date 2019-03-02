@@ -49,6 +49,8 @@ export default {
     getInstr (instr) {
       if (instr.length === 0) {
         return ''
+      } else if (instr === 1) {
+        return instr[0].slice(0, 14) + '...'
       } else {
         return instr[0].slice(0, 14) + '...' + ' ' + instr[1].slice(0, 14) + '...'
       }

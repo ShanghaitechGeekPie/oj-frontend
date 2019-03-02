@@ -7,7 +7,7 @@
           </el-menu>
       </el-col>
       <el-col :span="18">
-         <v-main :passCoInfo="courseInfo"></v-main>
+        <v-main :passCoInfo="courseInfo"></v-main>
       </el-col>
     </el-row>
     <el-row v-else>
@@ -38,29 +38,41 @@ export default {
   },
   computed: mapState({
     getAuth: state => state.isAuthorized,
-    getID: state => state.baseInfo.uid,
+    getBase: state => state.baseInfo,
     Api: state => state.api,
     getReq: state => state.isRequest
   }),
   mounted () {
     if (this.getAuth) {
-      console.log('1 5:06')
+      console.log('2 3:47')
       if (!this.getReq) {
         this.axios({
           method: 'get',
-          url: `https://${location.hostname}/api/user/role`
+          url: `${this.Api}/user/role` // todo: warning
         }).then((response) => {
           this.$store.commit('requested')
-          if (!response.data.is_student) {
-            this.$store.commit('updateInstructor', response.data.uid)
-          } else {
-            this.$store.commit('updateStudent', response.data.uid)
+          console.log(response.data)
+          if (!response.data.is_student && response.data.is_instructor) {
+            this.$store.commit('updateState', response.data.uid, 2)
             if (this.$route.name === 'indexInstructor' || this.$route.name === 'homeInstructor') {
+              window.location.reload()
             } else {
-              window.location.href = `https://${location.hostname}/#/`
+              window.location.href = `${this.Api}/instructor.html#/`
             }
+          } else if (response.data.is_student && !response.data.is_instructor) {
+            this.$store.commit('updateState', response.data.uid, 1)
+            if (this.$route.name === 'indexStudent' || this.$route.name === 'homeStudent') {
+              window.location.reload()
+            } else {
+              window.location.href = `${this.Api}/#/`
+            }
+          } else if (!response.data.is_student && !response.data.is_instructor) {
+            this.$store.commit('updateState', response.data.uid, 4)
+            this.$router.push('/uninitialized')
+          } else {
+            this.$store.commit('updateState', response.data.uid, 3)
+            window.location.reload()
           }
-          window.location.reload()
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -71,7 +83,7 @@ export default {
       }
       this.axios({
         method: 'GET',
-        url: `${this.Api}/student/${this.getID}/course/`
+        url: `${this.Api}/student/${this.getBase.uid}/course/`
       }).then((response) => {
         this.courseInfo = response.data
       }).catch((err) => {

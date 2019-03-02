@@ -10,18 +10,18 @@
     </el-row>
     <el-row class="rows">
       <el-col>
-        <el-form :model="judgeInfo" status-icon :rules="rules" ref="judgeInfo" label-width="100px">
+        <el-form :model="judgeInfo" status-icon :rules="rules" ref="judgeInfo" label-width="15%">
           <el-form-item label="Host:" prop="host">
             <el-input type="text" v-model="judgeInfo.host" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item label="Client Key:" prop="client_key">
-            <el-input type="textarea" v-model="judgeInfo.client_key" autocomplete="off"></el-input>
+            <el-input type="textarea" v-model="judgeInfo.client_key" autocomplete="off" class="height-input" :autosize="{ minRows: 10, maxRows: 100}"></el-input>
           </el-form-item>
           <el-form-item label="Client Cert:" prop="client_cert">
-            <el-input type="textarea" v-model="judgeInfo.client_cert" autocomplete="off"></el-input>
+            <el-input type="textarea" v-model="judgeInfo.client_cert" autocomplete="off"  :autosize="{ minRows: 10, maxRows: 100}"></el-input>
           </el-form-item>
           <el-form-item label="Cert CA:" prop="cert_ca">
-            <el-input type="textarea" v-model="judgeInfo.cert_ca" autocomplete="off"></el-input>
+            <el-input type="textarea" v-model="judgeInfo.cert_ca" autocomplete="off" :autosize="{ minRows: 10, maxRows: 100}"></el-input>
           </el-form-item>
           <el-form-item label="Max job:" prop="max_job">
             <el-input type="number" v-model.number="judgeInfo.max_job"></el-input>

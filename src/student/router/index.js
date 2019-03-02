@@ -11,6 +11,8 @@ import unAuth from '../../public/Unauthorized'
 import store from '../store'
 import forbidden from '../../public/Forbidden'
 import changePro from '../../public/ChangeProfile'
+import unInit from '../../public/NoRole'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -70,6 +72,11 @@ const router = new Router({
       path: '/unauthorized',
       name: 'unauthorized',
       component: unAuth
+    },
+    {
+      path: '/uninitialized',
+      name: 'uninitialized',
+      component: unInit
     },
     {
       path: '*',

@@ -19,10 +19,7 @@
     </el-row>
     <el-row class="row-two" v-if="this.steps === 1">
       <el-col>
-        <el-form :model="assignmentInfo" status-icon :rules="rules" ref="assignmentInfo" label-width="100px" class="demo-ruleForm">
-          <el-form-item label="Course uid:" prop="course_uid">
-            <el-input v-model="assignmentInfo.course_uid" autocomplete="off"></el-input>
-          </el-form-item>
+        <el-form :model="assignmentInfo" status-icon :rules="rules" ref="assignmentInfo" label-width="20%" class="demo-ruleForm">
           <el-form-item label="Name:" prop="name">
             <el-input v-model="assignmentInfo.name" autocomplete="off"></el-input>
           </el-form-item>
@@ -64,7 +61,7 @@
       <el-col>
         <el-card>
           <el-row class="card-rows" type="flex" align="middle">
-            <el-col :span="16"><span class="title-info">After you submit assignment judges, you will be redirect to the following url:</span></el-col>
+            <el-col :span="16"><span class="title-info">After you submit assignment judges, the git command may be useful for you:</span></el-col>
           </el-row>
           <el-row class="card-rows" type="flex" align="middle">
             <el-col :span="20"><span class="title-info">{{ this.reply.ssh_url_to_repo }}</span></el-col>
@@ -123,9 +120,6 @@ export default {
           { validator: check, trigger: 'blur' }
         ],
         uid: [
-          { validator: check, trigger: 'blur' }
-        ],
-        course_uid: [
           { validator: check, trigger: 'blur' }
         ],
         descr_link: [
@@ -201,6 +195,9 @@ export default {
         this.$emit('goBack')
       }, 500)
     }
+  },
+  created () {
+    this.assignmentInfo.course_uid = this.getUid
   },
   computed: mapState({
     getUid: state => state.coInfo.uid,

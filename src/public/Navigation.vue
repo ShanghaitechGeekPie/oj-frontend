@@ -67,7 +67,7 @@ export default {
         headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
       // todo: clear cookie
-      window.location.reload()
+      this.$router.push('/')
     },
     goBack () {
       this.$router.go(-2)
@@ -84,7 +84,8 @@ export default {
           }
         }).then((response) => {
           this.$store.commit('login', response.data.logout_url)
-          window.location.href = response.data.login_url
+          window.location.href = response.data.login_url // todo: warning
+          // window.location.reload()
         }).catch((error) => {
           this.$message({type: 'error',
             message: error,
@@ -106,13 +107,30 @@ export default {
         method: 'get',
         url: `https://${location.hostname}/api/user/role` // todo:warning
       }).then((response) => {
+        console.log(response.data)
         this.$store.commit('requested')
-        if (!response.data.is_student) {
-          this.$store.commit('updateInstructor', response.data.uid)
-          window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo:warning
+        if (!response.data.is_student && response.data.is_instructor) {
+          this.$store.commit('updateState', response.data.uid, 2)
+          if (this.$route.name === 'indexInstructor' || this.$route.name === 'homeInstructor') {
+            window.location.reload()
+          } else {
+            window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo:warning
+            // window.location.reload()
+          }
+        } else if (response.data.is_student && !response.data.is_instructor) {
+          this.$store.commit('updateState', response.data.uid, 1)
+          if (this.$route.name === 'indexStudent' || this.$route.name === 'homeStudent') {
+            window.location.reload()
+          } else {
+            window.location.href = 'https://' + location.hostname + '/#/' // todo:warning
+            // window.location.reload()
+          }
+        } else if (!response.data.is_student && !response.data.is_instructor) {
+          this.$store.commit('updateState', response.data.uid, 4)
+          this.$router.push('/uninitialized')
         } else {
-          this.$store.commit('updateStudent', response.data.uid)
-          window.location.href = 'https://' + location.hostname + '/#/' // todo:warning
+          this.$store.commit('updateState', response.data.uid, 3)
+          window.location.reload()
         }
       }).catch((err) => {
         this.$message({

@@ -10,7 +10,7 @@
     </el-row>
     <el-row class="rows">
       <el-col>
-        <el-form :model="courseInfo" status-icon :rules="rules" ref="courseInfo" label-width="140px">
+        <el-form :model="courseInfo" status-icon :rules="rules" ref="courseInfo" label-width="20%">
           <el-form-item label="Name:" prop="name">
             <el-input type="text" v-model="courseInfo.name" autocomplete="off"></el-input>
           </el-form-item>

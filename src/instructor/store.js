@@ -33,7 +33,8 @@ const store = new Vuex.Store({
     },
     baseInfo: {
       uid: '',
-      isInstructor: false
+      isInstructor: false,
+      isStudent: false
     },
     api: '',
     logout_url: ''
@@ -52,13 +53,19 @@ const store = new Vuex.Store({
     logOut (state) {
       state.isAuthorized = false
     },
-    updateInstructor (state, uid) {
+    updateState (state, uid, role) {
       state.baseInfo.uid = uid
-      state.baseInfo.isInstructor = true
-    },
-    updateStudent (state, uid) {
-      state.baseInfo.uid = uid
-      state.baseInfo.isInstructor = false
+      if (role === 1) {
+        state.baseInfo.isStudent = true
+      } else if (role === 2) {
+        state.baseInfo.isInstructor = true
+      } else if (role === 3) {
+        state.baseInfo.isStudent = true
+        state.baseInfo.isInstructor = true
+      } else {
+        state.baseInfo.isStudent = false
+        state.baseInfo.isInstructor = false
+      }
     },
     requested (state) {
       state.isRequest = true

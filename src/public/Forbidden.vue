@@ -12,7 +12,7 @@
             <el-card class="cards">
               <el-row type="flex" justify="space-around" align="middle">
                 <el-col class="space-center">
-                  <span class="words">Forbidden request detected or unknown error happens, please logout and login again!</span>
+                  <span class="words">Forbidden request detected or unknown error happens, please login again!</span>
                 </el-col>
               </el-row>
               <el-row type="flex" justify="space-around" align="middle">
@@ -57,7 +57,7 @@ export default {
         headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
       // todo: clear cookie
-      window.location.reload()
+      this.$router.push('/')
     },
     login () {
       this.axios({

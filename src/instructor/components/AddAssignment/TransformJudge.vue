@@ -52,7 +52,6 @@ export default {
       })
       setTimeout(() => {
         loading.close()
-        window.location.href = this.passReply.ssh_url_to_repo
       }, 500)
     },
     getCookie (name) {

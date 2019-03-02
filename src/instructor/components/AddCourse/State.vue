@@ -47,7 +47,7 @@
             <template slot-scope="scope">
               <el-dropdown>
                 <span class="el-dropdown-link">
-                  Click here<i class="el-icon-arrow-down el-icon--right"></i>
+                  Here<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item v-for="item in scope.row.instructor" :key="item">{{ item }}</el-dropdown-item>

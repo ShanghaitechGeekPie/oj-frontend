@@ -10,10 +10,7 @@
     </el-row>
     <el-row class="row-quarter">
       <el-col>
-        <el-form :model="studentInfo" status-icon :rules="rules" ref="studentInfo" label-width="100px">
-          <el-form-item label="Name:" prop="name">
-            <el-input type="text" v-model="studentInfo.name" autocomplete="off"></el-input>
-          </el-form-item>
+        <el-form :model="studentInfo" status-icon :rules="rules" ref="studentInfo" label-width="20%">
           <el-form-item label="Email:" prop="enroll_email">
             <el-input type="email" v-model.number="studentInfo.enroll_email"></el-input>
           </el-form-item>
@@ -54,14 +51,10 @@ export default {
     }
     return {
       studentInfo: {
-        name: '',
         enroll_email: '',
         student_id: ''
       },
       rules: {
-        name: [
-          {validator: check, trigger: 'blur'}
-        ],
         enroll_email: [
           { validator: checkEmail, trigger: 'blur' }
         ],
