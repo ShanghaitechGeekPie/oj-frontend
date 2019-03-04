@@ -52,6 +52,8 @@ const store = new Vuex.Store({
     },
     logOut (state) {
       state.isAuthorized = false
+      state.isInstructor = false
+      state.isStudent = false
     },
     updateState (state, uid, role) {
       state.baseInfo.uid = uid

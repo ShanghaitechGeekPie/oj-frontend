@@ -49,7 +49,7 @@ export default {
     getInstr (instr) {
       if (instr.length === 0) {
         return ''
-      } else if (instr === 1) {
+      } else if (instr.length === 1) {
         return instr[0].slice(0, 14) + '...'
       } else {
         return instr[0].slice(0, 14) + '...' + ' ' + instr[1].slice(0, 14) + '...'
@@ -91,8 +91,8 @@ export default {
   }
   .button-course {
     background-color: #f6f0f0;
-    height: 250px;
-    width: 400px;
+    height: 250px!important;
+    width: 400px!important;
     padding: 0 0 0 0;
   }
   .row-button {
