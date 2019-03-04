@@ -95,7 +95,6 @@ export default {
       if (parts.length === 2) return parts.pop().split(';').shift()
     },
     submitForm (formName) {
-      console.log(this.judgeInfo)
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (this.getAuth) {

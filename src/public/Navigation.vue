@@ -13,6 +13,7 @@
           </el-col>
           <el-col class="menu-top" v-if="this.getAuth">
              <el-menu
+              class="menu"
               :default-active="$route.path"
               mode="horizontal"
               background-color="#A40006"
@@ -101,35 +102,47 @@ export default {
     }
   },
   created () {
+    let that = this
     this.$store.commit('updateApi', 'https://' + location.hostname + '/api') // todo:warning
     if (this.getAuth && !this.getReq) {
       this.axios({
         method: 'get',
         url: `https://${location.hostname}/api/user/role` // todo:warning
       }).then((response) => {
-        console.log(response.data)
         this.$store.commit('requested')
         if (!response.data.is_student && response.data.is_instructor) {
-          this.$store.commit('updateState', response.data.uid, 2)
-          if (this.$route.name === 'indexInstructor' || this.$route.name === 'homeInstructor') {
+          that.$store.commit('updateState', {
+            uid: response.data.uid,
+            role: 2
+          })
+          if (that.$route.name === 'indexInstructor' || that.$route.name === 'homeInstructor') {
             window.location.reload()
           } else {
             window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo:warning
             // window.location.reload()
           }
         } else if (response.data.is_student && !response.data.is_instructor) {
-          this.$store.commit('updateState', response.data.uid, 1)
-          if (this.$route.name === 'indexStudent' || this.$route.name === 'homeStudent') {
+          that.$store.commit('updateState', {
+            uid: response.data.uid,
+            role: 1
+          })
+          if (that.$route.name === 'indexStudent' || that.$route.name === 'homeStudent') {
             window.location.reload()
           } else {
             window.location.href = 'https://' + location.hostname + '/#/' // todo:warning
             // window.location.reload()
           }
         } else if (!response.data.is_student && !response.data.is_instructor) {
-          this.$store.commit('updateState', response.data.uid, 4)
+          that.$store.commit('updateState', {
+            uid: response.data.uid,
+            role: 4
+          })
           this.$router.push('/uninitialized')
         } else {
-          this.$store.commit('updateState', response.data.uid, 3)
+          that.$store.commit('updateState', {
+            uid: response.data.uid,
+            role: 3
+          })
           window.location.reload()
         }
       }).catch((err) => {
@@ -154,6 +167,7 @@ export default {
   }
   .img-logo {
     width: 100%;
+    height: 100% !important;
   }
   .text-logo {
     color: white;
@@ -168,5 +182,11 @@ export default {
   }
   .menu-top {
     width: auto;
+  }
+  .menu {
+    height: 100% !important;
+    border-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    color: #A40006 !important;
   }
 </style>

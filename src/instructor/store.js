@@ -55,13 +55,13 @@ const store = new Vuex.Store({
       state.isInstructor = false
       state.isStudent = false
     },
-    updateState (state, uid, role) {
-      state.baseInfo.uid = uid
-      if (role === 1) {
+    updateState (state, value) {
+      state.baseInfo.uid = value.uid
+      if (value.role === 1) {
         state.baseInfo.isStudent = true
-      } else if (role === 2) {
+      } else if (value.role === 2) {
         state.baseInfo.isInstructor = true
-      } else if (role === 3) {
+      } else if (value.role === 3) {
         state.baseInfo.isStudent = true
         state.baseInfo.isInstructor = true
       } else {

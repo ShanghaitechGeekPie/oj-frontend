@@ -45,32 +45,44 @@ export default {
   }),
   created () {
     if (this.getAuth) {
+      let that = this
       if (!this.getReq) {
         this.axios({
           method: 'get',
           url: `/user/role` // todo: warning
         }).then((response) => {
           this.$store.commit('requested')
-          console.log(response.data)
           if (!response.data.is_student && response.data.is_instructor) {
-            this.$store.commit('updateState', response.data.uid, 2)
-            if (this.$route.name === 'indexInstructor' || this.$route.name === 'homeInstructor') {
+            that.$store.commit('updateState', {
+              uid: response.data.uid,
+              role: 2
+            })
+            if (that.$route.name === 'indexInstructor' || that.$route.name === 'homeInstructor') {
               window.location.reload()
             } else {
               window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo: warning
             }
           } else if (response.data.is_student && !response.data.is_instructor) {
-            this.$store.commit('updateState', response.data.uid, 1)
-            if (this.$route.name === 'indexStudent' || this.$route.name === 'homeStudent') {
+            that.$store.commit('updateState', {
+              uid: response.data.uid,
+              role: 1
+            })
+            if (that.$route.name === 'indexStudent' || that.$route.name === 'homeStudent') {
               window.location.reload()
             } else {
               window.location.href = 'https://' + location.hostname + '/#/' // todo: warning
             }
           } else if (!response.data.is_student && !response.data.is_instructor) {
-            this.$store.commit('updateState', response.data.uid, 4)
-            this.$router.push('/uninitialized')
+            that.$store.commit('updateState', {
+              uid: response.data.uid,
+              role: 4
+            })
+            that.$router.push('/uninitialized')
           } else {
-            this.$store.commit('updateState', response.data.uid, 3)
+            that.$store.commit('updateState', {
+              uid: response.data.uid,
+              role: 3
+            })
             window.location.reload()
           }
         }).catch((err) => {
