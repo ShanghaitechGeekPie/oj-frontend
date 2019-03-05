@@ -2,9 +2,9 @@
  <div class="line">
    <el-row type="flex" class="row-chicken" justify="space-between" align="middle">
           <el-col style="width: auto">
-            <el-row type="flex" justify="start" align="middle" :gutter="20">
-              <el-col>
-                <img v-bind:src="img" class="img-logo">
+            <el-row type="flex" justify="center" align="middle" :gutter="20">
+              <el-col type="flex" justify="center" align="middle" class="col-self">
+                <img v-bind:src="img" class="img-logo" @click="this.backHome">
               </el-col>
               <el-col>
                 <span class="text-logo">Online Judge</span>
@@ -72,6 +72,9 @@ export default {
     },
     goBack () {
       this.$router.go(-2)
+    },
+    backHome () {
+      this.$router.push('/')
     },
     login () {
       if (!this.getAuth) {
@@ -188,5 +191,8 @@ export default {
     border-bottom: 0 !important;
     margin-bottom: 0 !important;
     color: #A40006 !important;
+  }
+  .col-self {
+    height: 34px;
   }
 </style>
