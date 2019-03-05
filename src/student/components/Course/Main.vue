@@ -30,7 +30,7 @@
           label="STATUS"
           width="180">
           <template slot-scope="scope">
-            <el-button :style="colors(scope.row.state)" @click="updateAss(scope.row)" class="fake-href">
+            <el-button :style="colors(scope.row)" @click="updateAss(scope.row)" class="fake-href">
               {{ getScore(scope.row) }}
             </el-button>
           </template>
@@ -105,12 +105,14 @@ export default {
       window.location.href = scope.row.descr_link
     },
     colors (situation) { // don't use state as the variable name
-      if (situation === 'Failed') {
-        return 'background-color: #ed3f14;width: 100px;'
-      } else if (situation === 'Ongoing') {
-        return 'background-color: #19be6b;width: 100px;'
-      } else {
-        return 'background-color: #2d8cf0;width: 100px;'
+      if (situation.grade >= 70) {
+        return 'background-color: greenyellow;width: 100px;'
+      } else if (situation.grade >= 50) {
+        return 'background-color: #4d2bfc;width: 100px;'
+      } else if (situation.grade >= 30) {
+        return 'background-color: #cb0c0a;width: 100px;'
+      } else if (situation.grade === null || situation.grade === undefined) {
+        return 'background-color: orange;width: 100px;'
       }
     },
     showPending () {
@@ -121,10 +123,10 @@ export default {
       this.$router.push(`${this.$route.path}/submission/${info.name}`)
     },
     getScore (row) {
-      if (row.grade === null) {
+      if (row.grade === null || row.grade === undefined) {
         return 'no result'
       } else {
-        return row.grade + '/' + row.overall_grade
+        return row.grade
       }
     }
   },
@@ -194,7 +196,7 @@ export default {
   }
   .fake-href {
     text-decoration: none;
-    color: white;
+    color: #cb0c0a;
   }
   .button-shot {
     float: right;

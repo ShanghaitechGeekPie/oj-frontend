@@ -3,7 +3,7 @@
    <el-row type="flex" class="row-chicken" justify="space-between" align="middle">
           <el-col style="width: auto">
             <el-row type="flex" justify="center" align="middle" :gutter="20">
-              <el-col type="flex" justify="center" align="middle" class="col-self">
+              <el-col type="flex" justify="center" align="middle">
                 <img v-bind:src="img" class="img-logo" @click="this.backHome">
               </el-col>
               <el-col>
@@ -55,7 +55,7 @@ export default {
     Api: state => state.api,
     getLogout: state => state.logout_url,
     profilePage () {
-      return (this.$route.name === 'instrProfile') || (this.$route.name === 'profile')
+      return (this.$route.name === 'instrProfile') || (this.$route.name === 'profile' || this.$route.name === 'changeProfile')
     }
   }),
   methods: {
@@ -191,8 +191,5 @@ export default {
     border-bottom: 0 !important;
     margin-bottom: 0 !important;
     color: #A40006 !important;
-  }
-  .col-self {
-    height: 34px;
   }
 </style>

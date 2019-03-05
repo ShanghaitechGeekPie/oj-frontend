@@ -40,7 +40,7 @@ export default {
             that.$set(that.Judges, i, response.data)
           })
           .catch((err) => {
-            this.$message({
+            that.$message({
               type: 'error',
               message: err,
               showClose: true

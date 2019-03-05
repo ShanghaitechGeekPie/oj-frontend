@@ -12,7 +12,7 @@
       <el-col>
         <el-steps :active="steps" align-center>
           <el-step title="步骤 1" description="Please enter the information of new assignment"></el-step>
-          <el-step title="步骤 2" description="Please add judges for the assignment and you will be redirect to the next url "></el-step>
+          <el-step title="步骤 2" description="Please add judges for the assignment and you will receive a git command"></el-step>
           <el-step title="步骤 3" description="Assignment successfully added"></el-step>
         </el-steps>
       </el-col>

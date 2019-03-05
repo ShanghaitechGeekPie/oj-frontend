@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div>
     <el-row class="row-height" :gutter="6">
       <el-col :span="4" class="col-one">
           <el-menu class="menu-only">

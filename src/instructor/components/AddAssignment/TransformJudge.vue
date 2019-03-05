@@ -69,9 +69,8 @@ export default {
             data: {uid},
             headers: {'X-CSRFToken': that.getCookie('csrftoken')}
           }).then((response) => {
-            alert('submit!')
           }).catch((err) => {
-            this.$message({
+            that.$message({
               type: 'error',
               message: err,
               showClose: true
@@ -85,9 +84,8 @@ export default {
             url: `${that.Api}/course/${that.getUid}/assignment/${that.passReply.uid}/judge/${uid}`,
             headers: {'X-CSRFToken': that.getCookie('csrftoken')}
           }).then((response) => {
-            alert('delete!')
           }).catch((err) => {
-            this.$message({
+            that.$message({
               type: 'error',
               message: err,
               showClose: true
@@ -141,13 +139,28 @@ export default {
             })
           }
         }).catch((err) => {
-          this.$message({
+          that.$message({
             type: 'error',
             message: err,
             showClose: true
           })
         })
     }
+  },
+  updated () {
+    let that = this
+    this.transData.map(function (val, index) {
+      for (let i = 0; i < that.transData.length; i++) {
+        if (val.key === that.transData[i].key && index !== i) {
+          that.transData.splice(i, 1)
+          that.value.map(function (uid, index2) {
+            if (uid === that.transData[i].key) {
+              that.value.splice(index2, 1)
+            }
+          })
+        }
+      }
+    })
   },
   computed: mapState({
     getUid: state => state.coInfo.uid,

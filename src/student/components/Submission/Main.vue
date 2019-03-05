@@ -137,7 +137,11 @@ export default {
       this.message = data.message
     },
     lower (word) {
-      return word.toLowerCase()
+      if (word === undefined) {
+        return ''
+      } else {
+        return word.toLowerCase()
+      }
     }
   },
   watch: {

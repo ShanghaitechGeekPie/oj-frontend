@@ -67,6 +67,11 @@ export default {
         this.$store.commit('login', response.data.logout_url)
         window.location.href = response.data.login_url
       })
+    },
+    getCookie (name) {
+      let value = '; ' + document.cookie
+      let parts = value.split('; ' + name + '=')
+      if (parts.length === 2) return parts.pop().split(';').shift()
     }
   }
 }
