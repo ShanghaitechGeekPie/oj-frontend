@@ -98,8 +98,8 @@ export default {
           }
         }).then((response) => {
           this.$store.commit('login', response.data.logout_url)
-          // window.location.href = response.data.login_url // todo: warning
-          window.location.reload()
+          window.location.href = response.data.login_url // todo: warning
+          // window.location.reload()
         }).catch((error) => {
           this.$message({
             type: 'error',
