@@ -5,7 +5,7 @@
         <el-card class="card-index">
           <el-row>
             <el-col>
-              <span class="sub-text">Hey there! We noticed that you're not currently associated with any courses.
+              <span class="sub-text">Hey there! We noticed that you're not currently given any identification.
                     Here are some resources to get you started.</span>
             </el-col>
           </el-row>

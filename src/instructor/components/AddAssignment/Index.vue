@@ -17,7 +17,7 @@
 <script>
 import na from '../../../public/Navigation'
 import state from './State'
-import aside from './Aside'
+import aside from '../../../public/InstrAside'
 import add from './Add'
 
 export default {

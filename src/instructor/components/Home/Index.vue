@@ -57,10 +57,9 @@ export default {
               uid: response.data.uid,
               role: 2
             })
-            if (that.$route.name === 'indexInstructor' || that.$route.name === 'homeInstructor') {
-              window.location.reload()
+            if (that.$route.name === 'indexInstructor') {
             } else {
-              window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo: warning
+              that.$router.push('/instr') // todo: warning
             }
           } else if (response.data.is_student && !response.data.is_instructor) {
             that.$store.commit('updateState', {
@@ -68,9 +67,8 @@ export default {
               role: 1
             })
             if (that.$route.name === 'indexStudent' || that.$route.name === 'homeStudent') {
-              window.location.reload()
             } else {
-              window.location.href = 'https://' + location.hostname + '/#/' // todo: warning
+              that.$router.push('/') // todo: warning
             }
           } else if (!response.data.is_student && !response.data.is_instructor) {
             that.$store.commit('updateState', {
@@ -83,7 +81,6 @@ export default {
               uid: response.data.uid,
               role: 3
             })
-            window.location.reload()
           }
         }).catch((err) => {
           this.$message({

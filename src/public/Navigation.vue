@@ -22,6 +22,8 @@
               router>
                 <el-submenu index="2" class="submenu">
                   <template slot="title">Account</template>
+                  <el-menu-item index="/" v-if="this.checkRoleInstr">Student Version</el-menu-item>
+                  <el-menu-item index="/instr" v-if="this.checkRoleStu">Instructor Version</el-menu-item>
                   <el-menu-item index="/profile" v-if="!profilePage">Profile</el-menu-item>
                   <el-menu-item index="/" v-else>Dashboard</el-menu-item>
                   <el-menu-item index="/" v-if="profilePage" @click="goBack">Go back</el-menu-item>
@@ -48,7 +50,7 @@ export default {
   },
   computed: mapState({
     getAuth: state => state.isAuthorized,
-    getID: state => state.baseInfo.uid,
+    getBase: state => state.baseInfo,
     getUid: state => state.coInfo.uid,
     getCoInfo: state => state.coInfo,
     getReq: state => state.isRequest,
@@ -56,6 +58,14 @@ export default {
     getLogout: state => state.logout_url,
     profilePage () {
       return (this.$route.name === 'instrProfile') || (this.$route.name === 'profile' || this.$route.name === 'changeProfile')
+    },
+    checkRoleStu () {
+      console.log(this.getBase.isInstructor && this.getBase.isStudent && (this.$route.name === 'homeStudent' || this.$route.name === 'indexStudent'))
+      return this.getBase.isInstructor && this.getBase.isStudent && (this.$route.name === 'homeStudent' || this.$route.name === 'indexStudent')
+    },
+    checkRoleInstr () {
+      console.log(this.getBase.isInstructor && this.getBase.isStudent && this.$route.name === 'indexInstructor')
+      return this.getBase.isInstructor && this.getBase.isStudent && this.$route.name === 'indexInstructor'
     }
   }),
   methods: {
@@ -88,10 +98,11 @@ export default {
           }
         }).then((response) => {
           this.$store.commit('login', response.data.logout_url)
-          window.location.href = response.data.login_url // todo: warning
-          // window.location.reload()
+          // window.location.href = response.data.login_url // todo: warning
+          window.location.reload()
         }).catch((error) => {
-          this.$message({type: 'error',
+          this.$message({
+            type: 'error',
             message: error,
             showClose: true
           })
@@ -110,7 +121,7 @@ export default {
     if (this.getAuth && !this.getReq) {
       this.axios({
         method: 'get',
-        url: `https://${location.hostname}/api/user/role` // todo:warning
+        url: `https://${location.hostname}/api/user/role`
       }).then((response) => {
         this.$store.commit('requested')
         if (!response.data.is_student && response.data.is_instructor) {
@@ -118,11 +129,9 @@ export default {
             uid: response.data.uid,
             role: 2
           })
-          if (that.$route.name === 'indexInstructor' || that.$route.name === 'homeInstructor') {
-            window.location.reload()
+          if (that.$route.name === 'indexInstructor') {
           } else {
-            window.location.href = 'https://' + location.hostname + '/instructor.html#/' // todo:warning
-            // window.location.reload()
+            that.$router.push('/instr')
           }
         } else if (response.data.is_student && !response.data.is_instructor) {
           that.$store.commit('updateState', {
@@ -130,10 +139,8 @@ export default {
             role: 1
           })
           if (that.$route.name === 'indexStudent' || that.$route.name === 'homeStudent') {
-            window.location.reload()
           } else {
-            window.location.href = 'https://' + location.hostname + '/#/' // todo:warning
-            // window.location.reload()
+            that.$router.push('/')
           }
         } else if (!response.data.is_student && !response.data.is_instructor) {
           that.$store.commit('updateState', {
@@ -146,7 +153,6 @@ export default {
             uid: response.data.uid,
             role: 3
           })
-          window.location.reload()
         }
       }).catch((err) => {
         this.$message({

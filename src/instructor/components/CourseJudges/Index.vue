@@ -16,7 +16,7 @@
 <script>
 import na from '../../../public/Navigation'
 import main from './Main'
-import aside from './Aside'
+import aside from '../../../public/InstrAside'
 import add from './Add'
 
 export default {

@@ -12,7 +12,7 @@
       </el-row>
       <el-row class="row-quarter" type="flex" align="middle" justify="center">
         <el-col>
-          <span class="title-msg">You can check all the courses here and manage your courses.</span>
+          <span class="title-msg">You can check all the judges here and manage your judges.</span>
         </el-col>
       </el-row>
       <el-row class="row-half">
@@ -20,7 +20,7 @@
           <i class="el-icon-menu"></i>
         </el-col>
         <el-col :span="15">
-          <router-link :to="{ path: `/`}" class="sub-title">Dashboard</router-link>
+          <router-link :to="{ path: `/instr`}" class="sub-title">Dashboard</router-link>
         </el-col>
       </el-row>
     </div>
@@ -56,8 +56,8 @@ export default {
     margin-top: 5%;
   }
   .title-instr {
-    font-size: 30px;
-    margin-top: 5%;
+    font-size: 150%;
+    margin-top: 30px;
   }
   .title-msg {
     margin-top: 5%;

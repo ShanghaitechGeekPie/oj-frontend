@@ -12,7 +12,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-// require('./mock.js') // todo:warning
+require('./mock.js') // todo:warning
 Vue.use(Vuex)
 // axios.defaults.baseURL = ''
 Vue.prototype.axios = axios
