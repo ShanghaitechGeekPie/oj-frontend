@@ -60,11 +60,9 @@ export default {
       return (this.$route.name === 'instrProfile') || (this.$route.name === 'profile' || this.$route.name === 'changeProfile')
     },
     checkRoleStu () {
-      console.log(this.getBase.isInstructor && this.getBase.isStudent && (this.$route.name === 'homeStudent' || this.$route.name === 'indexStudent'))
       return this.getBase.isInstructor && this.getBase.isStudent && (this.$route.name === 'homeStudent' || this.$route.name === 'indexStudent')
     },
     checkRoleInstr () {
-      console.log(this.getBase.isInstructor && this.getBase.isStudent && this.$route.name === 'indexInstructor')
       return this.getBase.isInstructor && this.getBase.isStudent && this.$route.name === 'indexInstructor'
     }
   }),

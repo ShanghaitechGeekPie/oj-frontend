@@ -43,8 +43,8 @@
             <el-button @click="AddInstructor(courseInfo.tem_instr)"><i class="el-icon-plus"></i></el-button>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('courseInfo')">提交</el-button>
-            <el-button @click="resetForm('courseInfo')">重置</el-button>
+            <el-button type="primary" @click="submitForm('courseInfo')">submit</el-button>
+            <el-button @click="resetForm('courseInfo')">reset</el-button>
           </el-form-item>
         </el-form>
       </el-col>

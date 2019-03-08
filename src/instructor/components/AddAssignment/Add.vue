@@ -51,8 +51,8 @@
             </el-date-picker>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('assignmentInfo')">提交</el-button>
-            <el-button @click="resetForm('assignmentInfo')">重置</el-button>
+            <el-button type="primary" @click="submitForm('assignmentInfo')">submit</el-button>
+            <el-button @click="resetForm('assignmentInfo')">reset</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -149,6 +149,7 @@ export default {
           this.steps += 1
           this.assignmentInfo.release_date += '23:59:59+08:00'
           this.assignmentInfo.deadline += '23:59:59+08:00'
+          this.$store.commit('updateAss', this.assignmentInfo)
           if (this.getAuth) {
             this.axios({
               method: 'post',

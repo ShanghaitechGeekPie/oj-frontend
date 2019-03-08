@@ -106,13 +106,15 @@ export default {
     },
     colors (situation) { // don't use state as the variable name
       if (situation.grade >= 70) {
-        return 'background-color: greenyellow;width: 100px;'
+        return 'background-color: #67C23A;color: white;width: 100px;'
       } else if (situation.grade >= 50) {
-        return 'background-color: #4d2bfc;width: 100px;'
-      } else if (situation.grade >= 30) {
-        return 'background-color: #cb0c0a;width: 100px;'
+        return 'background-color: #E6A23C;color: white;width: 100px;'
+      } else if (situation.grade >= 20) {
+        return 'background-color: #F56C6C;color: white;width: 100px;'
       } else if (situation.grade === null || situation.grade === undefined) {
-        return 'background-color: orange;width: 100px;'
+        return 'background-color: #909399;color: white;width: 100px;'
+      } else {
+        return 'background-color: black;color: white;width: 100px;'
       }
     },
     showPending () {

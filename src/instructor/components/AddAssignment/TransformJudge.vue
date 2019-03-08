@@ -38,10 +38,12 @@ export default {
   methods: {
     submit () {
       this.steps += 1
+      let result = this.getAss
+      result.state = 2
       this.axios({
         method: 'post',
         url: `${this.Api}/course/${this.getUid}/assignment/${this.passReply.uid}`,
-        data: {state: 2},
+        data: result,
         headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
       const loading = this.$loading({
@@ -166,6 +168,7 @@ export default {
     getUid: state => state.coInfo.uid,
     getAuth: state => state.isAuthorized,
     getID: state => state.baseInfo.uid,
+    getAss: state => state.assignments,
     Api: state => state.api
   })
 }

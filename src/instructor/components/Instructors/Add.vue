@@ -18,8 +18,8 @@
             <el-input type="email" v-model.number="instructorInfo.enroll_email"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('instructorInfo')">提交</el-button>
-            <el-button @click="resetForm('instructorInfo')">重置</el-button>
+            <el-button type="primary" @click="submitForm('instructorInfo')">submit</el-button>
+            <el-button @click="resetForm('instructorInfo')">reset</el-button>
           </el-form-item>
         </el-form>
       </el-col>
