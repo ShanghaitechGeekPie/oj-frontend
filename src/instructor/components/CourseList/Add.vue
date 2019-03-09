@@ -19,7 +19,7 @@
             <el-collapse>
               <el-collapse-item title="Rule" name="1">
                 <span>The uploading file must be execl and excel only.The first row of the file must contain three
-                  label----<span class="red">student_id, name</span> and <span class="red">enroll_email</span>.And the order and place of labels doesn't matter.Data should be
+                  label----<span class="red">student_id, enroll_email</span> and <span class="red">name(not necessary)</span>.And the order and place of labels doesn't matter.Data should be
                   listed below every label.If there are anything unclear, you may check the demo below.</span>
               </el-collapse-item>
               <el-collapse-item title="Demo" name="2">
@@ -59,7 +59,7 @@
           <el-form-item label="Student ID:" prop="student_id">
             <el-input v-model.number="studentInfo.student_id"></el-input>
           </el-form-item>
-          <el-form-item label="Name:" prop="name">
+          <el-form-item label="Name:" prop="name" placeholder="not necessary">
             <el-input v-model.number="studentInfo.name"></el-input>
           </el-form-item>
           <el-form-item>

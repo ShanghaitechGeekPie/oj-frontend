@@ -12,7 +12,7 @@
           v-model="value"
           :titles="['Available Judges', 'Existing Judges']"
           @change="handleChange"
-          :data="transData">
+          :data="getTrans">
         </el-transfer>
       </el-col>
     </el-row>
@@ -95,6 +95,15 @@ export default {
           })
         })
       }
+    },
+    check (n) {
+      let result = []
+      for (let i = 0; i < n.length; i++) {
+        if (result.indexOf(n[i]) === -1) {
+          result.push(n[i])
+        }
+      }
+      return result
     }
   },
   props: ['passReply'],
@@ -116,7 +125,7 @@ export default {
                 })
               })
               .catch((err) => {
-                this.$message({
+                that.$message({
                   type: 'error',
                   message: err,
                   showClose: true
@@ -149,27 +158,20 @@ export default {
         })
     }
   },
-  updated () {
-    let that = this
-    this.transData.map(function (val, index) {
-      for (let i = 0; i < that.transData.length; i++) {
-        if (val.key === that.transData[i].key && index !== i) {
-          that.transData.splice(i, 1)
-          that.value.map(function (uid, index2) {
-            if (uid === that.transData[i].key) {
-              that.value.splice(index2, 1)
-            }
-          })
-        }
-      }
-    })
-  },
   computed: mapState({
     getUid: state => state.coInfo.uid,
     getAuth: state => state.isAuthorized,
     getID: state => state.baseInfo.uid,
     getAss: state => state.assignments,
-    Api: state => state.api
+    Api: state => state.api,
+    getTrans () {
+      this.value = this.check(this.value)
+      if (this.transData.length === 0) {
+        return []
+      } else {
+        return this.check(this.transData)
+      }
+    }
   })
 }
 </script>
