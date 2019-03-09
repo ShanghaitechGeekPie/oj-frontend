@@ -75,7 +75,7 @@ export default {
         url: `${this.getLogout}`,
         headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
-      // todo: clear cookie
+      this.$cookies.delete('sessionid')
       this.$router.push('/')
     },
     goBack () {
@@ -88,7 +88,7 @@ export default {
       if (!this.getAuth) {
         this.axios({
           method: 'get',
-          url: `${this.Api}/user/login/oauth/param`, // todo: warning
+          url: `${this.Api}/user/login/oauth/param`,
           headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'get',
@@ -115,7 +115,7 @@ export default {
   },
   created () {
     let that = this
-    this.$store.commit('updateApi', 'https://' + location.hostname + '/api') // todo:warning
+    this.$store.commit('updateApi', 'https://' + location.hostname + '/api') // todo:warning  'https://' + location.hostname + '/api'
     if (this.getAuth && !this.getReq) {
       this.axios({
         method: 'get',
