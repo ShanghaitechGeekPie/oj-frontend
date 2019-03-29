@@ -31,7 +31,7 @@
           <router-link :to="{ path: '/instr/course'}" class="sub-title">Course</router-link>
         </el-col>
     </el-row>
-    <el-row class="row-one" v-if="checkRole">
+    <el-row class="row-half" v-if="checkRole">
       <el-col>
         <span class="title">Tips:</span>
       </el-col>

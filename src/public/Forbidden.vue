@@ -56,7 +56,7 @@ export default {
         url: `${this.getLogout}`,
         headers: {'X-CSRFToken': this.getCookie('csrftoken')}
       })
-      // todo: clear cookie
+      this.$cookies.delete('sessionid')
       this.$router.push('/')
     },
     login () {

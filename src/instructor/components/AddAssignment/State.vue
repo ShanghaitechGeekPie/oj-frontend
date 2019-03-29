@@ -27,7 +27,7 @@
       <el-row class="row-quarter">
         <el-col>
           <el-table
-          :data="coState"
+          :data="getCoState(coState)"
           style="width: 90%"
           class="table-only">
           <el-table-column label="NAME" fix>
@@ -105,6 +105,40 @@ export default {
         loading.close()
         this.$emit('changeState', this.childChange)
       }, 500)
+    },
+    convertUTCTimeToLocalTime (UTCDateString) {
+      if (!UTCDateString) {
+        return '-'
+      }
+      if (UTCDateString.includes('PM') || UTCDateString.includes('AM')) {
+        return UTCDateString
+      }
+      function formatFunc (str) {
+        return str > 9 ? str : '0' + str
+      }
+      let date2 = new Date(UTCDateString)
+      let year = date2.getFullYear()
+      let mon = formatFunc(date2.getMonth() + 1)
+      let day = formatFunc(date2.getDate())
+      let hour = date2.getHours()
+      let noon = hour >= 12 ? 'PM' : 'AM'
+      hour = hour >= 12 ? hour - 12 : hour
+      hour = formatFunc(hour)
+      let min = formatFunc(date2.getMinutes())
+      return year + '-' + mon + '-' + day + ' ' + noon + ' ' + hour + ':' + min
+    },
+    getCoState (data) {
+      let that = this
+      if (!data) {
+        return data
+      }
+      let result = []
+      data.map(function (a) {
+        a.deadline = that.convertUTCTimeToLocalTime(a.deadline)
+        a.release_date = that.convertUTCTimeToLocalTime(a.release_date)
+        result.push(a)
+      })
+      return result
     },
     getCookie (name) {
       let value = '; ' + document.cookie

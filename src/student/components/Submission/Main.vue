@@ -40,7 +40,7 @@
       <el-row class="row-only">
         <el-col>
             <el-table
-            :data="submission"
+            :data="getSubmission(submission)"
             class="table-only"
             :default-sort = "{prop: 'date', order: 'descending'}">
             <el-table-column
@@ -142,12 +142,46 @@ export default {
       } else {
         return word.toLowerCase()
       }
+    },
+    getSubmission (data) {
+      let that = this
+      if (!data) {
+        return data
+      }
+      let result = []
+      data.map(function (a) {
+        a.submission_time = that.convertUTCTimeToLocalTime(a.submission_time)
+        result.push(a)
+      })
+      return result
+    },
+    convertUTCTimeToLocalTime (UTCDateString) {
+      if (!UTCDateString) {
+        return '-'
+      }
+      if (UTCDateString.includes('PM') || UTCDateString.includes('AM')) {
+        return UTCDateString
+      }
+      function formatFunc (str) {
+        return str > 9 ? str : '0' + str
+      }
+      let date2 = new Date(UTCDateString)
+      let year = date2.getFullYear()
+      let mon = formatFunc(date2.getMonth() + 1)
+      let day = formatFunc(date2.getDate())
+      let hour = date2.getHours()
+      let noon = hour >= 12 ? 'PM' : 'AM'
+      hour = hour >= 12 ? hour - 12 : hour
+      hour = formatFunc(hour)
+      let min = formatFunc(date2.getMinutes())
+      return year + '-' + mon + '-' + day + ' ' + noon + ' ' + hour + ':' + min
     }
   },
   watch: {
     deliverDetail: function name (newValue) {
       this.submission = newValue
       this.message = this.submission[0].message
+      console.log(newValue)
     }
   }
 }
