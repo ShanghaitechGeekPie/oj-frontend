@@ -112,30 +112,29 @@ export default {
   },
   created () {
     if (this.getAuth) {
-      let that = this
-      this.axios.get(`${this.Api}/course/${this.getUid}/judge/`)
-        .then((response) => {
-          for (let i = 0; i < response.data.length; i++) {
-            that.axios.get(`${this.Api}/judge/${response.data[i].uid}`)
-              .then((response2) => {
-                that.judgeList.push(response2.data)
-              })
-              .catch((err) => {
-                this.$message({
-                  type: 'error',
-                  message: err,
-                  showClose: true
-                })
-              })
-          }
-        })
-        .catch((err) => {
-          this.$message({
-            type: 'error',
-            message: err,
-            showClose: true
+      let promise = new Promise((resolve, reject) => {
+        this.axios.get(`${this.Api}/course/${this.getUid}/judge/`)
+          .then(response => {
+            resolve(response.data)
+          }).catch(error => {
+            reject(error)
           })
-        })
+      })
+      promise.then(data => {
+        for (let i = 0; i < data.length; i++) {
+          this.axios.get(`${this.Api}/judge/${data[i].uid}`)
+            .then((response2) => {
+              this.judgeList.push(response2.data)
+            })
+            .catch((err) => {
+              this.$message({
+                type: 'error',
+                message: err.status,
+                showClose: true
+              })
+            })
+        }
+      })
     }
   },
   computed: mapState({
