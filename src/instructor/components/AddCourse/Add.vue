@@ -121,6 +121,20 @@ export default {
       }
     }
   },
+  created () {
+    console.log(`${this.Api}/instructor/${this.getID}`)
+    this.axios.get(`${this.Api}/instructor/${this.getID}`).then(response => {
+      console.log('require response!')
+      this.courseInfo.instructor.push({enroll_email: response.data.email})
+    })
+      .catch(err => {
+        this.$message({
+          type: 'error',
+          message: err.status,
+          showClose: true
+        })
+      })
+  },
   methods: {
     goBack () {
       const loading = this.$loading({
@@ -183,7 +197,6 @@ export default {
   },
   computed: mapState({
     getAuth: state => state.isAuthorized,
-    getUid: state => state.coInfo.uid,
     getID: state => state.baseInfo.uid,
     Api: state => state.api
   })

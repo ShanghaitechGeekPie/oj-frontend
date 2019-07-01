@@ -19,3 +19,4 @@ selenium-debug.log
 src/instructor/mock\.js
 
 src/student/mock\.js
+/src/instructor/router/
