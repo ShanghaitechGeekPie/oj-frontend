@@ -13,7 +13,7 @@
       <el-row class="row-only">
         <el-col>
           <el-card class="card-only">
-            <el-collapse :v-model="judgeInfo">
+            <el-collapse v-model="activeNames">
               <el-collapse-item title="Host" name="1">
                 <span>{{ judgeInfo.host}}</span>
               </el-collapse-item>
@@ -80,9 +80,10 @@ export default {
       childChange: false,
       store: [],
       coState: [],
+      activeNames: ['1', '2'],
       judgeInfo: {
-        host: 'Please choose on of your judges',
-        max_job: 'Please choose on of your judges'
+        host: 'Please choose one of your judges',
+        max_job: 'Please choose one of your judges'
       },
       judgeList: [{
         host: '',

@@ -12,7 +12,7 @@
           v-model="value"
           :titles="['Available Judges', 'Existing Judges']"
           @change="handleChange"
-          :data="getTrans">
+          :data="transData">
         </el-transfer>
       </el-col>
     </el-row>
@@ -54,6 +54,7 @@ export default {
       })
       setTimeout(() => {
         loading.close()
+        window.location.reload()
       }, 500)
     },
     getCookie (name) {
@@ -74,7 +75,7 @@ export default {
           }).catch((err) => {
             that.$message({
               type: 'error',
-              message: err,
+              message: err.status,
               showClose: true
             })
           })
@@ -89,21 +90,12 @@ export default {
           }).catch((err) => {
             that.$message({
               type: 'error',
-              message: err,
+              message: err.status,
               showClose: true
             })
           })
         })
       }
-    },
-    check (n) {
-      let result = []
-      for (let i = 0; i < n.length; i++) {
-        if (result.indexOf(n[i]) === -1) {
-          result.push(n[i])
-        }
-      }
-      return result
     }
   },
   props: ['passReply'],
@@ -111,51 +103,48 @@ export default {
     let that = this
     let len = 0
     if (this.getAuth) {
-      this.axios.get(`${this.Api}/course/${this.getUid}/judge/`)
-        .then((response) => {
+      let promise = new Promise((resolve, reject) => {
+        this.axios.get(`${this.Api}/course/${this.getUid}/judge/`).then((response) => {
           len = response.data.length
-          for (let i = 0; i < response.data.length; i++) {
-            that.axios.get(`${this.Api}/judge/${response.data[i].uid}`)
-              .then((response2) => {
-                that.value.push(response2.data.uid)
-                that.$set(that.transData, i + len, {
-                  key: response2.data.uid,
-                  label: response2.data.host,
-                  disable: false
-                })
-              })
-              .catch((err) => {
-                that.$message({
-                  type: 'error',
-                  message: err,
-                  showClose: true
-                })
-              })
-          }
+          resolve(response.data)
         })
-        .catch((err) => {
-          this.$message({
-            type: 'error',
-            message: err,
-            showClose: true
-          })
-        })
-      this.axios.get(`${this.Api}/judge/`)
-        .then((response) => {
-          for (let i = 0; i < response.data.length; i++) {
-            that.$set(that.transData, i, {
-              key: response.data[i].uid,
-              label: response.data[i].host,
+      })
+      promise.then(data => {
+        for (let i = 0; i < data.length; i++) {
+          that.axios.get(`${this.Api}/judge/${data[i].uid}`).then(response => {
+            that.value.push(response.data.uid)
+            that.$set(that.transData, i + len - 1, {
+              key: response.data.uid,
+              label: response.data.host,
               disable: false
             })
-          }
-        }).catch((err) => {
-          that.$message({
-            type: 'error',
-            message: err,
-            showClose: true
           })
+        }
+      }).catch((err) => {
+        that.$message({
+          type: 'error',
+          message: err,
+          showClose: true
         })
+      })
+      promise.then(() => {
+        this.axios.get(`${this.Api}/judge/`)
+          .then((response) => {
+            for (let i = 0; i < response.data.length; i++) {
+              that.$set(that.transData, i, {
+                key: response.data[i].uid,
+                label: response.data[i].host,
+                disable: false
+              })
+            }
+          }).catch((err) => {
+            that.$message({
+              type: 'error',
+              message: err,
+              showClose: true
+            })
+          })
+      })
     }
   },
   computed: mapState({
@@ -163,15 +152,7 @@ export default {
     getAuth: state => state.isAuthorized,
     getID: state => state.baseInfo.uid,
     getAss: state => state.assignments,
-    Api: state => state.api,
-    getTrans () {
-      this.value = this.check(this.value)
-      if (this.transData.length === 0) {
-        return []
-      } else {
-        return this.check(this.transData)
-      }
-    }
+    Api: state => state.api
   })
 }
 </script>
