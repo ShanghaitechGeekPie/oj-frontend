@@ -96,6 +96,21 @@ export default {
           })
         })
       }
+    },
+    checkObj (value) {
+      let result = []
+      let keys = []
+      value.map(element => {
+        if (keys.indexOf(element.key) === -1) {
+          result.push(element)
+          keys.push(element.key)
+        }
+      })
+      return result
+    },
+    checkNum (value) {
+      let result = new Set(value)
+      return [...result]
     }
   },
   props: ['passReply'],
@@ -146,6 +161,11 @@ export default {
           })
       })
     }
+    /* ajax 申请来数据后对数据进行去重 */
+    console.log(this.value, 1) /* []  */
+    this.value = this.checkNum(this.value)
+    console.log(this.value, 2)
+    this.transData = this.checkObj(this.transData)
   },
   computed: mapState({
     getUid: state => state.coInfo.uid,

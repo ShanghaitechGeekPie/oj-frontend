@@ -70,13 +70,8 @@ export default {
     logout () {
       this.$store.commit('logOut')
       this.$store.commit('refreshReq')
-      this.axios({
-        method: 'post',
-        url: `${this.getLogout}`,
-        headers: {'X-CSRFToken': this.getCookie('csrftoken')}
-      })
-      this.$cookies.delete('sessionid')
-      this.$router.push('/')
+      this.$cookies.remove('sessionid')
+      window.location.href = `${this.getLogout}`
     },
     goBack () {
       this.$router.go(-2)
