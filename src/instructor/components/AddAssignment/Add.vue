@@ -155,7 +155,7 @@ export default {
               method: 'post',
               url: `${this.Api}/course/${this.getUid}/assignment/`,
               data: this.assignmentInfo,
-              headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+              headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
             }).then((response) => {
               this.reply = response.data
               alert('submit!')
@@ -173,11 +173,6 @@ export default {
           return false
         }
       })
-    },
-    getCookie (name) {
-      let value = '; ' + document.cookie
-      let parts = value.split('; ' + name + '=')
-      if (parts.length === 2) return parts.pop().split(';').shift()
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

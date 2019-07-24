@@ -44,7 +44,7 @@ export default {
         method: 'post',
         url: `${this.Api}/course/${this.getUid}/assignment/${this.passReply.uid}`,
         data: result,
-        headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+        headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
       })
       const loading = this.$loading({
         lock: true,
@@ -57,11 +57,6 @@ export default {
         window.location.reload()
       }, 500)
     },
-    getCookie (name) {
-      let value = '; ' + document.cookie
-      let parts = value.split('; ' + name + '=')
-      if (parts.length === 2) return parts.pop().split(';').shift()
-    },
     handleChange (cv, direction, value) {
       let that = this
       if (direction === 'right') {
@@ -70,7 +65,7 @@ export default {
             method: 'post',
             url: `${that.Api}/course/${that.getUid}/assignment/${that.passReply.uid}/judge/`,
             data: {uid},
-            headers: {'X-CSRFToken': that.getCookie('csrftoken')}
+            headers: {'X-CSRFToken': that.$cookies.get('csrftoken')}
           }).then((response) => {
           }).catch((err) => {
             that.$message({
@@ -85,7 +80,7 @@ export default {
           that.axios({
             method: 'delete',
             url: `${that.Api}/course/${that.getUid}/assignment/${that.passReply.uid}/judge/${uid}`,
-            headers: {'X-CSRFToken': that.getCookie('csrftoken')}
+            headers: {'X-CSRFToken': that.$cookies.get('csrftoken')}
           }).then((response) => {
           }).catch((err) => {
             that.$message({

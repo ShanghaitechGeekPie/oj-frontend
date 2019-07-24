@@ -68,7 +68,7 @@ export default {
           this.axios({
             method: 'delete',
             url: `${this.Api}/course/${this.getUid}/judge/${rows[index].uid}`,
-            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+            headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
           })
             .then((response) => {
               this.$message({
@@ -91,11 +91,6 @@ export default {
           message: '已取消删除'
         })
       })
-    },
-    getCookie (name) {
-      let value = '; ' + document.cookie
-      let parts = value.split('; ' + name + '=')
-      if (parts.length === 2) return parts.pop().split(';').shift()
     },
     addJudges () {
       const loading = this.$loading({

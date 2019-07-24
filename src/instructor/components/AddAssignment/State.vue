@@ -141,11 +141,6 @@ export default {
       })
       return result
     },
-    getCookie (name) {
-      let value = '; ' + document.cookie
-      let parts = value.split('; ' + name + '=')
-      if (parts.length === 2) return parts.pop().split(';').shift()
-    },
     deleteRow (index, rows) {
       this.$confirm('此操作将永久删除该作业, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -156,7 +151,7 @@ export default {
           this.axios({
             method: 'delete',
             url: `${this.Api}/course/${this.getUid}/assignment/${rows[index].uid}`,
-            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+            headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
           })
             .then((response) => {
               this.$message({

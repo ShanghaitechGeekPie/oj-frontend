@@ -68,7 +68,7 @@ export default {
           this.axios({
             method: 'delete',
             url: `${this.Api}/course/${this.getUid}/instructor/${rows[index].enroll_email}`,
-            headers: {'X-CSRFToken': this.getCookie('csrftoken')}
+            headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
           }).then((response) => {
             this.$message({
               type: 'success',
@@ -90,11 +90,6 @@ export default {
           message: '已取消删除'
         })
       })
-    },
-    getCookie (name) {
-      let value = '; ' + document.cookie
-      let parts = value.split('; ' + name + '=')
-      if (parts.length === 2) return parts.pop().split(';').shift()
     },
     addInstructor () {
       const loading = this.$loading({
