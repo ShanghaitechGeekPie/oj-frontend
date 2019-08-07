@@ -146,7 +146,6 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.steps += 1
           this.assignmentInfo.release_date += '23:59:59+08:00'
           this.assignmentInfo.deadline += '23:59:59+08:00'
           this.$store.commit('updateAss', this.assignmentInfo)
@@ -157,6 +156,7 @@ export default {
               data: this.assignmentInfo,
               headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
             }).then((response) => {
+              this.steps += 1
               this.reply = response.data
               alert('submit!')
             })

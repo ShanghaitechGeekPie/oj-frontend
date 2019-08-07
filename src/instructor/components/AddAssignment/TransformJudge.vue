@@ -122,7 +122,6 @@ export default {
       promise.then(data => {
         for (let i = 0; i < data.length; i++) {
           that.axios.get(`${this.Api}/judge/${data[i].uid}`).then(response => {
-            that.value.push(response.data.uid)
             that.$set(that.transData, i + len - 1, {
               key: response.data.uid,
               label: response.data.host,
