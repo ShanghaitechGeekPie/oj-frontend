@@ -103,9 +103,13 @@ export default {
   },
   methods: {
     goScoreBoard (assUid, coUid) {
-      console.log(assUid, coUid)
-      this.$store.commit('InstrUpdateScoreBoard', assUid, coUid)
-      this.$router.push(`/home/course/${coUid}/scoreboard/${assUid}`)
+      this.$router.push({
+        path: '/instr/scoreBoard',
+        query: {
+          assUid: assUid,
+          coUid: coUid
+        }
+      })
     },
     addHomework () {
       const loading = this.$loading({

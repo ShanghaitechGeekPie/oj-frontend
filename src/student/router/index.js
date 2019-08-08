@@ -19,6 +19,7 @@ import instructors from '../../instructor/components/Instructors/Index'
 import judges from '../../instructor/components/CourseJudges/Index'
 import addcourse from '../../instructor/components/AddCourse/Index'
 import instrIndex from '../../instructor/components/Home/Index'
+import instrScoreBoard from '../../instructor/components/ScoreBoard/Index'
 
 Vue.use(Router)
 
@@ -47,6 +48,12 @@ const router = new Router({
       path: '/instr/judge',
       name: 'judge',
       component: judge,
+      meta: { requiresInstr: true, requiresAuth: true }
+    },
+    {
+      path: '/instr/scoreBoard',
+      name: 'instrScoreBoard',
+      component: instrScoreBoard,
       meta: { requiresInstr: true, requiresAuth: true }
     },
     {
