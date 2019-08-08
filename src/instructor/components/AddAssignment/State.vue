@@ -55,7 +55,7 @@
             label="scoreboard"
             width="100">
             <template slot-scope="scope">
-              <el-button @click="goScoreBoard(scope.row.uid, scope.row.course_uid)">check</el-button>
+              <el-button @click="goScoreBoard(scope.row.uid, scope.row.course_uid)" size="mini">check</el-button>
             </template>
           </el-table-column>
           <el-table-column

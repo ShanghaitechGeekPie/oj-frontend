@@ -32,22 +32,13 @@
           <el-form-item label="Grade:" prop="grade">
             <el-input v-model="assignmentInfo.grade" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="Deadline:" prop="deadline">
+          <el-form-item label="Date:">
             <el-date-picker
-              v-model="assignmentInfo.deadline"
-              type="date"
-              placeholder="选择日期"
-              format="yyyy-MM-dd"
-              value-format="yyyy-MM-ddT">
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item label="Release date:" prop="release_date">
-            <el-date-picker
-              v-model="assignmentInfo.release_date"
-              type="date"
-              placeholder="选择日期"
-              format="yyyy-MM-dd"
-              value-format="yyyy-MM-ddT">
+                v-model="assignmentInfo.tem_time"
+                type="datetimerange"
+                range-separator="至"
+                start-placeholder="release date"
+                end-placeholder="deadline">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -110,6 +101,7 @@ export default {
         descr_link: '',
         grade: '',
         short_name: '',
+        tem_time: '',
         state: 1
       },
       rules: {
@@ -133,6 +125,9 @@ export default {
         ],
         short_name: [
           { validator: check, trigger: 'blur' }
+        ],
+        tem_time: [
+          { validator: check, trigger: 'blur' }
         ]
       },
       steps: 1,
@@ -146,8 +141,8 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.assignmentInfo.release_date += '23:59:59+08:00'
-          this.assignmentInfo.deadline += '23:59:59+08:00'
+          this.assignmentInfo.release_date = this.formateDate(this.assignmentInfo.tem_time[0])
+          this.assignmentInfo.deadline = this.formateDate(this.assignmentInfo.tem_time[1])
           this.$store.commit('updateAss', this.assignmentInfo)
           if (this.getAuth) {
             this.axios({
@@ -173,6 +168,29 @@ export default {
           return false
         }
       })
+    },
+    formateDate (time) {
+      let Hours = time.toLocaleTimeString()
+      if (Hours[0] === '上') {
+        Hours = Hours.replace(/上午/, '').length === 7 ? '0' + Hours.replace(/上午/, '') : Hours.replace(/上午/, '')
+      } else {
+        Hours = Hours.replace(/下午[0-9]+:/, (Hours) => {
+          return `${Number(Hours.slice(Hours.search(/午/) + 1, Hours.search(/:/))) + 12}:`
+        })
+      }
+      let date = ''
+      time.toLocaleDateString().split('/').map((item, index) => {
+        if (index === 0) {
+          date += item
+        } else {
+          if (item.length === 1) {
+            date += '-0' + item
+          } else {
+            date += '-' + item
+          }
+        }
+      })
+      return `${date}T${Hours}+08:00`
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
