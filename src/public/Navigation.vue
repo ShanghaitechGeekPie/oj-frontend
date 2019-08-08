@@ -53,7 +53,6 @@ export default {
     getBase: state => state.baseInfo,
     getUid: state => state.coInfo.uid,
     getCoInfo: state => state.coInfo,
-    getReq: state => state.isRequest,
     Api: state => state.api,
     getLogout: state => state.logout_url,
     profilePage () {
@@ -69,7 +68,6 @@ export default {
   methods: {
     logout () {
       this.$store.commit('logOut')
-      this.$store.commit('refreshReq')
       this.$cookies.remove('sessionid')
       window.location.href = `${this.getLogout}`
     },
@@ -101,40 +99,39 @@ export default {
           })
         })
       }
-    },
-    getCookie (name) {
-      let value = '; ' + document.cookie
-      let parts = value.split('; ' + name + '=')
-      if (parts.length === 2) return parts.pop().split(';').shift()
     }
   },
   created () {
     let that = this
     this.$store.commit('updateApi', 'https://' + location.hostname + '/api') // todo:warning  'https://' + location.hostname + '/api'
-    if (this.getAuth && !this.getReq) {
+    const loading = this.$loading({
+      lock: true,
+      text: 'Initializing!',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+    setTimeout(() => {
       this.axios({
         method: 'get',
         url: `https://${location.hostname}/api/user/role`
       }).then((response) => {
-        this.$store.commit('requested')
+        loading.close()
+        this.$store.commit('login', null)
+        this.$notify({
+          title: 'Success!',
+          message: 'Connection with potato server established!',
+          type: 'success'
+        })
         if (!response.data.is_student && response.data.is_instructor) {
           that.$store.commit('updateState', {
             uid: response.data.uid,
             role: 2
           })
-          if (that.$route.name === 'indexInstructor') {
-          } else {
-            that.$router.push('/instr')
-          }
         } else if (response.data.is_student && !response.data.is_instructor) {
           that.$store.commit('updateState', {
             uid: response.data.uid,
             role: 1
           })
-          if (that.$route.name === 'indexStudent' || that.$route.name === 'homeStudent') {
-          } else {
-            that.$router.push('/')
-          }
         } else if (!response.data.is_student && !response.data.is_instructor) {
           that.$store.commit('updateState', {
             uid: response.data.uid,
@@ -142,19 +139,39 @@ export default {
           })
           this.$router.push('/uninitialized')
         } else {
+          setTimeout(() => {
+            this.$notify({
+              title: 'Tips!',
+              message: 'Double roles detected! Version switch is available in the account menu.',
+              type: 'info'
+            })
+          }, 1000)
           that.$store.commit('updateState', {
             uid: response.data.uid,
             role: 3
           })
         }
-      }).catch((err) => {
-        this.$message({
-          type: 'error',
-          message: err,
-          showClose: true
+      }).catch(() => {
+        loading.close()
+        this.$notify({
+          title: 'Failure!',
+          message: 'Lost synchronism with potato server!',
+          type: 'error'
         })
+        setTimeout(() => {
+          this.$notify({
+            title: 'Info!',
+            message: 'Please login again!',
+            type: 'info'
+          })
+          setTimeout(() => {
+            this.$store.commit('logOut')
+            this.$cookies.remove('sessionid')
+            this.$router.push('/')
+          }, 3000)
+        }, 1000)
       })
-    }
+    }, 1000)
   }
 }
 </script>

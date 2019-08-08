@@ -10,7 +10,6 @@ const vuexLocal = new VuexPersistence({
 
 const store = new Vuex.Store({
   state: {
-    isRequest: false,
     isAuthorized: false,
     coInfo: {
       uid: '',
@@ -48,7 +47,10 @@ const store = new Vuex.Store({
     },
     login (state, url) {
       state.isAuthorized = true
-      state.logout_url = url
+      if (url === null) {
+      } else {
+        state.logout_url = url
+      }
     },
     logOut (state) {
       state.isAuthorized = false

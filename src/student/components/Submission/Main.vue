@@ -181,7 +181,6 @@ export default {
     deliverDetail: function name (newValue) {
       this.submission = newValue
       this.message = this.submission[0].message
-      console.log(newValue)
     }
   }
 }

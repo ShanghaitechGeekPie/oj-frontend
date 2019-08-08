@@ -156,9 +156,7 @@ export default {
       })
     }
     /* ajax 申请来数据后对数据进行去重 */
-    console.log(this.value, 1) /* []  */
     this.value = this.checkNum(this.value)
-    console.log(this.value, 2)
     this.transData = this.checkObj(this.transData)
   },
   computed: mapState({

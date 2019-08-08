@@ -38,7 +38,7 @@ export default {
   data () {
     return {
       courseInfo: [],
-      show: true,
+      show: false,
       student_id: 0
     }
   },
@@ -68,12 +68,12 @@ export default {
       }
     }
   },
-  props: ['passCoInfo'],
+  props: ['passCoInfo', 'passShow'],
   watch: {
     passCoInfo: function name (newValue) {
-      if (newValue.length > 0) {
-        this.show = false
-      }
+      this.courseInfo = newValue
+    },
+    passShow: function name (newValue) {
       this.courseInfo = newValue
     }
   },
