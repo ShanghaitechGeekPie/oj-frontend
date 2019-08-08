@@ -104,13 +104,14 @@ export default {
       window.location.href = scope.row.descr_link
     },
     colors (situation) { // don't use state as the variable name
-      if (situation.grade >= 70) {
+      let grade = situation.score / situation.overall_score
+      if (grade >= 0.7) {
         return 'background-color: #67C23A;color: white;width: 100px;'
-      } else if (situation.grade >= 50) {
+      } else if (grade >= 0.5) {
         return 'background-color: #E6A23C;color: white;width: 100px;'
-      } else if (situation.grade >= 20) {
+      } else if (grade >= 0.2) {
         return 'background-color: #F56C6C;color: white;width: 100px;'
-      } else if (situation.grade === null || situation.grade === undefined) {
+      } else if (grade === null || grade === undefined) {
         return 'background-color: #909399;color: white;width: 100px;'
       } else {
         return 'background-color: black;color: white;width: 100px;'
@@ -124,10 +125,10 @@ export default {
       this.$router.push(`${this.$route.path}/submission/${info.name}`)
     },
     getScore (row) {
-      if (row.grade === null || row.grade === undefined) {
+      if (row.score === null || row.score === undefined) {
         return 'no result'
       } else {
-        return row.grade
+        return `${row.score}/${row.overall_score}`
       }
     },
     convertUTCTimeToLocalTime (UTCDateString) {

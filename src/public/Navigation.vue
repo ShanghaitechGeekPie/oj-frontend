@@ -120,7 +120,8 @@ export default {
         this.$notify({
           title: 'Success!',
           message: 'Connection with potato server established!',
-          type: 'success'
+          type: 'success',
+          offset: 50
         })
         if (!response.data.is_student && response.data.is_instructor) {
           that.$store.commit('updateState', {
@@ -143,7 +144,8 @@ export default {
             this.$notify({
               title: 'Tips!',
               message: 'Double roles detected! Version switch is available in the account menu.',
-              type: 'info'
+              type: 'info',
+              offset: 50
             })
           }, 1000)
           that.$store.commit('updateState', {
