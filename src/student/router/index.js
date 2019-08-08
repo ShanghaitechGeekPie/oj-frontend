@@ -77,7 +77,7 @@ const router = new Router({
       path: '/home/course/:id/scoreboard/:ids',
       name: 'score',
       component: score,
-      meta: { requiresStu: true, requiresAuth: true }
+      meta: { requiresAuth: true }
     },
     {
       path: '/home/course/:id/submission/:ids',

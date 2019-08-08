@@ -71,6 +71,10 @@ const store = new Vuex.Store({
         state.baseInfo.isInstructor = false
       }
     },
+    InstrUpdateScoreBoard (state, AssUid, CoUid) {
+      state.assignments.uid = AssUid
+      state.coInfo.uid = CoUid
+    },
     requested (state) {
       state.isRequest = true
     },

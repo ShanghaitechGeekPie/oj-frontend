@@ -44,11 +44,18 @@
             label="DUE"
             >
           </el-table-column>
-            <el-table-column
+          <el-table-column
             label="Judges"
-            width="120">
+            width="100">
             <template slot-scope="scope">
               <v-judge :passAssUID="scope.row.uid" v-on:reJudges="loadJudges"></v-judge>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="scoreboard"
+            width="100">
+            <template slot-scope="scope">
+              <el-button @click="goScoreBoard(scope.row.uid, scope.row.course_uid)">check</el-button>
             </template>
           </el-table-column>
           <el-table-column
@@ -95,6 +102,11 @@ export default {
     }
   },
   methods: {
+    goScoreBoard (assUid, coUid) {
+      console.log(assUid, coUid)
+      this.$store.commit('InstrUpdateScoreBoard', assUid, coUid)
+      this.$router.push(`/home/course/${coUid}/scoreboard/${assUid}`)
+    },
     addHomework () {
       const loading = this.$loading({
         lock: true,
