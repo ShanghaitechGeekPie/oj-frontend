@@ -99,7 +99,7 @@ const router = new Router({
       meta: { requiresStu: true }
     },
     {
-      path: '/home/course/:id',
+      path: '/home/course/:course_code',
       name: 'course',
       component: course,
       meta: { requiresStu: true, requiresAuth: true }

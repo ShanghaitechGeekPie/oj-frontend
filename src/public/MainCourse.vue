@@ -48,7 +48,7 @@ export default {
       if (this.$route.name === 'indexInstructor') {
         this.$router.push('instr/home/course/' + course.code)
       } else {
-        this.$router.push('home/course/' + course.code)
+        this.$router.push(`home/course/${course.code}`)
       }
     },
     getYear (info) {
@@ -79,6 +79,9 @@ export default {
   },
   created () {
     this.courseInfo = this.passCoInfo
+  },
+  computed: {
+    getId: state => state.baseInfo.uid
   }
 }
 </script>

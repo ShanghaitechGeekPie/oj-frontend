@@ -18,7 +18,7 @@
     <el-row>
       <el-col>
         <el-table
-        :data="getCoState(coState)"
+        :data="coState"
         style="width: 100%"
         stripe>
         <el-table-column label="NAME">
@@ -81,7 +81,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -155,6 +155,16 @@ export default {
       timestamp = timestamp / 1000
       timestamp = timestamp + 8 * 60 * 60
       return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
+    },
+    filterUid (code) {
+      let uid = this.codeToUid(code)
+      if (uid === '') {
+        this.$router.push({
+          name: 'notFound'
+        })
+      } else {
+        return uid
+      }
     }
   },
   mounted () {
@@ -162,10 +172,10 @@ export default {
   },
   created () {
     if (this.getAuth) {
-      this.axios.get(`${this.Api}/student/${this.getID}/course/${this.getUid}/assignment/`)
+      this.axios.get(`${this.Api}/student/${this.getID}/course/${this.filterUid(this.$route.params.course_code)}/assignment/`)
         .then((response) => {
           this.length = response.data.length
-          this.coState = response.data
+          this.coState = this.getCoState(response.data)
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -187,13 +197,18 @@ export default {
         })
     }
   },
-  computed: mapState({
-    getAuth: state => state.isAuthorized,
-    getID: state => state.baseInfo.uid,
-    getUid: state => state.coInfo.uid,
-    getCoInfo: state => state.coInfo,
-    Api: state => state.api
-  })
+  computed: {
+    ...mapGetters([
+      'codeToUid'
+    ]),
+    ...mapState({
+      getAuth: state => state.isAuthorized,
+      getID: state => state.baseInfo.uid,
+      getUid: state => state.coInfo.uid,
+      getCoInfo: state => state.coInfo,
+      Api: state => state.api
+    })
+  }
 }
 </script>
 <style scoped>

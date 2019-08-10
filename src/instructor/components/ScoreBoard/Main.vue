@@ -95,10 +95,15 @@ export default {
       return (this.currentPage - 1) * 20 + index
     }
   },
-  computed: mapState({
-    getAuth: state => state.isAuthorized,
-    Api: state => state.api
-  })
+  computed: {
+    ...mapState({
+      getAuth: state => state.isAuthorized,
+      Api: state => state.api
+    }),
+    getCoUid: () => {
+      return 1
+    }
+  }
 }
 </script>
 <style scoped>

@@ -47,6 +47,7 @@ export default {
       method: 'GET',
       url: `${this.Api}/student/${this.getBase.uid}/course/`
     }).then((response) => {
+      this.$store.commit('loadAss', response.data)
       this.courseInfo = response.data
       if (response.data.length === 0) {
         this.show = true

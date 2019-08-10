@@ -30,6 +30,7 @@ const store = new Vuex.Store({
       score: 0,
       overall_socre: 0
     },
+    assignment_storage: [],
     baseInfo: {
       uid: '',
       isInstructor: false,
@@ -37,6 +38,17 @@ const store = new Vuex.Store({
     },
     api: '',
     logout_url: ''
+  },
+  getters: {
+    codeToUid: (state) => (code) => {
+      let result = ''
+      state.assignment_storage.map(item => {
+        if (item.code === code) {
+          result = item.uid
+        }
+      })
+      return result
+    }
   },
   mutations: {
     updateCoInfo (state, value) {
@@ -83,6 +95,9 @@ const store = new Vuex.Store({
     },
     updateApi (state, value) {
       state.api = value
+    },
+    loadAss (state, assignments) {
+      state.assignment_storage = assignments
     }
   },
   plugins: [vuexLocal.plugin]
