@@ -150,31 +150,22 @@ export default {
       }
       let result = []
       data.map(function (a) {
-        a.submission_time = that.convertUTCTimeToLocalTime(a.submission_time)
+        a.submission_time = that.formatUTC(a.submission_time)
         result.push(a)
       })
       return result
     },
-    convertUTCTimeToLocalTime (UTCDateString) {
-      if (!UTCDateString) {
-        return '-'
-      }
-      if (UTCDateString.includes('PM') || UTCDateString.includes('AM')) {
-        return UTCDateString
-      }
-      function formatFunc (str) {
-        return str > 9 ? str : '0' + str
-      }
-      let date2 = new Date(UTCDateString)
-      let year = date2.getFullYear()
-      let mon = formatFunc(date2.getMonth() + 1)
-      let day = formatFunc(date2.getDate())
-      let hour = date2.getHours()
-      let noon = hour >= 12 ? 'PM' : 'AM'
-      hour = hour >= 12 ? hour - 12 : hour
-      hour = formatFunc(hour)
-      let min = formatFunc(date2.getMinutes())
-      return year + '-' + mon + '-' + day + ' ' + noon + ' ' + hour + ':' + min
+    formatUTC (utcdatetime) {
+      let Tpos = utcdatetime.indexOf('T')
+      let Zpos = utcdatetime.indexOf('Z')
+      let yearmonthday = utcdatetime.substr(0, Tpos)
+      let hourminutesecond = utcdatetime.substr(Tpos + 1, Zpos - Tpos - 1)
+      let newdatetime = yearmonthday + ' ' + hourminutesecond
+      let timestamp = new Date(Date.parse(newdatetime))
+      timestamp = timestamp.getTime()
+      timestamp = timestamp / 1000
+      timestamp = timestamp + 8 * 60 * 60
+      return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
     }
   },
   watch: {

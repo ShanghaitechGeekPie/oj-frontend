@@ -131,27 +131,6 @@ export default {
         return `${row.score}/${row.overall_score}`
       }
     },
-    convertUTCTimeToLocalTime (UTCDateString) {
-      if (!UTCDateString) {
-        return '-'
-      }
-      if (UTCDateString.includes('PM') || UTCDateString.includes('AM')) {
-        return UTCDateString
-      }
-      function formatFunc (str) {
-        return str > 9 ? str : '0' + str
-      }
-      let date2 = new Date(UTCDateString)
-      let year = date2.getFullYear()
-      let mon = formatFunc(date2.getMonth() + 1)
-      let day = formatFunc(date2.getDate())
-      let hour = date2.getHours()
-      let noon = hour >= 12 ? 'PM' : 'AM'
-      hour = hour >= 12 ? hour - 12 : hour
-      hour = formatFunc(hour)
-      let min = formatFunc(date2.getMinutes())
-      return year + '-' + mon + '-' + day + ' ' + noon + ' ' + hour + ':' + min
-    },
     getCoState (data) {
       let that = this
       if (!data) {
@@ -159,11 +138,23 @@ export default {
       }
       let result = []
       data.map(function (a) {
-        a.deadline = that.convertUTCTimeToLocalTime(a.deadline)
-        a.release_date = that.convertUTCTimeToLocalTime(a.release_date)
+        a.deadline = that.formatUTC(a.deadline)
+        a.release_date = that.formatUTC(a.release_date)
         result.push(a)
       })
       return result
+    },
+    formatUTC (utcdatetime) {
+      let Tpos = utcdatetime.indexOf('T')
+      let Zpos = utcdatetime.indexOf('Z')
+      let yearmonthday = utcdatetime.substr(0, Tpos)
+      let hourminutesecond = utcdatetime.substr(Tpos + 1, Zpos - Tpos - 1)
+      let newdatetime = yearmonthday + ' ' + hourminutesecond
+      let timestamp = new Date(Date.parse(newdatetime))
+      timestamp = timestamp.getTime()
+      timestamp = timestamp / 1000
+      timestamp = timestamp + 8 * 60 * 60
+      return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
     }
   },
   mounted () {
