@@ -27,7 +27,7 @@
       <el-row class="row-quarter">
         <el-col>
           <el-table
-          :data="getCoState(coState)"
+          :data="coState"
           style="width: 90%"
           class="table-only">
           <el-table-column label="NAME" fix>
@@ -197,7 +197,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/assignment/`)
         .then((response) => {
-          this.coState = response.data
+          this.coState = this.getCoState(response.data)
         })
         .catch((err) => {
           this.$message({

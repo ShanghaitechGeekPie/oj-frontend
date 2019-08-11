@@ -42,6 +42,30 @@ export default {
     'v-aside': aside
   },
   methods: {
+    getSubmission (data) {
+      let that = this
+      if (!data) {
+        return data
+      }
+      let result = []
+      data.map(function (a) {
+        a.submission_time = that.formatUTC(a.submission_time)
+        result.push(a)
+      })
+      return result
+    },
+    formatUTC (utcdatetime) {
+      let Tpos = utcdatetime.indexOf('T')
+      let Zpos = utcdatetime.indexOf('Z')
+      let yearmonthday = utcdatetime.substr(0, Tpos)
+      let hourminutesecond = utcdatetime.substr(Tpos + 1, Zpos - Tpos - 1)
+      let newdatetime = yearmonthday + ' ' + hourminutesecond
+      let timestamp = new Date(Date.parse(newdatetime))
+      timestamp = timestamp.getTime()
+      timestamp = timestamp / 1000
+      timestamp = timestamp + 8 * 60 * 60
+      return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
+    }
   },
   created () {
     if (this.getAuth) {
@@ -49,7 +73,7 @@ export default {
         method: 'GET',
         url: `${this.Api}/student/${this.getID}/course/${this.getUID}/assignment/${this.getAssUID}/history/`
       }).then((response) => {
-        this.submission = response.data
+        this.submission = this.getSubmission(response.data)
       }).catch((err) => {
         this.$message({
           type: 'error',
