@@ -36,8 +36,10 @@
           label="Submission Time">
         </el-table-column>
           <el-table-column
-          prop="delta"
           label="Delta">
+          <template slot-scope="scope">
+            <i :class=getArrow(scope.row.delta)></i>
+          </template>
         </el-table-column>
      </el-table>
       </el-col>
@@ -93,6 +95,15 @@ export default {
     },
     ranking (index) {
       return (this.currentPage - 1) * 20 + index
+    },
+    getArrow (delta) {
+      if (delta > 0) {
+        return 'el-icon-caret-top'
+      } else if (delta === 0) {
+        return 'el-icon-d-caret'
+      } else {
+        return 'el-icon-caret-bottom'
+      }
     }
   },
   computed: mapState({

@@ -45,15 +45,13 @@ const store = new Vuex.Store({
       state.assignment_storage.map(item => {
         if (item.code === code) {
           result = item.uid
+          state.coInfo = item
         }
       })
       return result
     }
   },
   mutations: {
-    updateCoInfo (state, value) {
-      state.coInfo = value
-    },
     updateAss (state, value) {
       state.assignments = value
     },
