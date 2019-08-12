@@ -95,6 +95,9 @@ const store = new Vuex.Store({
       state.assignments.uid = AssUid
       state.coInfo.uid = CoUid
     },
+    updateCourse (state, course) {
+      state.coInfo = course
+    },
     requested (state) {
       state.isRequest = true
     },

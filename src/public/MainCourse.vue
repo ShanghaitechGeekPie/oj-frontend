@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     toCourse (course) {
+      this.$store.commit('updateCourse', course)
       if (this.$route.name === 'indexInstructor') {
         this.$router.push('instr/home/course/' + course.code)
       } else {
