@@ -87,7 +87,7 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
-      path: '/home/course/:id/submission/:ids',
+      path: '/home/course/:course_code/submission/:ass_name',
       name: 'submissionHistory',
       component: submission,
       meta: { requiresStu: true, requiresAuth: true }

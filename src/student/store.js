@@ -30,7 +30,8 @@ const store = new Vuex.Store({
       score: 0,
       overall_socre: 0
     },
-    assignment_storage: [],
+    course_storage: [],
+    ass_storage: [],
     baseInfo: {
       uid: '',
       isInstructor: false,
@@ -40,14 +41,23 @@ const store = new Vuex.Store({
     logout_url: ''
   },
   getters: {
-    codeToUid: (state) => (code) => {
+    codeToUid: (state) => (value) => {
       let result = ''
-      state.assignment_storage.map(item => {
-        if (item.code === code) {
-          result = item.uid
-          state.coInfo = item
-        }
-      })
+      if (value.cate === 'course') {
+        state.course_storage.map(item => {
+          if (item.code === value.code) {
+            result = item.uid
+            state.coInfo = item
+          }
+        })
+      } else if (value.cate === 'assignment') {
+        state.ass_storage.map(item => {
+          if (item.name === value.code) {
+            result = item.uid
+            state.assignemnts = item
+          }
+        })
+      }
       return result
     }
   },
@@ -94,8 +104,11 @@ const store = new Vuex.Store({
     updateApi (state, value) {
       state.api = value
     },
+    loadCourse (state, courses) {
+      state.course_storage = courses
+    },
     loadAss (state, assignments) {
-      state.assignment_storage = assignments
+      state.ass_storage = assignments
     }
   },
   plugins: [vuexLocal.plugin]

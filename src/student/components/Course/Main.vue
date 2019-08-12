@@ -157,7 +157,10 @@ export default {
       return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
     },
     filterUid (code) {
-      let uid = this.codeToUid(code)
+      let uid = this.codeToUid({
+        code: code,
+        cate: 'course'
+      })
       if (uid === '') {
         this.$router.push({
           name: 'notFound'
@@ -176,6 +179,7 @@ export default {
         .then((response) => {
           this.length = response.data.length
           this.coState = this.getCoState(response.data)
+          this.$store.commit('loadAss', this.coState)
         }).catch((err) => {
           this.$message({
             type: 'error',
