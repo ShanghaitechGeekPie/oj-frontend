@@ -113,7 +113,11 @@ export default {
       }
       let result = []
       data.map(function (a) {
-        a.submission_time = that.formatUTC(a.submission_time)
+        if (a.submission_time) {
+          a.submission_time = that.formatUTC(a.submission_time)
+        } else {
+          a.submission_time = 'no time!'
+        }
         result.push(a)
       })
       return result
