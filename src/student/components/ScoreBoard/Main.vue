@@ -65,7 +65,7 @@ export default {
   data () {
     return {
       scoreInfo: [],
-      loading: false,
+      loading: true,
       currentPage: 1,
       pagesize: 20,
       total: 0
@@ -77,6 +77,7 @@ export default {
         .then((response) => {
           this.scoreInfo = this.getSubmission(response.data)
           this.total = response.data.length
+          this.loading = false
         }).catch((err) => {
           this.$message({
             type: 'error',

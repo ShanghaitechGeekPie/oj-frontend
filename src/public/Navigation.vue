@@ -75,7 +75,17 @@ export default {
       this.$router.go(-2)
     },
     backHome () {
-      this.$router.push('/')
+      if (this.getBase.isStudent && !this.getBase.isInstructor) {
+        this.$router.push('/')
+      } else if (!this.getBase.isStudent && this.getBase.isInstructor) {
+        this.$router.push('/instr')
+      } else {
+        if (this.$route.path.includes('instr')) {
+          this.$router.push('/instr')
+        } else {
+          this.$router.push('/')
+        }
+      }
     },
     login () {
       if (!this.getAuth) {

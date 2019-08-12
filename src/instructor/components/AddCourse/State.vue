@@ -15,6 +15,7 @@
           <el-table
           :data="courseList"
           style="width: 90%"
+          v-loading="loading"
           >
           <el-table-column
             prop="name"
@@ -89,7 +90,8 @@ export default {
         year: 0,
         homepage: '',
         instructor: []
-      }]
+      }],
+      loading: true
     }
   },
   methods: {
@@ -144,6 +146,7 @@ export default {
       this.axios.get(`${this.Api}/instructor/${this.getID}/course/`)
         .then((response) => {
           this.courseList = response.data
+          this.loading = false
         })
         .catch((err) => {
           this.$message({

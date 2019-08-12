@@ -41,6 +41,7 @@
         <el-col>
             <el-table
             :data="submission"
+            v-loading="loading"
             class="table-only"
             :default-sort = "{prop: 'date', order: 'descending'}">
             <el-table-column
@@ -105,7 +106,8 @@ export default {
         descr_link: ''
       },
       message: '',
-      email: ''
+      email: '',
+      loading: true
     }
   },
   computed: mapState({
@@ -146,6 +148,7 @@ export default {
   },
   watch: {
     deliverDetail: function (newValue) {
+      this.loading = false
       this.submission = newValue
       this.message = this.submission[0].message
     }

@@ -14,6 +14,7 @@
         <el-col>
           <el-table
           :data="studentList"
+          v-loading="loading"
           style="width: 100%"
           stripe>
           <el-table-column
@@ -59,7 +60,8 @@ export default {
         enroll_email: '',
         student_id: ''
       }],
-      childChange: false
+      childChange: false,
+      loading: true
     }
   },
   methods: {
@@ -114,6 +116,7 @@ export default {
       this.axios.get(`${this.Api}/course/${this.getUid}/students/`)
         .then((response) => {
           this.studentList = response.data
+          this.loading = false
         })
         .catch((err) => {
           this.$message({

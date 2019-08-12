@@ -15,6 +15,7 @@
           <el-table
           :data="judgeList"
           style="width: 100%"
+          v-loading="loading"
           stripe>
           <el-table-column
             prop="uid"
@@ -54,7 +55,8 @@ export default {
   data () {
     return {
       judgeList: [],
-      childChange: false
+      childChange: false,
+      loading: true
     }
   },
   methods: {
@@ -131,6 +133,7 @@ export default {
         }
       })
     }
+    this.loading = false
   },
   computed: mapState({
     getAuth: state => state.isAuthorized,

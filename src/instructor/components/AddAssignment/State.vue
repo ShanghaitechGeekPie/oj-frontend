@@ -28,6 +28,7 @@
         <el-col>
           <el-table
           :data="coState"
+          v-loading="loading"
           style="width: 90%"
           class="table-only">
           <el-table-column label="NAME" fix>
@@ -92,6 +93,7 @@ export default {
         host: 'Please choose one of your judges',
         max_job: 'Please choose one of your judges'
       },
+      loading: true,
       judgeList: [{
         host: '',
         client_cert: '',
@@ -198,6 +200,7 @@ export default {
       this.axios.get(`${this.Api}/course/${this.getUid}/assignment/`)
         .then((response) => {
           this.coState = this.getCoState(response.data)
+          this.loading = false
         })
         .catch((err) => {
           this.$message({

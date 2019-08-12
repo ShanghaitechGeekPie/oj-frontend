@@ -63,7 +63,7 @@ export default {
   data () {
     return {
       scoreInfo: [],
-      loading: false,
+      loading: true,
       currentPage: 1,
       pagesize: 20,
       total: 0
@@ -75,6 +75,7 @@ export default {
         .then((response) => {
           this.scoreInfo = response.data
           this.total = response.data.length
+          this.loading = false
         }).catch((err) => {
           this.$message({
             type: 'error',
@@ -99,10 +100,7 @@ export default {
     ...mapState({
       getAuth: state => state.isAuthorized,
       Api: state => state.api
-    }),
-    getCoUid: () => {
-      return 1
-    }
+    })
   }
 }
 </script>

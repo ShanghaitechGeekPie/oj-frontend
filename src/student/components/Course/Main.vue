@@ -19,6 +19,7 @@
       <el-col>
         <el-table
         :data="coState"
+        v-loading="loading"
         style="width: 100%"
         stripe>
         <el-table-column label="NAME">
@@ -96,7 +97,8 @@ export default {
         submission_time: 0,
         submitter: ''
       }],
-      length: 0
+      length: 0,
+      loading: true
     }
   },
   methods: {
@@ -180,6 +182,7 @@ export default {
           this.length = response.data.length
           this.coState = this.getCoState(response.data)
           this.$store.commit('loadAss', this.coState)
+          this.loading = false
         }).catch((err) => {
           this.$message({
             type: 'error',

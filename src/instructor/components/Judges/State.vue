@@ -14,6 +14,7 @@
         <el-col>
           <el-table
           :data="judges"
+          v-loading="loading"
           style="width: 90%"
           >
           <el-table-column
@@ -61,7 +62,8 @@ export default {
         uid: '',
         host: '',
         max_job: 4
-      }]
+      }],
+      loading: true
     }
   },
   methods: {
@@ -116,6 +118,7 @@ export default {
       this.axios.get(`${this.Api}/judge/`)
         .then((response) => {
           this.judges = response.data
+          this.loading = false
         })
         .catch((err) => {
           this.$message({

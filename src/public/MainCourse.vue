@@ -78,9 +78,6 @@ export default {
   },
   created () {
     this.courseInfo = this.passCoInfo
-  },
-  computed: {
-    getId: state => state.baseInfo.uid
   }
 }
 </script>
