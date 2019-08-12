@@ -140,8 +140,16 @@ export default {
       }
       let result = []
       data.map(function (a) {
-        a.deadline = that.formatUTC(a.deadline)
-        a.release_date = that.formatUTC(a.release_date)
+        if (a.deadline) {
+          a.deadline = that.formatUTC(a.deadline)
+        } else {
+          a.deadline = 'no time!'
+        }
+        if (a.release_date) {
+          a.release_datee = that.formatUTC(a.release_date)
+        } else {
+          a.release_date = 'no time!'
+        }
         result.push(a)
       })
       return result

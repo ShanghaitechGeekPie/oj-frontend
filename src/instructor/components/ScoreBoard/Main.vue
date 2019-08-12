@@ -73,7 +73,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.$route.query.coUid}/assignment/${this.$route.query.assUid}/scores/`)
         .then((response) => {
-          this.scoreInfo = response.data
+          this.scoreInfo = this.getSubmission(response.data)
           this.total = response.data.length
           this.loading = false
         }).catch((err) => {
@@ -94,6 +94,34 @@ export default {
     },
     ranking (index) {
       return (this.currentPage - 1) * 20 + index
+    },
+    getSubmission (data) {
+      let that = this
+      if (!data) {
+        return data
+      }
+      let result = []
+      data.map(function (a) {
+        if (a.submission_time) {
+          a.submission_time = that.formatUTC(a.submission_time)
+        } else {
+          a.submission_time = 'no time!'
+        }
+        result.push(a)
+      })
+      return result
+    },
+    formatUTC (utcdatetime) {
+      let Tpos = utcdatetime.indexOf('T')
+      let Zpos = utcdatetime.indexOf('Z')
+      let yearmonthday = utcdatetime.substr(0, Tpos)
+      let hourminutesecond = utcdatetime.substr(Tpos + 1, Zpos - Tpos - 1)
+      let newdatetime = yearmonthday + ' ' + hourminutesecond
+      let timestamp = new Date(Date.parse(newdatetime))
+      timestamp = timestamp.getTime()
+      timestamp = timestamp / 1000
+      timestamp = timestamp + 8 * 60 * 60
+      return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
     }
   },
   computed: {
