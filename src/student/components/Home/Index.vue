@@ -43,22 +43,24 @@ export default {
     Api: state => state.api
   }),
   mounted () {
-    this.axios({
-      method: 'GET',
-      url: `${this.Api}/student/${this.getBase.uid}/course/`
-    }).then((response) => {
-      this.$store.commit('loadAss', response.data)
-      this.courseInfo = response.data
-      if (response.data.length === 0) {
-        this.show = true
-      }
-    }).catch((err) => {
-      this.$message({
-        type: 'error',
-        message: err,
-        showClose: true
+    if (this.getAuth) {
+      this.axios({
+        method: 'GET',
+        url: `${this.Api}/student/${this.getBase.uid}/course/`
+      }).then((response) => {
+        this.$store.commit('loadAss', response.data)
+        this.courseInfo = response.data
+        if (response.data.length === 0) {
+          this.show = true
+        }
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
       })
-    })
+    }
   }
 }
 </script>

@@ -138,7 +138,17 @@ export default {
             uid: response.data.uid,
             role: 4
           })
-          this.$router.push('/uninitialized')
+          setTimeout(() => {
+            this.$notify({
+              title: 'Warning!',
+              message: 'No role detected, you will be redirect to another page!',
+              type: 'warning',
+              offset: 50
+            })
+            setTimeout(() => {
+              this.$router.push('/uninitialized')
+            }, 3000)
+          }, 1000)
         } else {
           setTimeout(() => {
             this.$notify({

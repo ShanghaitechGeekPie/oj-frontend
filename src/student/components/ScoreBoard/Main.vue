@@ -75,7 +75,7 @@ export default {
     if (this.getAuth) {
       this.axios.get(`${this.Api}/course/${this.getUid}/assignment/${this.getAssUid}/scores/`)
         .then((response) => {
-          this.scoreInfo = response.data
+          this.scoreInfo = this.getSubmission(response.data)
           this.total = response.data.length
         }).catch((err) => {
           this.$message({
@@ -94,7 +94,7 @@ export default {
       this.pagesize = val
     },
     ranking (index) {
-      return (this.currentPage - 1) * 20 + index
+      return (this.currentPage - 1) * 20 + index + 1
     },
     getArrow (delta) {
       if (delta > 0) {
@@ -104,6 +104,30 @@ export default {
       } else {
         return 'el-icon-caret-bottom'
       }
+    },
+    getSubmission (data) {
+      let that = this
+      if (!data) {
+        return data
+      }
+      let result = []
+      data.map(function (a) {
+        a.submission_time = that.formatUTC(a.submission_time)
+        result.push(a)
+      })
+      return result
+    },
+    formatUTC (utcdatetime) {
+      let Tpos = utcdatetime.indexOf('T')
+      let Zpos = utcdatetime.indexOf('Z')
+      let yearmonthday = utcdatetime.substr(0, Tpos)
+      let hourminutesecond = utcdatetime.substr(Tpos + 1, Zpos - Tpos - 1)
+      let newdatetime = yearmonthday + ' ' + hourminutesecond
+      let timestamp = new Date(Date.parse(newdatetime))
+      timestamp = timestamp.getTime()
+      timestamp = timestamp / 1000
+      timestamp = timestamp + 8 * 60 * 60
+      return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
     }
   },
   computed: mapState({
