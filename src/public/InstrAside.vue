@@ -105,11 +105,26 @@ export default {
     font-size: 15px;
     font-style: italic;
   }
+  .el-icon-menu {
+    display: none;
+  }
   .sub-title {
-   font-size: 25px;
-   text-decoration: none;
-   color: black;
- }
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+    padding: 0.3em 1.2em;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: #FFFFFF;
+    background-color: #bf6970;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .sub-title:hover{
+    background-color: #b5555d;
+  }
   .row-two {
     margin-top: 40px;
   }
