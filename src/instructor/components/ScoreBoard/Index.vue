@@ -38,7 +38,7 @@ export default {
   .menu-only {
     float: left;
     margin-right: 5%;
-    width: 200px;
+    /*width: 200px;*/
     min-height: 400px;
   }
 </style>
