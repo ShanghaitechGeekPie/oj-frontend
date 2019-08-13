@@ -88,37 +88,81 @@ export default {
   },
   methods: {
     updateInfo () {
-      if (this.getState) {
-        this.axios({
-          method: 'post',
-          url: `${this.Api}/instructor/${this.getID}`,
-          data: this.Info,
-          headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
-        }).then((response) => {
-          alert('submit!')
-        }).catch((err) => {
-          this.$message({
-            type: 'error',
-            message: err,
-            showClose: true
-          })
-        })
-      } else {
-        this.axios({
-          method: 'post',
-          url: `${this.Api}/student/${this.getID}`,
-          data: this.Info,
-          headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
-        }).then((response) => {
-          alert('submit!')
-        }).catch((err) => {
-          this.$message({
-            type: 'error',
-            message: err,
-            showClose: true
-          })
-        })
+      if (this.getAuth) {
+        if (this.getStu && this.getState) {
+          if (this.$route.path.includes('instr')) {
+            this.axiosInstrPost()
+          } else {
+            this.axiosStuPost()
+          }
+        } else {
+          if (this.getState) {
+            this.axiosInstrPost()
+          } else {
+            this.axiosStuPost()
+          }
+        }
       }
+    },
+    axiosInstrPost () {
+      this.axios({
+        method: 'post',
+        url: `${this.Api}/instructor/${this.getID}`,
+        data: this.Info,
+        headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
+      }).then((response) => {
+        alert('submit!')
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
+      })
+    },
+    axiosStuPost () {
+      this.axios({
+        method: 'post',
+        url: `${this.Api}/student/${this.getID}`,
+        data: this.Info,
+        headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
+      }).then((response) => {
+        alert('submit!')
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
+      })
+    },
+    axiosInstr () {
+      this.axios({
+        method: 'GET',
+        url: `${this.Api}/instructor/${this.getID}`
+      }).then((response) => {
+        this.Info = response.data
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
+      })
+    },
+    axiosStu () {
+      this.axios({
+        method: 'GET',
+        url: `${this.Api}/student/${this.getID}`
+      }).then((response) => {
+        this.Info = response.data
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
+      })
     }
   },
   components: {
@@ -128,36 +172,23 @@ export default {
     getAuth: state => state.isAuthorized,
     getID: state => state.baseInfo.uid,
     getState: state => state.baseInfo.isInstructor,
+    getStu: state => state.baseInfo.isStudent,
     Api: state => state.api
   }),
   created () {
     if (this.getAuth) {
-      if (this.getState) {
-        this.axios({
-          method: 'GET',
-          url: `${this.Api}/instructor/${this.getID}`
-        }).then((response) => {
-          this.Info = response.data
-        }).catch((err) => {
-          this.$message({
-            type: 'error',
-            message: err,
-            showClose: true
-          })
-        })
+      if (this.getStu && this.getState) {
+        if (this.$route.path.includes('instr')) {
+          this.axiosInstr()
+        } else {
+          this.axiosStu()
+        }
       } else {
-        this.axios({
-          method: 'GET',
-          url: `${this.Api}/student/${this.getID}`
-        }).then((response) => {
-          this.Info = response.data
-        }).catch((err) => {
-          this.$message({
-            type: 'error',
-            message: err,
-            showClose: true
-          })
-        })
+        if (this.getState) {
+          this.axiosInstr()
+        } else {
+          this.axiosStu()
+        }
       }
     }
   }

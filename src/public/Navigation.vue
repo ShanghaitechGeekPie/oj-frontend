@@ -27,7 +27,7 @@
                   <el-menu-item :index=getProfile() v-if="!profilePage">Profile</el-menu-item>
                   <el-menu-item index="/" v-else>Dashboard</el-menu-item>
                   <el-menu-item index="/" v-if="profilePage" @click="goBack">Go back</el-menu-item>
-                  <el-menu-item index="/changeProfile">Change profile</el-menu-item>
+                  <el-menu-item :index=getProChange()>Change profile</el-menu-item>
                   <el-menu-item index="/" @click="logout">Logout</el-menu-item>
                 </el-submenu>
               </el-menu>
@@ -76,6 +76,13 @@ export default {
         return '/instr/profile'
       } else {
         return '/profile'
+      }
+    },
+    getProChange () {
+      if (this.$route.path.includes('instr')) {
+        return '/instr/changeProfile'
+      } else {
+        return '/changeProfile'
       }
     },
     goBack () {

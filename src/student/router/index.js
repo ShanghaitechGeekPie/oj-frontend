@@ -126,7 +126,13 @@ const router = new Router({
       path: '/changeProfile',
       name: 'changeProfile',
       component: changePro,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresStu: true }
+    },
+    {
+      path: '/instr/changeProfile',
+      name: 'InstrChangeProfile',
+      component: changePro,
+      meta: { requiresAuth: true, requiresInstr: true }
     },
     {
       path: '/error',
