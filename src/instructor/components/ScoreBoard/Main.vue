@@ -105,7 +105,7 @@ export default {
         if (a.submission_time) {
           a.submission_time = that.formatUTC(a.submission_time)
         } else {
-          a.submission_time = 'no time!'
+          a.submission_time = '(not yet submitted)'
         }
         result.push(a)
       })

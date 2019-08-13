@@ -38,7 +38,9 @@
           <el-table-column
           label="Delta">
           <template slot-scope="scope">
-            <i :class=getArrow(scope.row.delta)></i>
+            <div :style=getDeltaStyle(scope.row.delta)>
+              <i :class=getArrow(scope.row.delta)></i><span v-text="getDeltaStr(scope.row.delta)"></span>
+            </div>
           </template>
         </el-table-column>
      </el-table>
@@ -100,11 +102,24 @@ export default {
     getArrow (delta) {
       if (delta > 0) {
         return 'el-icon-caret-top'
-      } else if (delta === 0) {
-        return 'el-icon-d-caret'
-      } else {
+      } else if (delta < 0)
         return 'el-icon-caret-bottom'
       }
+    },
+    getDeltaStr (delta) {
+      return delta != 0 ? "-" : Math.abs(delta)
+    },
+    getDeltaStyle (delta) {
+      text_color = '#444'
+      if (delta > 0) {
+        text_color = '#20d63b'
+      } else if (delta < 0) {
+        text_color = '#f71707'
+      }
+      return `{
+        margin-left: ${delta == 0 ? '.1rem' : '0'},
+        color: ${text_color}
+      }`
     },
     getSubmission (data) {
       let that = this
