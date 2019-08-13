@@ -147,7 +147,10 @@ export default {
       timestamp = timestamp.getTime()
       timestamp = timestamp / 1000
       timestamp = timestamp + 8 * 60 * 60
-      return new Date(parseInt(timestamp) * 1000).toLocaleString().replace(/年|月/g, '-').replace(/日/g, ' ')
+      let date = new Date(parseInt(timestamp) * 1000)
+      let hours = date.toString().split(' ')[4]
+      let days = date.toLocaleString().split(' ')[0]
+      return `${days} ${hours}`
     }
   },
   computed: mapState({
