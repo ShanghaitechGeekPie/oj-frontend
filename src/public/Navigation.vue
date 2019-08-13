@@ -24,7 +24,7 @@
                   <template slot="title">Account</template>
                   <el-menu-item index="/" v-if="this.checkRoleInstr">Student Version</el-menu-item>
                   <el-menu-item index="/instr" v-if="this.checkRoleStu">Instructor Version</el-menu-item>
-                  <el-menu-item index="/profile" v-if="!profilePage">Profile</el-menu-item>
+                  <el-menu-item :index=getProfile() v-if="!profilePage">Profile</el-menu-item>
                   <el-menu-item index="/" v-else>Dashboard</el-menu-item>
                   <el-menu-item index="/" v-if="profilePage" @click="goBack">Go back</el-menu-item>
                   <el-menu-item index="/changeProfile">Change profile</el-menu-item>
@@ -70,6 +70,13 @@ export default {
       this.$store.commit('logOut')
       this.$cookies.remove('sessionid')
       window.location.href = `${this.getLogout}`
+    },
+    getProfile () {
+      if (this.$route.path.includes('instr')) {
+        return '/instr/profile'
+      } else {
+        return '/profile'
+      }
     },
     goBack () {
       this.$router.go(-2)

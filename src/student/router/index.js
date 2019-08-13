@@ -108,7 +108,13 @@ const router = new Router({
       path: '/profile',
       name: 'profile',
       component: profile,
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true, requiresStu: true }
+    },
+    {
+      path: '/instr/profile',
+      name: 'inProfile',
+      component: profile,
+      meta: { requiresAuth: true, requiresInstr: true }
     },
     {
       path: '/instrProfile',
