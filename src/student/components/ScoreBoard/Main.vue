@@ -107,7 +107,7 @@ export default {
       }
     },
     getDeltaStr (delta) {
-      return delta !== 0 ? '-' : Math.abs(delta)
+      return delta === 0 ? '-' : Math.abs(delta)
     },
     getDeltaStyle (delta) {
       let textColor = '#444'
@@ -116,9 +116,7 @@ export default {
       } else if (delta < 0) {
         textColor = '#f71707'
       }
-      return `{
-        margin-left: ${delta === 0 ? '.1rem' : '0'},
-        color: ${textColor}
+      return `margin-left: ${delta === 0 ? '.1rem' : '0'}; color:${textColor}
       }`
     },
     getSubmission (data) {
