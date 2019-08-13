@@ -102,23 +102,23 @@ export default {
     getArrow (delta) {
       if (delta > 0) {
         return 'el-icon-caret-top'
-      } else if (delta < 0)
+      } else if (delta < 0) {
         return 'el-icon-caret-bottom'
       }
     },
     getDeltaStr (delta) {
-      return delta != 0 ? "-" : Math.abs(delta)
+      return delta !== 0 ? '-' : Math.abs(delta)
     },
     getDeltaStyle (delta) {
-      text_color = '#444'
+      let textColor = '#444'
       if (delta > 0) {
-        text_color = '#20d63b'
+        textColor = '#20d63b'
       } else if (delta < 0) {
-        text_color = '#f71707'
+        textColor = '#f71707'
       }
       return `{
-        margin-left: ${delta == 0 ? '.1rem' : '0'},
-        color: ${text_color}
+        margin-left: ${delta === 0 ? '.1rem' : '0'},
+        color: ${textColor}
       }`
     },
     getSubmission (data) {
