@@ -152,7 +152,7 @@ export default {
         if (a.release_date) {
           a.release_datee = that.formatUTC(a.release_date)
         } else {
-          a.release_date = 'no time!'
+          a.release_date = '(not yet released)'
         }
         result.push(a)
       })
