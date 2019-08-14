@@ -81,28 +81,11 @@ export default {
   .cards {
     width: 700px;
   }
-  .el-icon-menu {
-    display: none;
-  }
   .sub-title {
     font-size: 20px;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     float: right;
     margin-right: 8%;
-    text-decoration: none;
-    color: white;
-    padding: 0.3em 1.2em;
-    border-radius: 2em;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-weight: 300;
-    color: #FFFFFF;
-    background-color: #bf6970;
-    text-align: center;
-    transition: all 0.2s;
-  }
-  .sub-title:hover{
-    background-color: #b5555d;
   }
   .card-row {
     margin: 3% 3% 3% 0;

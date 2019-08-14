@@ -106,7 +106,7 @@ export default {
     font-style: italic;
   }
   .el-icon-menu {
-    display: none;
+    display: none !important;
   }
   .sub-title {
     font-size: 25px;
