@@ -31,7 +31,7 @@
           <el-card class="card-only">
             <el-row class="margins">
               <el-col>
-                <span class="code">{{ message }}</span>
+                <span class="code" v-html="renderMultipleLines(message)"></span>
               </el-col>
             </el-row>
           </el-card>
@@ -144,6 +144,9 @@ export default {
       } else {
         return word.toLowerCase()
       }
+    },
+    renderMultipleLines (content) {
+      return content.trim().replace(/\n/g, '<br/>')
     }
   },
   watch: {
