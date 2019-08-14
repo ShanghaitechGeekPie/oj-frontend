@@ -16,7 +16,7 @@
             <el-row class="margins">
               <el-col>
                 <span>
-                  <span class="code-two">git@git.geekpie.club:{{this.lower(this.getCoInfo.code)}}-{{this.lower(this.getCoInfo.year + this.getCoInfo.semester)}}/{{this.lower(this.getAss.short_name)}}/{{this.lower(this.email)}}.git </span>
+                  <span class="code-two">git@oj.geekpie.club:{{this.lower(this.getCoInfo.code)}}-{{this.lower(this.getCoInfo.year + this.getCoInfo.semester)}}/{{this.lower(this.getAss.short_name)}}/{{this.lower(this.email)}}.git </span>
                     is the repo for your homework. To access
                   your repo and submit your homework, clone it use
                   <span class="code-two"> git clone git@oj.geekpie.club:{{this.lower(this.getCoInfo.code)}}-{{this.lower(this.getCoInfo.year + this.getCoInfo.semester)}}/{{this.lower(this.getAss.short_name)}}/{{this.lower(this.email)}}.git </span>
