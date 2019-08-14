@@ -33,13 +33,13 @@ const router = new Router({
       meta: { requiresInstr: true }
     },
     {
-      path: '/instr/home/course/:id',
+      path: '/instr/course/:id',
       name: 'instrCourses',
       component: courses,
       meta: { requiresInstr: true, requiresAuth: true }
     },
     {
-      path: '/instr/home/course/:id/assignment',
+      path: '/instr/course/:id/assignment',
       name: 'instructorAddHomework',
       component: addAssignment,
       meta: { requiresInstr: true, requiresAuth: true }
@@ -63,13 +63,13 @@ const router = new Router({
       meta: { requiresInstr: true, requiresAuth: true }
     },
     {
-      path: '/instr/home/course/:id/judge',
+      path: '/instr/course/:id/judge',
       name: 'courseJudge',
       component: judges,
       meta: { requiresInstr: true, requiresAuth: true }
     },
     {
-      path: '/instr/home/course/:id/instructor',
+      path: '/instr/course/:id/instructor',
       name: 'instructor',
       component: instructors,
       meta: { requiresInstr: true, requiresAuth: true }

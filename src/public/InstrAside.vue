@@ -28,7 +28,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="18">
-          <router-link :to="{ path: `/instr/home/course/${this.coInfo.code}/assignment`}" class="sub-title">Assignments</router-link>
+          <router-link :to="{ path: `/instr/course/${this.coInfo.code}/assignment`}" class="sub-title">Assignments</router-link>
       </el-col>
     </el-row>
     <el-row class="mt-10percent">
@@ -36,7 +36,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="18">
-          <router-link :to="{ path: `/instr/home/course/${this.coInfo.code}`}" class="sub-title">Student List</router-link>
+          <router-link :to="{ path: `/instr/course/${this.coInfo.code}`}" class="sub-title">Student List</router-link>
       </el-col>
     </el-row>
     <el-row class="mt-10percent">
@@ -44,7 +44,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="18">
-          <router-link :to="{ path: `/instr/home/course/${this.coInfo.code}/judge`}" class="sub-title">Judges List</router-link>
+          <router-link :to="{ path: `/instr/course/${this.coInfo.code}/judge`}" class="sub-title">Judges List</router-link>
       </el-col>
     </el-row>
     <el-row class="mt-10percent">
@@ -52,7 +52,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="18">
-          <router-link :to="{ path: `/instr/home/course/${this.coInfo.code}/instructor`}" class="sub-title">Instructors</router-link>
+          <router-link :to="{ path: `/instr/course/${this.coInfo.code}/instructor`}" class="sub-title">Instructors</router-link>
       </el-col>
     </el-row>
   </div>

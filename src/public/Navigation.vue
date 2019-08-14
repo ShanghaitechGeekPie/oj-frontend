@@ -92,10 +92,10 @@ export default {
       if (this.getBase.isStudent && !this.getBase.isInstructor) {
         this.$router.push('/home')
       } else if (!this.getBase.isStudent && this.getBase.isInstructor) {
-        this.$router.push('/instr/home')
+        this.$router.push('/instr')
       } else {
         if (this.$route.path.includes('instr')) {
-          this.$router.push('/instr/home')
+          this.$router.push('/instr')
         } else {
           this.$router.push('/home')
         }
