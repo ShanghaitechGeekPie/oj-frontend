@@ -97,6 +97,7 @@ export default {
 <style scoped>
   .aside {
     padding: 0 20px 0 20px;
+    min-width: 280px;
   }
   .mt-10percent {
     margin-top: 10%;
@@ -111,11 +112,9 @@ export default {
   .sub-title {
     font-size: 25px;
     text-decoration: none;
-    color: white;
     padding: 0.3em 1.2em;
     border-radius: 2em;
     box-sizing: border-box;
-    text-decoration: none;
     font-weight: 300;
     color: #FFFFFF;
     background-color: #bf6970;

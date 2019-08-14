@@ -70,7 +70,7 @@
                 fixed="right"
                 label="Outputs">
                 <template slot-scope="scope">
-                  <el-button @click="showMessage(scope.row)" type="text" size="small">查看</el-button>
+                  <el-button @click="showMessage(scope.row)" size="small">check</el-button>
                 </template>
               </el-table-column>
           </el-table>

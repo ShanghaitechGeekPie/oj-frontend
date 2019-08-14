@@ -6,7 +6,7 @@
             <v-aside></v-aside>
           </el-menu>
       </el-col>
-      <el-col :span="18">
+      <el-col :span="16">
         <v-main :passCoInfo="courseInfo" :passShow="show"></v-main>
       </el-col>
     </el-row>
@@ -69,7 +69,7 @@ export default {
     height: 100%;
   }
   .col-one {
-    margin-right: 5%;
+    margin-right: 10%;
   }
   .menu-only {
     float: left;

@@ -1,12 +1,12 @@
 <template>
     <div>
         <el-row :gutter="2">
-            <el-col :span="4">
+            <el-col :span="4" class="col-one">
               <el-menu class="menu-only">
                 <v-aside :deliverDetail="assignmentDetail"></v-aside>
               </el-menu>
             </el-col>
-            <el-col :span="18" class="col-one">
+            <el-col :span="16">
               <v-main class="main" :deliverDetail="submission" :deliverInfo="assignmentDetail"></v-main>
             </el-col>
         </el-row>
@@ -103,6 +103,12 @@ export default {
       })
     }
     this.assignmentDetail = this.$store.state.assignments
+    this.$notify({
+      title: 'Info!',
+      message: 'Tip the check button to switch the outputs of different submissions.',
+      type: 'info',
+      offset: 50
+    })
   },
   computed: {
     ...mapGetters([
@@ -119,14 +125,14 @@ export default {
 }
 </script>
 <style scoped>
+  .col-one {
+    margin-right: 10%;
+  }
   .menu-only {
     float: left;
     margin-right: 5%;
-    width: 220px;
+    /*width: 200px;*/
     min-height: 1000px;
-  }
-  .col-one {
-    float: right;
   }
   .main {
     margin: 5%;

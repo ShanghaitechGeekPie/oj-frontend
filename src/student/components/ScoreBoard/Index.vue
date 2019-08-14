@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row class="row-height" :gutter="2">
+    <el-row :gutter="2">
       <el-col :span="4" class="col-one">
           <el-menu class="menu-only">
             <v-aside></v-aside>
@@ -37,9 +37,6 @@ export default {
 }
 </script>
 <style scoped>
-  .row-height {
-    height: 100%;
-  }
   .col-one {
     margin-right: 10%;
   }
@@ -47,6 +44,6 @@ export default {
     float: left;
     margin-right: 5%;
     /*width: 200px;*/
-    min-height: 400px;
+    min-height: 1000px;
   }
 </style>

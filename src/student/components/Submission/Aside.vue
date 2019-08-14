@@ -15,7 +15,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="18">
-        <router-link :to="{ path: `/course/${this.$route.params.course_code}` }" class="sub-title">Assignment</router-link>
+        <router-link :to="{ path: `/course/${this.$route.params.course_code}` }" class="sub-title">Assignments</router-link>
       </el-col>
     </el-row>
     <el-row class="row-three-forth">
@@ -23,7 +23,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="18">
-        <router-link :to="{ path: `/course/${this.$route.params.course_code}/scoreboard/${this.assignmentDetail.name}` }" class="sub-title">Scoreboard</router-link>
+        <router-link :to="{ path: `/course/${this.$route.params.course_code}/scoreboard/${this.$route.params.ass_name}` }" class="sub-title">Scoreboard</router-link>
       </el-col>
     </el-row>
   </div>
@@ -56,6 +56,7 @@ export default {
 <style scoped>
   .aside {
     padding: 0 20px 0 20px;
+    min-width: 280px !important;
   }
   .subtitle {
     font-size: 20px;

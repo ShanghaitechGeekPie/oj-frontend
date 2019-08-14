@@ -2,7 +2,7 @@
     <div>
       <el-row :gutter="16" class="row-quarter">
         <el-col :span="4">
-          <span class="title-main">Assignment</span>
+          <span class="title-main">Assignments</span>
         </el-col>
         <el-col :span="4" class="col-one">
           <el-tooltip class="item" effect="dark" content="Add New Assignment" placement="left">
@@ -221,6 +221,12 @@ export default {
           })
         })
     }
+    this.$notify({
+      title: 'Info!',
+      message: "Judges' detail is placed in the collapse below the title after requested and selected one specific judge.",
+      type: 'info',
+      offset: 100
+    })
   },
   watch: {
     coState: function name (newValue) {

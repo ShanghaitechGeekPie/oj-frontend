@@ -33,6 +33,7 @@ export default {
     flex-direction: column;
     margin-top: 20px;
     padding: 0 20px 0 20px;
+    min-width: 280px;
   }
   .title1 {
     font-size: 30px;

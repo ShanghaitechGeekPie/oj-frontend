@@ -23,7 +23,7 @@
         <i class="el-icon-menu"></i>
       </el-col>
       <el-col :span="15">
-        <router-link :to="{ path: `/instr/home/course/${this.$route.query.coUid}/assignment` }" class="sub-title">Assignment</router-link>
+        <router-link :to="{ path: `/instr/course/${this.$route.query.coUid}/assignment` }" class="sub-title">Assignments</router-link>
       </el-col>
     </el-row>
     <el-row class="row-half">
@@ -93,6 +93,7 @@ export default {
 <style scoped>
   .aside {
     padding: 0 20px 0 20px;
+    min-width: 280px;
   }
   .subtitle {
     font-size: 15px;

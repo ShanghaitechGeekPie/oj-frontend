@@ -2,7 +2,7 @@
   <div>
     <el-button @click="requestData" v-if="this.show" size="mini">Request</el-button>
     <el-dropdown v-else>
-      <span class="el-dropdown-link">Here<i class="el-icon-arrow-down el-icon--right"></i>
+      <span class="el-dropdown-link">Hover<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item v-for="(item, index) in Judges" v-bind:key="index" v-if="checkData(item)">

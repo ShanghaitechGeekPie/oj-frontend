@@ -87,6 +87,7 @@ export default {
   }
   .aside {
     padding: 0 20px 0 20px;
+    min-width: 280px;
   }
   .subtitle {
     font-size: 15px;
