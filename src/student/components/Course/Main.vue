@@ -149,7 +149,8 @@ export default {
       this.$router.push(`/course/${this.$route.params.course_code}/scoreboard/${row.name}`)
     },
     goToSU (row) {
-      this.$router.push(`/course/${this.$route.params.course_code}/submission/${row.name}`)
+      // this.$router.push(`/course/${this.$route.params.course_code}/submission/${row.name}`)
+      this.updateAss(row)
     },
     getCoState (data) {
       let that = this
