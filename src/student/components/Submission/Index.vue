@@ -92,7 +92,7 @@ export default {
       this.axios({
         method: 'GET',
         url: `${this.Api}/student/${this.getID}/course/${this.filterUid(this.$route.params.course_code, 'course')}/assignment/${this.filterUid(this.$route.params.ass_name, 'assignment')}/history/`
-      }).then(function (response) {
+      }).then((response) => {
         this.submission = this.getSubmission(response.data)
       }).catch((err) => {
         this.$message({
