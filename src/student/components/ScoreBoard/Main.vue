@@ -61,7 +61,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -75,7 +75,7 @@ export default {
   },
   created () {
     if (this.getAuth) {
-      this.axios.get(`${this.Api}/course/${this.getUid}/assignment/${this.getAssUid}/scores/`)
+      this.axios.get(`${this.Api}/course/${this.filterUid(this.$route.params.course_code, 'course')}/assignment/${this.filterUid(this.$route.params.ass_name, 'assignment')}/scores/`)
         .then((response) => {
           this.scoreInfo = this.getSubmission(response.data)
           this.total = response.data.length
@@ -135,6 +135,19 @@ export default {
       })
       return result
     },
+    filterUid (code, cate) {
+      let uid = this.codeToUid({
+        code: code,
+        cate: cate
+      })
+      if (uid === '') {
+        this.$router.push({
+          name: 'notFound'
+        })
+      } else {
+        return uid
+      }
+    },
     formatUTC (utcdatetime) {
       let Tpos = utcdatetime.indexOf('T')
       let Zpos = utcdatetime.indexOf('Z')
@@ -151,12 +164,17 @@ export default {
       return `${days} ${hours}`
     }
   },
-  computed: mapState({
-    getAuth: state => state.isAuthorized,
-    getUid: state => state.coInfo.uid,
-    getAssUid: state => state.assignments.uid,
-    Api: state => state.api
-  })
+  computed: {
+    ...mapGetters([
+      'codeToUid'
+    ]),
+    ...mapState({
+      getAuth: state => state.isAuthorized,
+      getUid: state => state.coInfo.uid,
+      getAssUid: state => state.assignments.uid,
+      Api: state => state.api
+    })
+  }
 }
 </script>
 <style scoped>

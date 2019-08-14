@@ -81,13 +81,13 @@ const router = new Router({
       meta: { requiresStu: true }
     },
     {
-      path: '/home/course/:id/scoreboard/:ids',
+      path: '/course/:course_code/scoreboard/:ass_name',
       name: 'score',
       component: score,
       meta: { requiresAuth: true }
     },
     {
-      path: '/home/course/:course_code/submission/:ass_name',
+      path: '/course/:course_code/submission/:ass_name',
       name: 'submissionHistory',
       component: submission,
       meta: { requiresStu: true, requiresAuth: true }
@@ -99,7 +99,7 @@ const router = new Router({
       meta: { requiresStu: true }
     },
     {
-      path: '/home/course/:course_code',
+      path: '/course/:course_code',
       name: 'course',
       component: course,
       meta: { requiresStu: true, requiresAuth: true }

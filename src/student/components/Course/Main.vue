@@ -29,7 +29,7 @@
         </el-table-column>
         <el-table-column
           label="STATUS"
-          width="180">
+          width="150">
           <template slot-scope="scope">
             <el-button :style="colors(scope.row)" @click="updateAss(scope.row)" class="fake-href">
               {{ getScore(scope.row) }}
@@ -44,6 +44,18 @@
           prop="deadline"
           label="DUE">
         </el-table-column>
+          <el-table-column
+          label="SCOREBOARD">
+            <template slot-scope="scope">
+              <el-button @click="goToSB(scope.row)" size="small">check</el-button>
+            </template>
+          </el-table-column>
+          <el-table-column
+          label="SUBMISSION">
+            <template slot-scope="scope">
+              <el-button @click="goToSU(scope.row)" size="small">check</el-button>
+            </template>
+          </el-table-column>
         </el-table>
       </el-col>
     </el-row>
@@ -132,6 +144,12 @@ export default {
       } else {
         return `${row.score}/${row.overall_score}`
       }
+    },
+    goToSB (row) {
+      this.$router.push(`/course/${this.$route.params.course_code}/scoreboard/${row.name}`)
+    },
+    goToSU (row) {
+      this.$router.push(`/course/${this.$route.params.course_code}/submission/${row.name}`)
     },
     getCoState (data) {
       let that = this

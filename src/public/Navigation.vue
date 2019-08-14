@@ -90,14 +90,14 @@ export default {
     },
     backHome () {
       if (this.getBase.isStudent && !this.getBase.isInstructor) {
-        this.$router.push('/')
+        this.$router.push('/home')
       } else if (!this.getBase.isStudent && this.getBase.isInstructor) {
-        this.$router.push('/instr')
+        this.$router.push('/instr/home')
       } else {
         if (this.$route.path.includes('instr')) {
-          this.$router.push('/instr')
+          this.$router.push('/instr/home')
         } else {
-          this.$router.push('/')
+          this.$router.push('/home')
         }
       }
     },
