@@ -14,7 +14,10 @@ import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-// require('./mock.js') // todo:warning
+if (window.location.hostname === 'localhost') {
+  require('./mock.js')
+  document.title += ' [DEBUGGING]'
+}
 Vue.use(Vuex)
 Vue.prototype.axios = axios
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
