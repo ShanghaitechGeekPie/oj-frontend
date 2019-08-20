@@ -15,13 +15,13 @@
           <el-card class="cards">
             <el-row type="flex" justify="center" align="middle" class="card-row">
               <el-col :span="4">
-                <span class="sub-title">Name:</span>
+                <span class="sub-title-nonbutton">Name:</span>
               </el-col>
               <el-col :span="9">
                 <el-input class="shortInput" v-model="Info.name" :disabled="true"></el-input>
               </el-col>
               <el-col :span="4">
-                <span class="sub-title">Email:</span>
+                <span class="sub-title-nonbutton">Email:</span>
               </el-col>
               <el-col :span="9">
                 <el-input class="shortInput" v-model="Info.enroll_email" :disabled="true"></el-input>
@@ -81,7 +81,7 @@ export default {
   .cards {
     width: 700px;
   }
-  .sub-title {
+  .sub-title-nonbutton {
     font-size: 20px;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     float: right;

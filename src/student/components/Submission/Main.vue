@@ -65,6 +65,9 @@
             <el-table-column
               prop="delta"
               label="Delta">
+              <template slot-scope="scope">
+                <ScoreDelta :delta="scope.row.delta"></ScoreDelta>
+              </template>
             </el-table-column>
               <el-table-column
                 fixed="right"
@@ -82,8 +85,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import ScoreDelta from '../../../public/ScoreDelta'
 
 export default {
+  components: {
+    ScoreDelta
+  },
   data () {
     return {
       submission: [

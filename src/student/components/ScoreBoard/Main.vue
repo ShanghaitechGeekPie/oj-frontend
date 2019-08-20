@@ -35,12 +35,10 @@
           prop="submission_time"
           label="Submission Time">
         </el-table-column>
-          <el-table-column
+        <el-table-column
           label="Delta">
           <template slot-scope="scope">
-            <div :style=getDeltaStyle(scope.row.delta)>
-              <i :class=getArrow(scope.row.delta)></i><span v-text="getDeltaStr(scope.row.delta)"></span>
-            </div>
+            <ScoreDelta :delta="scope.row.delta"></ScoreDelta>
           </template>
         </el-table-column>
      </el-table>
@@ -62,8 +60,12 @@
 </template>
 <script>
 import { mapState, mapGetters } from 'vuex'
+import ScoreDelta from '../../../public/ScoreDelta'
 
 export default {
+  components: {
+    ScoreDelta
+  },
   data () {
     return {
       scoreInfo: [],
@@ -98,26 +100,6 @@ export default {
     },
     ranking (index) {
       return (this.currentPage - 1) * 20 + index + 1
-    },
-    getArrow (delta) {
-      if (delta > 0) {
-        return 'el-icon-caret-top'
-      } else if (delta < 0) {
-        return 'el-icon-caret-bottom'
-      }
-    },
-    getDeltaStr (delta) {
-      return delta === 0 ? '-' : Math.abs(delta)
-    },
-    getDeltaStyle (delta) {
-      let textColor = '#444'
-      if (delta > 0) {
-        textColor = '#20d63b'
-      } else if (delta < 0) {
-        textColor = '#f71707'
-      }
-      return `margin-left: ${delta === 0 ? '.1rem' : '0'}; color:${textColor}
-      }`
     },
     getSubmission (data) {
       let that = this
