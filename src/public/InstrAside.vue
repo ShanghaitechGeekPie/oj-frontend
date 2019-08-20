@@ -120,6 +120,10 @@ export default {
     background-color: #bf6970;
     text-align: center;
     transition: all 0.2s;
+    /* temporarily fix navbutton width */
+    /* consider set background to its parent? */
+    display: inline-block;
+    width: 100%;
   }
   .sub-title:hover{
     background-color: #b5555d;
