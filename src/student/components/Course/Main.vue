@@ -118,18 +118,18 @@ export default {
       window.location.href = scope.row.descr_link
     },
     colors (situation) { // don't use state as the variable name
-      let grade = situation.score / situation.overall_score
+      const grade = situation.score / situation.overall_score
+      let bgColor = 'black'
       if (grade >= 0.7) {
-        return 'background-color: #67C23A;color: white;width: 100px;'
+        bgColor = '#67C23A'
       } else if (grade >= 0.5) {
-        return 'background-color: #E6A23C;color: white;width: 100px;'
+        bgColor = '#E6A23C'
       } else if (grade >= 0.2) {
-        return 'background-color: #F56C6C;color: white;width: 100px;'
+        bgColor = '#F56C6C'
       } else if (grade === null || grade === undefined) {
-        return 'background-color: #909399;color: white;width: 100px;'
-      } else {
-        return 'background-color: black;color: white;width: 100px;'
+        bgColor = '#909399'
       }
+      return `background-color:${bgColor}; color:white; width:100px;`
     },
     showPending () {
       this.show = !this.show
