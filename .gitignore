@@ -17,7 +17,4 @@ package-lock.json
 *.njsproj
 *.sln
 
-src/instructor/mock\.js
-
-src/student/mock\.js
 /src/instructor/router/
