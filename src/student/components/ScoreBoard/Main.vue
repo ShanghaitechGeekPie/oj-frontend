@@ -77,7 +77,7 @@ export default {
   },
   created () {
     if (this.getAuth) {
-      this.axios.get(`${this.Api}/course/${this.filterUid(this.$route.params.course_code, 'course')}/assignment/${this.filterUid(this.$route.params.ass_name, 'assignment')}/scores/`)
+      this.axios.get(`${this.Api}/student/${this.getId}/course/${this.filterUid(this.$route.params.course_code, 'course')}/assignment/${this.filterUid(this.$route.params.ass_name, 'assignment')}/scores/`)
         .then((response) => {
           this.scoreInfo = this.getSubmission(response.data)
           this.total = response.data.length
@@ -153,7 +153,7 @@ export default {
     ...mapState({
       getAuth: state => state.isAuthorized,
       getUid: state => state.coInfo.uid,
-      getAssUid: state => state.assignments.uid,
+      getId: state => state.baseInfo.uid,
       Api: state => state.api
     })
   }
