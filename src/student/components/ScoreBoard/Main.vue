@@ -1,8 +1,11 @@
 <template>
   <div>
     <el-row class="row-main">
-      <el-col>
+      <el-col :span="4" offset="10">
         <span class="title-main">ScoreBoard</span>
+      </el-col>
+      <el-col :span="10">
+        <el-button class="back-button" @click="goback">back</el-button>
       </el-col>
     </el-row>
     <el-row>
@@ -48,6 +51,7 @@
       <el-col>
         <el-pagination
         background
+        class="margin-top"
         :page-size="pagesize"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -92,6 +96,9 @@ export default {
     }
   },
   methods: {
+    goback () {
+      this.$router.go(-1)
+    },
     handleCurrentChange (val) {
       this.currentPage = val
     },
@@ -169,6 +176,15 @@ export default {
   }
   .table-only {
     width: 100%;
-    background-color: #606266;
+    border: 2px solid dimgray;
+    box-shadow: 4px 4px darkgray ;
+  }
+  .back-button {
+    float: right;
+    background-color: #a40006;
+    color: white;
+  }
+  .margin-top {
+    margin-top: 20px;
   }
 </style>
