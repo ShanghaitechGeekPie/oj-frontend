@@ -1,8 +1,11 @@
 <template>
   <div>
     <el-row class="row-main">
-      <el-col>
+      <el-col :span="4" offset="10">
         <span class="title-main">ScoreBoard</span>
+      </el-col>
+      <el-col :span="10">
+        <el-button class="back-button" @click="goback">back</el-button>
       </el-col>
     </el-row>
     <el-row>
@@ -48,6 +51,7 @@
       <el-col>
         <el-pagination
         background
+        class="margin-top"
         :page-size="pagesize"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -77,7 +81,7 @@ export default {
   },
   created () {
     if (this.getAuth) {
-      this.axios.get(`${this.Api}/course/${this.filterUid(this.$route.params.course_code, 'course')}/assignment/${this.filterUid(this.$route.params.ass_name, 'assignment')}/scores/`)
+      this.axios.get(`${this.Api}/student/${this.getId}/course/${this.filterUid(this.$route.params.course_code, 'course')}/assignment/${this.filterUid(this.$route.params.ass_name, 'assignment')}/scores/`)
         .then((response) => {
           this.scoreInfo = this.getSubmission(response.data)
           this.total = response.data.length
@@ -92,6 +96,9 @@ export default {
     }
   },
   methods: {
+    goback () {
+      this.$router.go(-1)
+    },
     handleCurrentChange (val) {
       this.currentPage = val
     },
@@ -153,7 +160,7 @@ export default {
     ...mapState({
       getAuth: state => state.isAuthorized,
       getUid: state => state.coInfo.uid,
-      getAssUid: state => state.assignments.uid,
+      getId: state => state.baseInfo.uid,
       Api: state => state.api
     })
   }
@@ -169,6 +176,15 @@ export default {
   }
   .table-only {
     width: 100%;
-    background-color: #606266;
+    border: 2px solid dimgray;
+    box-shadow: 4px 4px darkgray ;
+  }
+  .back-button {
+    float: right;
+    background-color: #a40006;
+    color: white;
+  }
+  .margin-top {
+    margin-top: 20px;
   }
 </style>
