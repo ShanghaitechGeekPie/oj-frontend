@@ -18,3 +18,5 @@ package-lock.json
 *.sln
 
 /src/instructor/router/
+
+src/instructor/mock.js
