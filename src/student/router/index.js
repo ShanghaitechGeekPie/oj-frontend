@@ -10,7 +10,6 @@ import instructorProfile from '../../public/InstructorProfile'
 import unAuth from '../../public/Unauthorized'
 import store from '../store'
 import forbidden from '../../public/Forbidden'
-import changePro from '../../public/ChangeProfile'
 import unInit from '../../public/NoRole'
 import addAssignment from '../../instructor/components/AddAssignment/Index'
 import courses from '../../instructor/components/CourseList/Index'
@@ -121,18 +120,6 @@ const router = new Router({
       name: 'instrProfile',
       component: instructorProfile,
       meta: { requiresAuth: true }
-    },
-    {
-      path: '/changeProfile',
-      name: 'changeProfile',
-      component: changePro,
-      meta: { requiresAuth: true, requiresStu: true }
-    },
-    {
-      path: '/instr/changeProfile',
-      name: 'InstrChangeProfile',
-      component: changePro,
-      meta: { requiresAuth: true, requiresInstr: true }
     },
     {
       path: '/error',

@@ -16,27 +16,50 @@
           <el-card class="cards">
             <el-row type="flex" justify="center" align="middle" class="card-row">
               <el-col :span="4">
-                <span class="sub-title-nonbutton">Name:</span>
+                <span class="sub-title">Name:</span>
               </el-col>
               <el-col :span="8">
-                <el-input class="shortInput" v-model="Info.name" :disabled="true"></el-input>
+                <el-input class="shortInput" v-model="Info.name"></el-input>
               </el-col>
               <el-col :span="5">
-                <span class="sub-title-nonbutton">Student ID:</span>
+                <span class="sub-title">Student ID:</span>
               </el-col>
               <el-col :span="5">
-                <el-input class="shortInput" v-model="Info.student_id" :disabled="true"></el-input>
+                <el-input class="shortInput" v-model="Info.student_id" :disabled="this.getState"></el-input>
               </el-col>
               <el-col :span="2"></el-col>
             </el-row>
             <el-row type="flex" align="middle" class="card-row2">
               <el-col :span="4">
-                <span class="sub-title-nonbutton">Email:</span>
+                <span class="sub-title">Email:</span>
               </el-col>
               <el-col :span="18">
-                <el-input class="shortInput" v-model="Info.email" :disabled="true"></el-input>
+                <el-input class="shortInput" v-model="Info.email"></el-input>
               </el-col>
               <el-col :span="2"></el-col>
+            </el-row>
+            <el-row type="flex" align="middle" class="card-row2" v-if="!this.getState">
+              <el-col :span="4">
+                <span class="sub-title">Nickname:</span>
+              </el-col>
+              <el-col :span="18">
+                <el-input class="shortInput" v-model="Info.nickname"></el-input>
+              </el-col>
+              <el-col :span="2"></el-col>
+            </el-row>
+            <el-row type="flex" align="middle" class="card-row2">
+              <el-col :span="4">
+                <span class="sub-title">Public Key:</span>
+              </el-col>
+              <el-col :span="18">
+                <el-input type="textarea" class="shortInput" v-model="Info.rsa_pub_key"></el-input>
+              </el-col>
+              <el-col :span="2"></el-col>
+            </el-row>
+            <el-row type="flex" align="left" class="card-row2">
+              <el-col>
+                <el-button class="button-back" @click="updateInfo">submit</el-button>
+              </el-col>
             </el-row>
           </el-card>
         </el-col>
@@ -58,21 +81,61 @@ export default {
         name: '王大锤',
         nickname: 'hammerwang',
         email: 'sjbdkjas@shanghaitech.edu.cn',
-        student_id: 0
+        student_id: 0,
+        rsa_pub_key: 'testkey'
       }
     }
   },
-  components: {
-    'v-na': na
-  },
-  computed: mapState({
-    getAuth: state => state.isAuthorized,
-    getID: state => state.baseInfo.uid,
-    getState: state => state.baseInfo.isInstructor,
-    getStu: state => state.baseInfo.isStudent,
-    Api: state => state.api
-  }),
   methods: {
+    updateInfo () {
+      if (this.getAuth) {
+        if (this.getStu && this.getState) {
+          if (this.$route.path.includes('instr')) {
+            this.axiosInstrPost()
+          } else {
+            this.axiosStuPost()
+          }
+        } else {
+          if (this.getState) {
+            this.axiosInstrPost()
+          } else {
+            this.axiosStuPost()
+          }
+        }
+      }
+    },
+    axiosInstrPost () {
+      this.axios({
+        method: 'post',
+        url: `${this.Api}/instructor/${this.getID}`,
+        data: this.Info,
+        headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
+      }).then((response) => {
+        alert('submit!')
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
+      })
+    },
+    axiosStuPost () {
+      this.axios({
+        method: 'post',
+        url: `${this.Api}/student/${this.getID}`,
+        data: this.Info,
+        headers: {'X-CSRFToken': this.$cookies.get('csrftoken')}
+      }).then((response) => {
+        alert('submit!')
+      }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err,
+          showClose: true
+        })
+      })
+    },
     axiosInstr () {
       this.axios({
         method: 'GET',
@@ -102,6 +165,16 @@ export default {
       })
     }
   },
+  components: {
+    'v-na': na
+  },
+  computed: mapState({
+    getAuth: state => state.isAuthorized,
+    getID: state => state.baseInfo.uid,
+    getState: state => state.baseInfo.isInstructor,
+    getStu: state => state.baseInfo.isStudent,
+    Api: state => state.api
+  }),
   created () {
     if (this.getAuth) {
       if (this.getStu && this.getState) {
@@ -134,7 +207,7 @@ export default {
     font-size: 40px;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   }
-  .sub-title-nonbutton {
+  .sub-title {
     font-size: 20px;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     float: right;
@@ -148,5 +221,9 @@ export default {
   }
   .rows {
     margin-top: 2%;
+  }
+  .button-back {
+    background-color: #A40004;
+    color: white;
   }
 </style>

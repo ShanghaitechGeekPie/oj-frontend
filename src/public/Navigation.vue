@@ -25,9 +25,8 @@
                   <el-menu-item index="/" v-if="this.checkRoleInstr">Student Version</el-menu-item>
                   <el-menu-item index="/instr" v-if="this.checkRoleStu">Instructor Version</el-menu-item>
                   <el-menu-item :index=getProfile() v-if="!profilePage">Profile</el-menu-item>
-                  <el-menu-item index="/" v-else>Dashboard</el-menu-item>
+                  <el-menu-item :index=getDashboard() v-else>Dashboard</el-menu-item>
                   <el-menu-item index="/" v-if="profilePage" @click="goBack">Go back</el-menu-item>
-                  <el-menu-item :index=getProChange()>Change profile</el-menu-item>
                   <el-menu-item index="/" @click="logout">Logout</el-menu-item>
                 </el-submenu>
               </el-menu>
@@ -56,7 +55,7 @@ export default {
     Api: state => state.api,
     getLogout: state => state.logout_url,
     profilePage () {
-      return (this.$route.name === 'instrProfile') || (this.$route.name === 'profile' || this.$route.name === 'changeProfile')
+      return (this.$route.name === 'inProfile') || (this.$route.name === 'profile' || this.$route.name === 'changeProfile')
     },
     checkRoleStu () {
       return this.getBase.isInstructor && this.getBase.isStudent && (this.$route.name === 'homeStudent' || this.$route.name === 'indexStudent')
@@ -71,18 +70,18 @@ export default {
       this.$cookies.remove('sessionid')
       window.location.href = `${this.getLogout}`
     },
+    getDashboard () {
+      if (this.$route.path.includes('instr')) {
+        return '/instr'
+      } else {
+        return '/'
+      }
+    },
     getProfile () {
       if (this.$route.path.includes('instr')) {
         return '/instr/profile'
       } else {
         return '/profile'
-      }
-    },
-    getProChange () {
-      if (this.$route.path.includes('instr')) {
-        return '/instr/changeProfile'
-      } else {
-        return '/changeProfile'
       }
     },
     goBack () {
