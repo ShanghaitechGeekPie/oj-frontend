@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row class="row-main">
-      <el-col :span="4" offset="10">
+      <el-col :span="4" offset=10>
         <span class="title-main">ScoreBoard</span>
       </el-col>
       <el-col :span="10">
@@ -33,6 +33,10 @@
         <el-table-column
           prop="overall_score"
           label="Overall Score">
+          </el-table-column>
+          <el-table-column
+          prop="submission_count"
+          label="Submission times">
           </el-table-column>
           <el-table-column
           prop="submission_time"

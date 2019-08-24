@@ -32,6 +32,10 @@
           label="Overall Score">
           </el-table-column>
           <el-table-column
+          prop="submission_count"
+          label="Submission times">
+          </el-table-column>
+          <el-table-column
           prop="submission_time"
           label="Submission Time">
         </el-table-column>
