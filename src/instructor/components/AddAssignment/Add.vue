@@ -71,6 +71,7 @@
 <script>
 import { mapState } from 'vuex'
 import transform from './TransformJudge'
+import Formatter from '../../../public/formateDate'
 
 export default {
   data () {
@@ -141,9 +142,10 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.assignmentInfo.release_date = this.formateDate(this.assignmentInfo.tem_time[0])
-          this.assignmentInfo.deadline = this.formateDate(this.assignmentInfo.tem_time[1])
+          this.assignmentInfo.release_date = Formatter(this.assignmentInfo.tem_time[0])
+          this.assignmentInfo.deadline = Formatter(this.assignmentInfo.tem_time[1])
           this.$store.commit('updateAss', this.assignmentInfo)
+          console.log(this.assignmentInfo.tem_time[0], typeof new Date())
           if (this.getAuth) {
             this.axios({
               method: 'post',
@@ -168,29 +170,6 @@ export default {
           return false
         }
       })
-    },
-    formateDate (time) {
-      let Hours = time.toLocaleTimeString()
-      if (Hours[0] === '上') {
-        Hours = Hours.replace(/上午/, '').length === 7 ? '0' + Hours.replace(/上午/, '') : Hours.replace(/上午/, '')
-      } else {
-        Hours = Hours.replace(/下午[0-9]+:/, (Hours) => {
-          return `${Number(Hours.slice(Hours.search(/午/) + 1, Hours.search(/:/))) + 12}:`
-        })
-      }
-      let date = ''
-      time.toLocaleDateString().split('/').map((item, index) => {
-        if (index === 0) {
-          date += item
-        } else {
-          if (item.length === 1) {
-            date += '-0' + item
-          } else {
-            date += '-' + item
-          }
-        }
-      })
-      return `${date}T${Hours}+08:00`
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
