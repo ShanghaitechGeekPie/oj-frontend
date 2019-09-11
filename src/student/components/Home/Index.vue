@@ -61,6 +61,13 @@ export default {
         })
       })
     }
+  },
+  watch: {
+    getAuth (newValue) {
+      if (newValue) {
+        window.location.reload()
+      }
+    }
   }
 }
 </script>

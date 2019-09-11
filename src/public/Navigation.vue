@@ -111,9 +111,12 @@ export default {
             'Access-Control-Allow-Headers': 'x-requested-with,content-type'
           }
         }).then((response) => {
+          if (window.location.hostname === 'localhost') {
+            window.location.reload()
+          } else {
+            window.location.href = response.data.login_url
+          }
           this.$store.commit('login', response.data.logout_url)
-          window.location.href = response.data.login_url // todo: warning
-          // window.location.reload()
         }).catch((error) => {
           this.$message({
             type: 'error',
@@ -126,7 +129,11 @@ export default {
   },
   created () {
     let that = this
-    this.$store.commit('updateApi', 'https://' + location.hostname + '/api') // todo:warning  'https://' + location.hostname + '/api'
+    if (window.location.hostname === 'localhost') {
+      this.$store.commit('updateApi', location.hostname)
+    } else {
+      this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
+    }
     const loading = this.$loading({
       lock: true,
       text: 'Initializing!',

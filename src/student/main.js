@@ -24,15 +24,6 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 axios.interceptors.response.use(function (response) {
   return response
 }, function (error) {
-  /*
-  if (error.response.status === 403) {
-    if (error.response.headers.refresh_url === undefined) {
-      router.push('/error')
-    } else {
-      window.location.href = error.response.headers.refresh_url
-    }
-  }
-  */
   return Promise.reject(error)
 })
 /* eslint-disable no-new */
