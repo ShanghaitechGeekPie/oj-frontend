@@ -112,12 +112,9 @@ export default {
           }
         }).then((response) => {
           if (window.location.hostname === '1localhost') {
-            console.log('inside login localhost')
             window.location.reload()
           } else {
-            console.log('above redirection')
             window.location.href = response.data.login_url
-            console.log('below redirection')
           }
           this.$store.commit('login', response.data.logout_url)
         }).catch((error) => {
@@ -133,12 +130,9 @@ export default {
   created () {
     let that = this
     if (window.location.hostname === '1localhost') {
-      console.log('inside created localhost')
       this.$store.commit('updateApi', location.hostname)
     } else {
-      console.log('above upload production api')
       this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
-      console.log('below upload production api')
     }
     const loading = this.$loading({
       lock: true,
@@ -204,13 +198,15 @@ export default {
         this.$notify({
           title: 'Failure!',
           message: 'Lost synchronism with potato server!',
-          type: 'error'
+          type: 'error',
+          offset: 50
         })
         setTimeout(() => {
           this.$notify({
             title: 'Info!',
             message: 'Please login again!',
-            type: 'info'
+            type: 'info',
+            offset: 50
           })
           setTimeout(() => {
             this.$store.commit('logOut')
