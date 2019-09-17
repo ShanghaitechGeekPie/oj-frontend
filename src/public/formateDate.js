@@ -1,26 +1,27 @@
-function formateDate (time) {
-  // todo:截取日期数字前的上下午表示各种语言文字
-  let Hours = time.toLocaleTimeString().replace(/AM/, '上午').replace(/PM/, '下午')
-  if (Hours[0] === '上') {
-    Hours = Hours.replace(/上午/, '').length === 7 ? '0' + Hours.replace(/上午/, '') : Hours.replace(/上午/, '')
-  } else {
-    Hours = Hours.replace(/下午[0-9]+:/, (Hours) => {
-      return `${Number(Hours.slice(Hours.search(/午/) + 1, Hours.search(/:/))) + 12}:`
-    })
-  }
-  let date = ''
-  time.toLocaleDateString().split('/').map((item, index) => {
-    if (index === 0) {
-      date += item
-    } else {
-      if (item.length === 1) {
-        date += '-0' + item
-      } else {
-        date += '-' + item
-      }
-    }
-  })
-  return `${date}T${Hours}+08:00`
+function formateDate (time, ISOformat) {
+  const pad = n => n<10 ? '0'+n : n
+  const sgn = n => n<0 ? '-' : '+'
+  const useISO = ISOformat || false
+
+  const tz = time.getTimezoneOffset(),
+        tzH = parseInt(Math.abs(tz/60)),
+        tzM = Math.abs(tz%60)
+
+  const YYYY = useISO ? time.getUTCFullYear() : time.getFullYear(),
+        MM = useISO ? time.getUTCMonth() : time.getMonth(),
+        DD = useISO ? time.getUTCDate() : time.getDate(),
+        hh = useISO ? time.getUTCHours() : time.getHours(),
+        mm = useISO ? time.getUTCMinutes() : time.getMinutes(),
+        ss = useISO ? time.getUTCSeconds() : time.getSeconds()
+
+  return YYYY+'-'
+  + pad(MM+1)+'-'
+  + pad(DD)+'T'
+  + pad(hh)+':'
+  + pad(mm)+':'
+  + pad(ss)+(
+    useISO?'Z':(sgn(-tz)+pad(tzH)+':'+pad(tzM))
+  )
 }
 
 export default formateDate
