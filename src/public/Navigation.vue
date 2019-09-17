@@ -113,9 +113,8 @@ export default {
         }).then((response) => {
           if (window.location.hostname === 'localhost') {
             window.location.reload()
-          } else {
-            window.location.href = response.data.login_url
           }
+          window.location.href = response.data.login_url
           this.$store.commit('login', response.data.logout_url)
         }).catch((error) => {
           this.$message({
@@ -129,10 +128,9 @@ export default {
   },
   created () {
     let that = this
+    this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
     if (window.location.hostname === 'localhost') {
       this.$store.commit('updateApi', location.hostname)
-    } else {
-      this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
     }
     const loading = this.$loading({
       lock: true,
