@@ -111,13 +111,14 @@ export default {
             'Access-Control-Allow-Headers': 'x-requested-with,content-type'
           }
         }).then((response) => {
-          if (window.location.hostname === 'localhost') {
+          if (window.location.hostname === '1localhost') {
             console.log('inside login localhost')
             window.location.reload()
+          } else {
+            console.log('above redirection')
+            window.location.href = response.data.login_url
+            console.log('below redirection')
           }
-          console.log('above redirection')
-          window.location.href = response.data.login_url
-          console.log('below redirection')
           this.$store.commit('login', response.data.logout_url)
         }).catch((error) => {
           this.$message({
@@ -131,12 +132,13 @@ export default {
   },
   created () {
     let that = this
-    console.log('above upload production api')
-    this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
-    console.log('below upload production api')
-    if (window.location.hostname === 'localhost') {
+    if (window.location.hostname === '1localhost') {
       console.log('inside created localhost')
       this.$store.commit('updateApi', location.hostname)
+    } else {
+      console.log('above upload production api')
+      this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
+      console.log('below upload production api')
     }
     const loading = this.$loading({
       lock: true,
@@ -150,7 +152,7 @@ export default {
         url: `https://${location.hostname}/api/user/role`
       }).then((response) => {
         loading.close()
-        this.$store.commit('login', null)
+        this.$store.commit('login', 'login')
         this.$notify({
           title: 'Success!',
           message: 'Connection with potato server established!',

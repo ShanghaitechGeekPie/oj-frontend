@@ -118,7 +118,7 @@ const returnInstructor = function () {
 
 const login = function () {
   return {
-    'login_url': Random.url(),
+    'login_url': 'https://www.baidu.com',
     'logout_url': 'https://www.baidu.com'
   }
 }

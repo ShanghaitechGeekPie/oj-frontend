@@ -66,8 +66,8 @@ const store = new Vuex.Store({
       state.assignments = value
     },
     login (state, url) {
-      state.isAuthorized = true
-      if (url === null) {
+      if (url === 'login') {
+        state.isAuthorized = true
       } else {
         state.logout_url = url
       }
