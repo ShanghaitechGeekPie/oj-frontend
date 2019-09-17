@@ -112,9 +112,12 @@ export default {
           }
         }).then((response) => {
           if (window.location.hostname === 'localhost') {
+            console.log('inside login localhost')
             window.location.reload()
           }
+          console.log('above redirection')
           window.location.href = response.data.login_url
+          console.log('below redirection')
           this.$store.commit('login', response.data.logout_url)
         }).catch((error) => {
           this.$message({
@@ -128,8 +131,11 @@ export default {
   },
   created () {
     let that = this
+    console.log('above upload production api')
     this.$store.commit('updateApi', 'https://' + location.hostname + '/api')
+    console.log('below upload production api')
     if (window.location.hostname === 'localhost') {
+      console.log('inside created localhost')
       this.$store.commit('updateApi', location.hostname)
     }
     const loading = this.$loading({
