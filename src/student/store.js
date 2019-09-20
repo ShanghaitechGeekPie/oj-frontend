@@ -38,7 +38,8 @@ const store = new Vuex.Store({
       isStudent: false
     },
     api: '',
-    logout_url: ''
+    logout_url: '',
+    show_tips: true
   },
   getters: {
     codeToUid: (state) => (value) => {
@@ -62,6 +63,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    notShow (state) {
+      state.show_tips = false
+    },
     updateAss (state, value) {
       state.assignments = value
     },
@@ -74,8 +78,11 @@ const store = new Vuex.Store({
     },
     logOut (state) {
       state.isAuthorized = false
-      state.baseInfo.isInstructor = false
-      state.baseInfo.isStudent = false
+      state.baseInfo = {
+        isInstructor: false,
+        isStudent: false,
+        uid: 'logout'
+      }
     },
     updateState (state, value) {
       state.baseInfo.uid = value.uid

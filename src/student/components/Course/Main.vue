@@ -129,7 +129,7 @@ export default {
       } else if (grade === null || grade === undefined) {
         bgColor = '#909399'
       }
-      return `background-color:${bgColor}; color:white; width:100px;`
+      return `background-color:${bgColor}; color:white; width:100px;opacity: 0.7;`
     },
     showPending () {
       this.show = !this.show
@@ -149,7 +149,6 @@ export default {
       this.$router.push(`/course/${this.$route.params.course_code}/scoreboard/${row.name}`)
     },
     goToSU (row) {
-      // this.$router.push(`/course/${this.$route.params.course_code}/submission/${row.name}`)
       this.updateAss(row)
     },
     getCoState (data) {

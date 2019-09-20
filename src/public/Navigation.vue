@@ -195,25 +195,28 @@ export default {
         }
       }).catch(() => {
         loading.close()
-        this.$notify({
-          title: 'Failure!',
-          message: 'Lost synchronism with potato server!',
-          type: 'error',
-          offset: 50
-        })
-        setTimeout(() => {
+        if (this.$store.state.baseInfo.uid === 'logout') {
+        } else {
           this.$notify({
-            title: 'Info!',
-            message: 'Please login again!',
-            type: 'info',
+            title: 'Failure!',
+            message: 'Lost synchronism with potato server!',
+            type: 'error',
             offset: 50
           })
+          this.$store.commit('logOut')
+          this.$cookies.remove('sessionid')
           setTimeout(() => {
-            this.$store.commit('logOut')
-            this.$cookies.remove('sessionid')
-            this.$router.push('/')
-          }, 3000)
-        }, 1000)
+            this.$notify({
+              title: 'Info!',
+              message: 'Please login again!',
+              type: 'info',
+              offset: 50
+            })
+            setTimeout(() => {
+              this.$router.push('/')
+            }, 3000)
+          }, 1000)
+        }
       })
     }, 1000)
   }

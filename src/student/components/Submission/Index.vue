@@ -103,12 +103,15 @@ export default {
       })
     }
     this.assignmentDetail = this.$store.state.assignments
-    this.$notify({
-      title: 'Info!',
-      message: 'Tip the check button to switch the outputs of different submissions.',
-      type: 'info',
-      offset: 50
-    })
+    if (this.$store.state.show_tips) {
+      this.$notify({
+        title: 'Info!',
+        message: 'Tip the check button to switch the outputs of different submissions.',
+        type: 'info',
+        offset: 50
+      })
+      this.$store.commit('notShow')
+    }
   },
   computed: {
     ...mapGetters([
