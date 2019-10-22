@@ -243,7 +243,6 @@ Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/instructor\/[-0-9a-zA-Z]+/, 'ge
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-a-zA-Z0-9]+\/queue/, 'get', returnPendingAssignment())
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/instructor/, 'get', returnInstructors)
 Mock.mock(/[-0-9a-zA-Z]+\/student\/[-0-9a-zA-Z]+/, 'post', 'success')
-Mock.mock(/[-0-9a-zA-Z/:]+\/user\/login\/oauth\/param/, 'get', login)
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+\/judge/, 'post', 'success')
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+\/judge\/[-0-9a-zA-Z]+/, 'get', returnJudgeInfo)
 Mock.mock(/[-0-9a-zA-Z]+\/course\/[-0-9a-zA-Z]+\/assignment\/[-0-9a-zA-Z]+\/judge/, 'get', returnJudges2)

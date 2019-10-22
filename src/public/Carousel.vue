@@ -35,7 +35,27 @@ export default {
         },
         {
           id: 5,
-          img: require('../assets/timg-6.jpg')
+          img: require('../assets/new1.png')
+        },
+        {
+          id: 6,
+          img: require('../assets/new2.png')
+        },
+        {
+          id: 7,
+          img: require('../assets/new3.png')
+        },
+        {
+          id: 8,
+          img: require('../assets/new4.png')
+        },
+        {
+          id: 9,
+          img: require('../assets/new5.png')
+        },
+        {
+          id: 10,
+          img: require('../assets/new6.png')
         }
       ]
     }

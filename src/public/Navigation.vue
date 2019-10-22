@@ -2,12 +2,15 @@
  <div class="line">
    <el-row type="flex" class="row-chicken" justify="space-between" align="middle">
           <el-col style="width: auto">
-            <el-row type="flex" justify="center" align="middle" :gutter="20">
-              <el-col type="flex" justify="center" align="middle">
-                <img v-bind:src="img" class="img-logo" @click="this.backHome">
+            <el-row type="flex" justify="center" align="middle" :gutter="14">
+              <el-col :col="4" type="flex" justify="center" align="middle">
+                <img v-bind:src="piegon" class="img-piegon" @click="this.backHome">
               </el-col>
-              <el-col>
-                <span class="text-logo">Online Judge</span>
+              <el-col :col="2">
+                <img v-bind:src="gang" class="img-gang" @click="this.backHome">
+              </el-col>
+              <el-col :col="4" type="flex" justify="center" align="middle">
+                <img v-bind:src="img" class="img-logo" @click="this.backHome">
               </el-col>
             </el-row>
           </el-col>
@@ -24,9 +27,9 @@
                   <template slot="title">Account</template>
                   <el-menu-item index="/" v-if="this.checkRoleInstr">Student Version</el-menu-item>
                   <el-menu-item index="/instr" v-if="this.checkRoleStu">Instructor Version</el-menu-item>
-                  <el-menu-item :index=getProfile() v-if="!profilePage">Profile</el-menu-item>
+                  <el-menu-item :index=getProfile() v-if="!this.profilePage">Profile</el-menu-item>
                   <el-menu-item :index=getDashboard() v-else>Dashboard</el-menu-item>
-                  <el-menu-item index="/" v-if="profilePage" @click="goBack">Go back</el-menu-item>
+                  <el-menu-item index="/" v-if="this.profilePage" @click="goBack">Go back</el-menu-item>
                   <el-menu-item index="/" @click="logout">Logout</el-menu-item>
                 </el-submenu>
               </el-menu>
@@ -44,7 +47,9 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      img: require('../assets/logo.png')
+      img: require('../assets/logo.png'),
+      piegon: require('../assets/piegon.jpg'),
+      gang: require('../assets/gang.jpg')
     }
   },
   computed: mapState({
@@ -232,11 +237,16 @@ export default {
     padding:0 1rem;
   }
   .img-logo {
-    width: 100%;
-    height: 100% !important;
+    width: 143px !important;
+    height: 35px !important;
   }
-  .text-logo {
-    color: white;
+  .img-piegon {
+    height: 45px !important;
+  }
+  .img-gang {
+    height: 45px !important;
+    width: 5px !important;
+    margin: 0 10px 0 10px;
   }
   .submenu {
     float: right;
