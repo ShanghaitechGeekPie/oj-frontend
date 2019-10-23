@@ -245,7 +245,7 @@ export default {
   }
   .img-gang {
     height: 45px !important;
-    width: 5px !important;
+    width: 2px !important;
     margin: 0 10px 0 10px;
   }
   .submenu {
