@@ -50,7 +50,7 @@
               sortable>
             </el-table-column>
             <el-table-column
-              prop="git_commit_id"
+              prop="commit_tag"
               label="Git ID">
             </el-table-column>
             <el-table-column
@@ -95,7 +95,7 @@ export default {
     return {
       submission: [
         {
-          git_commit_id: '',
+          commit_tag: '',
           course_uid: '',
           message: '',
           score: 0,

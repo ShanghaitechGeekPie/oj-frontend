@@ -73,8 +73,8 @@
         class="table-only"
         stripe>
         <el-table-column
-          prop="git_commit_id"
-          label="git commit id">
+          prop="commit_tag"
+          label="commit_tag">
         </el-table-column>
         <el-table-column
           prop="course_id"
@@ -104,7 +104,7 @@ export default {
       },
       show: false,
       pendingList: [{
-        git_commit_id: '',
+        commit_tag: '',
         course_id: '',
         submission_time: 0,
         submitter: ''

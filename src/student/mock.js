@@ -52,7 +52,7 @@ const returnSubmissionHistory = function () {
   let submissionHistorys = []
   for (let i = 0; i <= 7; i++) {
     let submissionHistory = {
-      'git_commit_id': Random.word(25, 40),
+      'commit_tag': Random.word(25, 40),
       'course_uid': Random.word(25, 40),
       'message': Random.sentence(30, 100),
       'score': Random.natural(10, 100),
@@ -86,7 +86,7 @@ const returnPendingAssignment = function () {
   for (let i = 0; i <= 12; i++) {
     let list = {
       'submitter': Random.name(),
-      'git_commit_id': Random.word(25, 40),
+      'commit_tag': Random.word(25, 40),
       'course_id': Random.word(25, 40),
       'submission_time': '2018-01-22T09:12:43.083Z'
     }
