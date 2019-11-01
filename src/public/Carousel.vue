@@ -1,8 +1,8 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="400px" class="carousel">
+  <el-carousel :interval="4000" type="card" height="400px">
     <el-carousel-item v-for="item in pictures" :key="item.id">
       <el-row>
-          <el-col :span="24" type="flex" align="middle" justify="center"><img :src="item.img"></el-col>
+          <el-col :span="24" type="flex" align="middle" justify="center"><img :src="item.img" class="carousel"></el-col>
         </el-row>
     </el-carousel-item>
   </el-carousel>
@@ -67,5 +67,6 @@ export default {
     -moz-box-shadow:-4px 4px 20px #333333;
     -webkit-box-shadow:-4px 4px 20px #333333;
     box-shadow:-4px 4px 20px #333333;
+    background: white;
   }
 </style>
