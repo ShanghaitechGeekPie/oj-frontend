@@ -125,7 +125,8 @@ export default {
     }
   },
   computed: mapState({
-    getUid: state => state.baseInfo.uid
+    getUid: state => state.baseInfo.uid,
+    Api: state => state.api
   })
 }
 </script>
