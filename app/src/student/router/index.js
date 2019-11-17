@@ -10,7 +10,6 @@ import instructorProfile from '../../public/InstructorProfile'
 import unAuth from '../../public/Unauthorized'
 import store from '../store'
 import forbidden from '../../public/Forbidden'
-import unInit from '../../public/NoRole'
 import addAssignment from '../../instructor/components/AddAssignment/Index'
 import courses from '../../instructor/components/CourseList/Index'
 import judge from '../../instructor/components/Judges/Index'
@@ -19,6 +18,7 @@ import judges from '../../instructor/components/CourseJudges/Index'
 import addcourse from '../../instructor/components/AddCourse/Index'
 import instrIndex from '../../instructor/components/Home/Index'
 import instrScoreBoard from '../../instructor/components/ScoreBoard/Index'
+// import unInit from '../../public/NoRole'
 
 Vue.use(Router)
 
@@ -131,11 +131,13 @@ const router = new Router({
       name: 'unauthorized',
       component: unAuth
     },
+    /*
     {
       path: '/uninitialized',
       name: 'uninitialized',
       component: unInit
     },
+     */
     {
       path: '*',
       name: 'notFound',
