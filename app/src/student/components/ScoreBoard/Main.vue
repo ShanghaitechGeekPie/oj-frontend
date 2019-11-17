@@ -19,31 +19,38 @@
         >
         <el-table-column
           type="index"
+          align="center"
           :index="ranking"
           width="50">
         </el-table-column>
         <el-table-column
           prop="nickname"
+          align="center"
           label="Nickname">
         </el-table-column>
         <el-table-column
           prop="score"
+          align="center"
           label="Score">
         </el-table-column>
         <el-table-column
           prop="overall_score"
+          align="center"
           label="Overall Score">
           </el-table-column>
           <el-table-column
           prop="submission_count"
+          align="center"
           label="Submission times">
           </el-table-column>
           <el-table-column
           prop="submission_time"
+          align="center"
           label="Submission Time">
         </el-table-column>
         <el-table-column
-          label="Delta">
+          label="Delta"
+          align="center">
           <template slot-scope="scope">
             <ScoreDelta :delta="scope.row.delta"></ScoreDelta>
           </template>

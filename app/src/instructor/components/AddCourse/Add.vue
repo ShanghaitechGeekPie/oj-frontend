@@ -42,6 +42,7 @@
                 fixed
                 prop="enroll_email"
                 label="Email"
+                align="center"
                 width="600">
               </el-table-column>
               <el-table-column>

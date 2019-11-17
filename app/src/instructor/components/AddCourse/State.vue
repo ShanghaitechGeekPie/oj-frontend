@@ -19,31 +19,37 @@
           >
           <el-table-column
             prop="name"
+            align="center"
             label="Name">
           </el-table-column>
           <el-table-column
             prop="code"
             label="Code"
+            align="center"
             >
           </el-table-column>
             <el-table-column
             prop="semester"
             label="Semester"
+            align="center"
             >
           </el-table-column>
             <el-table-column
             prop="year"
             label="Year"
+            align="center"
             >
           </el-table-column>
             <el-table-column
             prop="homepage"
             label="Homepage"
+            align="center"
             >
           </el-table-column>
             <el-table-column
             label="Instructors"
             width="120"
+            align="center"
              prop="instructor">
             <template slot-scope="scope">
               <el-dropdown>
@@ -59,6 +65,7 @@
           <el-table-column
             fixed="right"
             label="操作"
+            align="center"
             width="120">
             <template slot-scope="scope">
               <el-button

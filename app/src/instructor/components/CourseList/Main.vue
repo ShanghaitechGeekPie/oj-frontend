@@ -19,18 +19,22 @@
           stripe>
           <el-table-column
             prop="name"
+            align="center"
             label="name">
           </el-table-column>
           <el-table-column
             prop="enroll_email"
+            align="center"
             label="email">
           </el-table-column>
           <el-table-column
             prop="student_id"
+            align="center"
             label="student id">
           </el-table-column>
             <el-table-column
             fixed="right"
+            align="center"
             label="操作"
             width="120">
             <template slot-scope="scope">

@@ -22,13 +22,14 @@
         v-loading="loading"
         style="width: 100%"
         stripe>
-        <el-table-column label="NAME">
+        <el-table-column label="NAME" align="center">
           <template slot-scope="scope" >
             <el-button @click="getpath(scope)" class="name">{{ scope.row.name }}</el-button>
           </template>
         </el-table-column>
         <el-table-column
           label="STATUS"
+          align="center"
           width="150">
           <template slot-scope="scope">
             <el-button :style="colors(scope.row)" @click="updateAss(scope.row)" class="fake-href">
@@ -38,20 +39,24 @@
         </el-table-column>
         <el-table-column
           prop="release_date"
+          align="center"
           label="RELEASE">
         </el-table-column>
         <el-table-column
           prop="deadline"
+          align="center"
           label="DUE">
         </el-table-column>
           <el-table-column
-          label="SCOREBOARD">
+          label="SCOREBOARD"
+          align="center">
             <template slot-scope="scope">
               <el-button @click="goToSB(scope.row)" size="small">check</el-button>
             </template>
           </el-table-column>
           <el-table-column
-          label="SUBMISSION">
+          label="SUBMISSION"
+          align="center">
             <template slot-scope="scope">
               <el-button @click="goToSU(scope.row)" size="small">check</el-button>
             </template>

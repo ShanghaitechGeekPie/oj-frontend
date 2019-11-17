@@ -30,7 +30,7 @@
         <el-col>
           <el-card class="card-only">
             <el-row class="margins">
-              <el-col>
+              <el-col class="code-box">
                 <span class="code" v-html="renderMultipleLines(message)"></span>
               </el-col>
             </el-row>
@@ -47,23 +47,38 @@
             <el-table-column
               prop="submission_time"
               label="When"
+              align="center"
               sortable>
             </el-table-column>
             <el-table-column
               prop="commit_tag"
+              align="center"
               label="Git ID">
             </el-table-column>
             <el-table-column
               prop="score"
+              align="center"
               label="Score"
               sortable>
             </el-table-column>
             <el-table-column
               prop="overall_score"
+              align="center"
               label="Full score">
             </el-table-column>
+              <el-table-column
+              prop="status"
+              align="center"
+              label="Status">
+              <template slot-scope="scope" >
+                <el-button :style="getStatus(scope.row.status, 'style')">
+                  {{ getStatus(scope.row.status, 'title') }}
+                </el-button>
+              </template>
+              </el-table-column>
             <el-table-column
               prop="delta"
+              align="center"
               label="Delta">
               <template slot-scope="scope">
                 <ScoreDelta :delta="scope.row.delta"></ScoreDelta>
@@ -71,6 +86,7 @@
             </el-table-column>
               <el-table-column
                 fixed="right"
+                align="center"
                 label="Outputs">
                 <template slot-scope="scope">
                   <el-button @click="showMessage(scope.row)" size="small">check</el-button>
@@ -154,6 +170,37 @@ export default {
     },
     renderMultipleLines (content) {
       return content.trim().replace(/\n/g, '<br/>')
+    },
+    getStatus (statusCode, cate) {
+        if (cate === 'title') {
+            switch (statusCode) {
+              case 0:
+                  return 'PLACEHOLD';
+              case 1:
+                  return 'PENDING';
+              case 2:
+                  return 'JUDGED';
+              case 3:
+                  return 'INVALID';
+            }
+        } else {
+            let bgColor = '';
+            switch (statusCode) {
+              case 0:
+                  bgColor = 'black';
+                  break;
+              case 1:
+                  bgColor = '#E6A23C';
+                  break;
+              case 2:
+                  bgColor = '#67C23A';
+                  break;
+              case 3:
+                  bgColor = bgColor = '#F56C6C';
+                  break;
+            }
+            return `background-color:${bgColor}; color:white; width:110px;opacity: 0.7;`
+        }
     }
   },
   watch: {
@@ -174,6 +221,7 @@ export default {
     font-size: 15px;
     font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
     color: white;
+    min-height: 400px;
   }
   .row-main {
     margin-bottom: 10px;
@@ -193,5 +241,8 @@ export default {
   .code-two {
     font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
     font-size: 15px;
+  }
+  .code-box {
+    min-height: 150px;
   }
 </style>
