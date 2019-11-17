@@ -1,7 +1,7 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="400px">
+  <el-carousel :interval="4000" type="card" height="800px" indicator-position="none">
     <el-carousel-item v-for="item in pictures" :key="item.id">
-      <el-row>
+      <el-row class="outline-img">
           <el-col :span="24" type="flex" align="middle" justify="center"><img :src="item.img" class="carousel"></el-col>
         </el-row>
     </el-carousel-item>
@@ -20,10 +20,6 @@ export default {
         {
           id: 1,
           img: require('../assets/timg-2.jpg')
-        },
-        {
-          id: 2,
-          img: require('../assets/timg-3.jpg')
         },
         {
           id: 3,
@@ -64,9 +60,15 @@ export default {
 </script>
 <style>
   .carousel {
-    -moz-box-shadow:-4px 4px 20px #333333;
-    -webkit-box-shadow:-4px 4px 20px #333333;
-    box-shadow:-4px 4px 20px #333333;
+    margin: 10px;
+    -moz-box-shadow:0 0 30px #333333;
+    -webkit-box-shadow:0 0 30px #333333;
+    box-shadow:0 0 15px 5px #333333;
     background: white;
+    border-radius: 30px;
+    height: 450px
+  }
+  .outline-img {
+    padding: 5px;
   }
 </style>
