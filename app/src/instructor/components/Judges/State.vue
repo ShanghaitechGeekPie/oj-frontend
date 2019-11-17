@@ -20,21 +20,25 @@
           <el-table-column
             fixed
             prop="uid"
+            align="center"
             label="Uid"
             show-overflow-tooltip>
           </el-table-column>
           <el-table-column
             prop="host"
+            align="center"
             label="Host">
           </el-table-column>
           <el-table-column
             prop="max_job"
+            align="center"
             label="Max job"
             >
           </el-table-column>
           <el-table-column
             fixed="right"
             label="操作"
+            align="center"
             width="120">
             <template slot-scope="scope">
               <el-button
