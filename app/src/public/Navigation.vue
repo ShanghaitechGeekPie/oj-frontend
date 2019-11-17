@@ -141,9 +141,9 @@ export default {
     }
     const loading = this.$loading({
       lock: true,
-      text: 'Initializing.......',
+      text: 'Initializing!',
       spinner: 'el-icon-loading',
-      background: 'rgba(248, 248, 248, 0.7)'
+      background: 'rgba(0, 0, 0, 0.7)'
     })
     setTimeout(() => {
       this.axios({
