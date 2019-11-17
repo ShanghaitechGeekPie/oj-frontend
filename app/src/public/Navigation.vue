@@ -31,6 +31,7 @@
                   <el-menu-item :index=getDashboard() v-else>Dashboard</el-menu-item>
                   <el-menu-item index="/" v-if="this.profilePage" @click="goBack">Go back</el-menu-item>
                   <el-menu-item index="/" @click="logout">Logout</el-menu-item>
+                  <el-menu-item index="/" @click="goToAbout">About</el-menu-item>
                 </el-submenu>
               </el-menu>
           </el-col>
@@ -130,6 +131,9 @@ export default {
           })
         })
       }
+    },
+    goToAbout () {
+        this.$router.push('/about')
     }
   },
   created () {
@@ -141,7 +145,7 @@ export default {
     }
     const loading = this.$loading({
       lock: true,
-      text: 'Initializing.......',
+      text: 'Initializing...',
       spinner: 'el-icon-loading',
       background: 'rgba(248, 248, 248, 0.7)'
     })

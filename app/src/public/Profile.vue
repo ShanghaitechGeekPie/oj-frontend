@@ -18,10 +18,10 @@
               <el-col :span="4">
                 <span class="sub-title">Name:</span>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="6">
                 <el-input class="shortInput" v-model="Info.name"></el-input>
               </el-col>
-              <el-col :span="5">
+              <el-col :span="7">
                 <span class="sub-title">Student ID:</span>
               </el-col>
               <el-col :span="5">

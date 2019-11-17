@@ -18,6 +18,7 @@ import judges from '../../instructor/components/CourseJudges/Index'
 import addcourse from '../../instructor/components/AddCourse/Index'
 import instrIndex from '../../instructor/components/Home/Index'
 import instrScoreBoard from '../../instructor/components/ScoreBoard/Index'
+import about from '../../public/About'
 // import unInit from '../../public/NoRole'
 
 Vue.use(Router)
@@ -120,6 +121,11 @@ const router = new Router({
       name: 'instrProfile',
       component: instructorProfile,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: about,
     },
     {
       path: '/error',
