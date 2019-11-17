@@ -141,7 +141,7 @@ export default {
     }
     const loading = this.$loading({
       lock: true,
-      text: 'Initializing!',
+      text: 'Initializing.......',
       spinner: 'el-icon-loading',
       background: 'rgba(0, 0, 0, 0.7)'
     })

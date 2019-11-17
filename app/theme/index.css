@@ -314,7 +314,12 @@
 
 .el-icon-loading {
   -webkit-animation: rotating 2s linear infinite;
-  animation: rotating 2s linear infinite
+  animation: rotating 2s linear infinite;
+  display: none;
+}
+
+.el-icon-loading {
+  width: 50px;
 }
 
 .el-icon--right {
@@ -5852,7 +5857,7 @@
   margin-top: -21px;
   width: 100%;
   text-align: center;
-  position: absolute
+  position: relative;
 }
 
 .el-col-pull-0, .el-col-pull-1, .el-col-pull-10, .el-col-pull-11, .el-col-pull-13, .el-col-pull-14, .el-col-pull-15, .el-col-pull-16, .el-col-pull-17, .el-col-pull-18, .el-col-pull-19, .el-col-pull-2, .el-col-pull-20, .el-col-pull-21, .el-col-pull-22, .el-col-pull-23, .el-col-pull-24, .el-col-pull-3, .el-col-pull-4, .el-col-pull-5, .el-col-pull-6, .el-col-pull-7, .el-col-pull-8, .el-col-pull-9, .el-col-push-0, .el-col-push-1, .el-col-push-10, .el-col-push-11, .el-col-push-12, .el-col-push-13, .el-col-push-14, .el-col-push-15, .el-col-push-16, .el-col-push-17, .el-col-push-18, .el-col-push-19, .el-col-push-2, .el-col-push-20, .el-col-push-21, .el-col-push-22, .el-col-push-23, .el-col-push-24, .el-col-push-3, .el-col-push-4, .el-col-push-5, .el-col-push-6, .el-col-push-7, .el-col-push-8, .el-col-push-9, .el-row {
@@ -5861,20 +5866,20 @@
 
 .el-loading-spinner .el-loading-text {
   color: #A40006;
-  margin: 3px 0;
-  font-size: 14px
+  margin: 15px 0;
+  font-size: 25px
 }
 
 .el-loading-spinner .circular {
   height: 42px;
   width: 42px;
   -webkit-animation: loading-rotate 2s linear infinite;
-  animation: loading-rotate 2s linear infinite
+  animation: loading-rotate 2s linear infinite;
 }
 
 .el-loading-spinner .path {
-  -webkit-animation: loading-dash 1.5s ease-in-out infinite;
-  animation: loading-dash 1.5s ease-in-out infinite;
+  -webkit-animation: loading-dash 3s ease-in-out infinite;
+  animation: loading-dash 3s ease-in-out infinite;
   stroke-dasharray: 90, 150;
   stroke-dashoffset: 0;
   stroke-width: 2;
@@ -5883,7 +5888,12 @@
 }
 
 .el-loading-spinner i {
-  color: #A40006
+  background: url('../src/assets/piegon.jpg') no-repeat;
+  width: 120px !important;
+  height: 120px !important;
+  -moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+  color: #A40006;
 }
 
 @-webkit-keyframes loading-rotate {
