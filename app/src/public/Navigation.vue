@@ -169,10 +169,12 @@ export default {
             role: 1
           })
         } else if (!response.data.is_student && !response.data.is_instructor) {
+          // hide no role and set default to student identity
           that.$store.commit('updateState', {
             uid: response.data.uid,
-            role: 4
+            role: 1
           })
+          /*
           setTimeout(() => {
             this.$notify({
               title: 'Warning!',
@@ -184,6 +186,7 @@ export default {
               this.$router.push('/uninitialized')
             }, 3000)
           }, 1000)
+           */
         } else {
           setTimeout(() => {
             this.$notify({
