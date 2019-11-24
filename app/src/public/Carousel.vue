@@ -63,10 +63,10 @@ export default {
     margin: 10px;
     -moz-box-shadow:0 0 30px #8c939d;
     -webkit-box-shadow:0 0 30px #8c939d;
-    box-shadow:0 0 30px 1px #8c939d;
+    box-shadow:0 0 20px 1px #8c939d;
     background: white;
     border-radius: 30px;
-    height: 450px
+    height: 430px
   }
   .outline-img {
     padding: 5px;

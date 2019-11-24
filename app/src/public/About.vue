@@ -154,6 +154,6 @@ export default {
   font-size: 15px;
 }
 .img {
-  height: 200px;
+  height: 150px;
 }
 </style>

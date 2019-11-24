@@ -20,3 +20,4 @@ package-lock.json
 /src/instructor/router/
 
 src/instructor/mock.js
+/app/dist/
