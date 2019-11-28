@@ -71,8 +71,8 @@
               align="center"
               label="Status">
               <template slot-scope="scope" >
-                <el-button :style="getStatus(scope.row.status, 'style')">
-                  {{ getStatus(scope.row.status, 'title') }}
+                <el-button :style="getStatus(scope.row.state, 'style')">
+                  {{ getStatus(scope.row.state, 'title') }}
                 </el-button>
               </template>
               </el-table-column>
@@ -175,7 +175,7 @@ export default {
         if (cate === 'title') {
             switch (statusCode) {
               case 0:
-                  return 'PLACEHOLD';
+                  return 'NONE';
               case 1:
                   return 'PENDING';
               case 2:

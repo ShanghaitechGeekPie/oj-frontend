@@ -5853,7 +5853,7 @@
 }
 
 .el-loading-spinner {
-  top: 50%;
+  top: 40%;
   margin-top: -21px;
   width: 100%;
   text-align: center;
@@ -5888,12 +5888,40 @@
 }
 
 .el-loading-spinner i {
-  background: url('../src/assets/piegon.jpg') no-repeat;
-  width: 100px !important;
-  height: 100px !important;
+  background: transparent url('../src/assets/loading.png') no-repeat;
+  width: 150px !important;
+  height: 130px !important;
   -moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
   color: #A40006;
+  margin-left: 150px;
+  animation: h 2s infinite;
+}
+@media screen and (max-width: 768px) {
+  .el-loading-spinner i {
+    background: transparent url('../src/assets/loading.png') no-repeat;
+    width: 200px !important;
+    height: 150px !important;
+    -moz-border-radius: 50%;
+    color: #A40006;
+    margin-left: 150px;
+    animation: h 2s infinite;
+  }
+}
+@media screen and (max-width: 768px) {
+  .el-loading-spinner i {
+    height: 150px !important;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .el-loading-spinner i {
+    margin-left: 400px;
+    width: 300px !important;
+    height: 150px !important;
+  }
+}
+
+.el-icon-loading:before{
+    content: none!important;
 }
 
 @-webkit-keyframes loading-rotate {

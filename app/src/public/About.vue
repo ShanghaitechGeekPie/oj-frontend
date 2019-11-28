@@ -7,8 +7,8 @@
     </el-row>
     <el-row class="margin-top-small">
       <el-col type="flex" justify="center" align="middle">
-        <span class="sub-title">Geekpie are developing and maintaining this online judge system where students and TAs</span>
-        <br><span class="sub-title">work together to dealing with homework from the start to the end. </span>
+        <span class="about-sub-title">Geekpie are developing and maintaining this online judge system where students and TAs</span>
+        <br><span class="about-sub-title">work together to dealing with homework from the start to the end. </span>
       </el-col>
     </el-row>
     <el-row class="margin-top-big">
@@ -29,7 +29,7 @@
     </el-row>
     <el-row class="margin-top-small">
       <el-col type="flex" justify="center" align="middle">
-        <span class="sub-title">We’re working hard to build a supportive, welcoming place for Students and TAs alike</span>
+        <span class="about-sub-title">We’re working hard to build a supportive, welcoming place for Students and TAs alike</span>
         <br>
         <a href="https://github.com/ShanghaitechGeekPie"><span class="link">Learn more about us to offer help and advice</span></a>
       </el-col>
@@ -59,7 +59,7 @@
           <img v-bind:src="imgWang" class="img"/>
        </el-col>
       <el-col span="5" type="flex" justify="center" align="left">
-          <span class="table-title black">llk89</span><br><span class="table-title-sub">philipxyc</span>
+          <span class="table-title black">llk89</span><br><span class="table-title-sub"></span>
        </el-col>
         <el-col span="4" type="flex" justify="center" align="middle">
           <img v-bind:src="imgZhang" class="img"/>
@@ -132,8 +132,9 @@ export default {
   margin-top: 40px;
 }
 
-.sub-title {
+.about-sub-title {
   color: #596068;
+  background: white;
   font-size: 25px;
 }
 .link {
