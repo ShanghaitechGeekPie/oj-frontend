@@ -242,6 +242,7 @@ export default {
   .row-chicken {
     background-color: #A40006;
     padding:0 1rem;
+    min-height: 50px;
   }
   .img-logo {
     width: 143px !important;
