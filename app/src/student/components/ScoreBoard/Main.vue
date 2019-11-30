@@ -41,7 +41,7 @@
           <el-table-column
           prop="submission_count"
           align="center"
-          label="Submission times">
+          label="Total Submission">
           </el-table-column>
           <el-table-column
           prop="submission_time"
