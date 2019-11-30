@@ -26,6 +26,11 @@
           label="Nickname">
         </el-table-column>
         <el-table-column
+          prop="name"
+          align="center"
+          label="Name">
+        </el-table-column>
+        <el-table-column
           prop="score"
           align="center"
           label="Score">
@@ -56,7 +61,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col>
+      <el-col offset="8">
         <el-pagination
         background
         :page-size="pagesize"

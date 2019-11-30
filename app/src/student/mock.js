@@ -71,6 +71,7 @@ const returnAssignmentScoreboard = function () {
   for (let i = 0; i <= 200; i++) {
     let scores = {
       'nickname': Random.name(),
+      'name': Random.name(),
       'score': Random.natural(10, 100),
       'overall_score': Random.natural(100, 120),
       'submission_time': null,
