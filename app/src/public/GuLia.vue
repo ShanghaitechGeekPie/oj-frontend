@@ -1,15 +1,15 @@
 <template>
   <div class="fix-float-bottom">
-    <img id="img" @onmousemove="mouse_move_on_img()" @onmouseout="mouse_move_out_img()" v-bind:src="imgGif" width=100/>
-    <a href="#"><img id="cross" onclick="close_img()" onmousemove="mouse_move_on_cross()"
-                     onmouseout="mouse_move_out_cross()"
+    <img id="img" @mouseenter="mouse_move_on_img()" @mouseleave="mouse_move_out_img()" v-bind:src="imgGif" width=100/>
+    <a href="#"><img id="cross" @click="close_img()" @mouseenter="mouse_move_on_cross()"
+                     @mouseleave="mouse_move_out_cross()"
                      style="display:none;" v-bind:src="imgCross" width=20/></a>
-    <a href="#" id="com" onmousedown="communicate()" onmousemove="mouse_move_on_img()" onmouseout="mouse_move_out_img()"
+    <a href="#" id="com" @click="communicate()" @mouseenter="mouse_move_on_img()" @mouseleave="mouse_move_out_img()"
        style="display:none;">
 
     </a>
-    <div align="center" class="com" id="bubble" onmousemove="mouse_move_on_img()"
-         onmouseout="mouse_move_out_img()" style="display:none;">想和我交流吗？
+    <div align="center" class="com" id="bubble" @mouseenter="mouse_move_on_img()"
+         @mouseleave="mouse_move_out_img()" style="display:none;">想和我交流吗？
       <div class="arrow"></div>
     </div>
   </div>
