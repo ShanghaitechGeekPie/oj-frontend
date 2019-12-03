@@ -7,7 +7,7 @@
       <el-col style="width: auto">
         <el-row type="flex" justify="center" align="middle" :gutter="14">
           <el-col :col="4" type="flex" justify="center" align="middle">
-            <img v-bind:src="piegon" class="img-piegon" @click="this.backHome">
+            <img v-bind:src="piegon" class="img-piegon" @click="this.gulia">
           </el-col>
           <el-col :col="2">
             <img v-bind:src="gang" class="img-gang" @click="this.backHome">
@@ -97,11 +97,13 @@
             goBack() {
                 this.$router.go(-2)
             },
-            backHome() {
+            gulia() {
                 // avoid double gulia
                 if (!this.$route.path.includes('about')) {
                     this.showGulia = !this.showGulia
                 }
+            },
+            backHome() {
                 if (this.getBase.isStudent && !this.getBase.isInstructor) {
                     this.$router.push('/home')
                 } else if (!this.getBase.isStudent && this.getBase.isInstructor) {

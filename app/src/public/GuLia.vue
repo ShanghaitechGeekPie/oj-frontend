@@ -13,7 +13,7 @@
       </div>
       <form>
         <input type="text" class="mytxt" ref="inp" placeholder="和咕凉交流" @keyup.enter='communicate'>
-        <button ref="but" type="button" @click="communicate">talk</button>
+        <button ref="but" type="button"  class="gulia-button" @click="communicate">talk</button>
       </form>
     </div>
   </div>
@@ -311,5 +311,26 @@
     bottom: 20px;
     height: 550px;
     z-index: 9999;
+  }
+
+  .gulia-button {
+    margin-top: 4px;
+    width: 50px; /* 宽度 */
+    height: 30px; /* 高度 */
+    border-width: 0px; /* 边框宽度 */
+    border-radius: 3px; /* 边框半径 */
+    background: #870d0d; /* 背景颜色 */
+    cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+    outline: none; /* 不显示轮廓线 */
+    font-family: Microsoft YaHei; /* 设置字体 */
+    color: white; /* 字体颜色 */
+    font-size: 15px; /* 字体大小 */
+    left: 280px;
+    top: 450px;
+    position: absolute;
+  }
+
+  .gulia-button:hover { /* 鼠标移入按钮范围时改变颜色 */
+    background: #f56069;
   }
 </style>
