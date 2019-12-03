@@ -1,27 +1,40 @@
 <template>
   <div class="fix-float-bottom">
-    <img id="img" @onmousemove="mouse_move_on_img()" @onmouseout="mouse_move_out_img()" v-bind:src="imgGif" width=100/>
-    <a href="#"><img id="cross" onclick="close_img()" onmousemove="mouse_move_on_cross()"
-                     onmouseout="mouse_move_out_cross()"
-                     style="display:none;" v-bind:src="imgCross" width=20/></a>
-    <a href="#" id="com" onmousedown="communicate()" onmousemove="mouse_move_on_img()" onmouseout="mouse_move_out_img()"
-       style="display:none;">
-
-    </a>
-    <div align="center" class="com" id="bubble" onmousemove="mouse_move_on_img()"
-         onmouseout="mouse_move_out_img()" style="display:none;">想和我交流吗？
-      <div class="arrow"></div>
+    <div id="app">
+      <img v-bind:src="imgGif" @mouseenter="mouse_move_on_img" @mouseleave="mouse_move_out_img" ref="img" width=100/>
+      <a href="#"><img v-bind:src="imgCross" ref="cross" style="display:none;" @mouseenter="mouse_move_on_cross"
+                       @mouseleave="mouse_move_out_cross" @click="close_img" width=20/></a>
+      <a href="#" ref="com" style="display:none;" @click="communicate" @mouseenter="mouse_move_on_img"
+         @mouseleave="mouse_move_out_img">
+      </a>
+      <div class="com" ref="bubble" style="display:none;" @mouseenter="mouse_move_on_img"
+           @mouseleave="mouse_move_out_img" align="center">想和我交流吗？
+        <div class="arrow"></div>
+      </div>
+      <form>
+        <input type="text" class="mytxt" ref="inp" placeholder="和咕凉交流" @keyup.enter='communicate'>
+        <button ref="but" type="button" @click="communicate">talk</button>
+      </form>
     </div>
   </div>
 </template>
 <script>
-        function moveImage() {
-                let moveId = document.getElementById("img");
-                let cross = document.getElementById("cross");
-                let com = document.getElementById("com");
-                let bubble = document.getElementById("bubble");
-                let inp = document.getElementById("inp");
-                let but = document.getElementById("but");
+    export default {
+        data() {
+            return {
+                imgGif: require('../assets/img.gif'),
+                imgCross: require('../assets/cross.png'),
+                imgPng2: require('../assets/img2.png'),
+            }
+        },
+        mounted() {
+            let moveImage = () => {
+                let moveId = this.$refs.img;
+                let cross = this.$refs.cross;
+                let com = this.$refs.com;
+                let bubble = this.$refs.bubble;
+                let inp = this.$refs.inp;
+                let but = this.$refs.but;
                 moveId.style.top = "200px";
                 moveId.style.left = "200px";
                 moveId.style.position = "absolute";
@@ -66,7 +79,7 @@
                     let sender = (typeof (window.event) != "undefined") ? e.srcElement : e.target;
 
                     if (sender.id === "img") {
-                        mouseover = true;
+                        let mouseover = true;
                         leftp = parseInt(moveId.style.left);
                         topp = parseInt(moveId.style.top);
                         cleftp = parseInt(cross.style.left);
@@ -108,70 +121,68 @@
                     document.onmousemove = "";
                 }
             }
-    export default {
-        data() {
-            return {
-                imgGif: require('../assets/img.gif'),
-                imgCross: require('../assets/cross.png')
-            }
-        },
-        created () {
             moveImage()
         },
         methods: {
-            mouse_move_on_img () {
-                element = document.getElementById('img');
-                element.src = "img/img2.png";
-                cross = document.getElementById('cross');
-                cross.style.display = "";
-                com = document.getElementById('com');
-                com.style.display = "";
-                bubble = document.getElementById('bubble');
-                bubble.style.display = "";
-            },
-            mouse_move_out_img() {
-                element = document.getElementById('img');
-                element.src = "img/img.gif";
+            mouse_move_on_img: function () {
+                let element = this.$refs.img;
+                element.src = this.imgGif;
+                let cross = this.$refs.cross;
                 cross.style.display = "none";
-                com = document.getElementById('com');
+                let com = this.$refs.com;
                 com.style.display = "none";
-                bubble = document.getElementById('bubble');
+                let bubble = this.$refs.bubble;
                 bubble.style.display = "none";
             },
-            mouse_move_on_cross() {
-                element = document.getElementById('img');
-                element.src = "img/img2.png";
-                cross = document.getElementById('cross');
+            mouse_move_out_img: function () {
+                let element = this.$refs.img;
+                element.src = this.imgPng2;
+                let cross = this.$refs.cross;
+                cross.style.display = "";
+                let com = this.$refs.com;
+                com.style.display = "";
+                let bubble = this.$refs.bubble;
+                bubble.style.display = "";
+            },
+            mouse_move_on_cross: function () {
+                let element = this.$refs.img;
+                element.src = this.imgPng2;
+                let cross = this.$refs.cross;
                 cross.style.display = "";
             },
-            mouse_move_out_cross() {
-                element = document.getElementById('img');
-                element.src = "img/img.gif";
+            mouse_move_out_cross: function () {
+                let element = this.$refs.img;
+                element.src = this.imgGif;
+                let cross = this.$refs.cross;
                 cross.style.display = "none";
             },
-            close_img() {
-                element = document.getElementById('img');
+            close_img: function () {
+                let element = this.$refs.img;
                 element.style.display = "none";
-                cross = document.getElementById('cross');
+                let cross = this.$refs.cross;
                 cross.style.display = "none";
-                document.getElementById('inp').style.display = "none";
-                document.getElementById('but').style.display = "none";
+                let bubble = this.$refs.bubble;
+                bubble.style.display = "none";
+                this.$refs.inp.style.display = "none";
+                this.$refs.but.style.display = "none";
             },
-            communicate() {
-                var t = document.getElementById("inp").value;
-                if (t != null && t != "") {
-                    var txt = new Array();
-                    text = t.replace("吗", "").replace("？", "！").replace("?", "！");
-                    for (var i = 0; i < text.length; i++) {
+            communicate: function () {
+                let t = this.$refs.inp.value;
+                if (t != null && t !== "") {
+                    let txt = [];
+                    let text = t.replace("吗", "").replace("？", "！").replace("?", "！");
+                    for (let i = 0; i < text.length; i++) {
                         if (text[i] === "我") txt[i] = "你";
-                        else if (text[i] == "你") txt[i] = "我";
+                        else if (text[i] === "你") txt[i] = "我";
                         else txt[i] = text[i]
                     }
-                    bubble = document.getElementById('bubble');
+                    let bubble = this.$refs.bubble;
                     bubble.innerHTML = txt.join('') + "<div class=\"arrow\"></div>";
-                    document.getElementById('bubble').style.display = "";
+                    this.$refs.bubble.style.display = "";
+                    // talk完后清空输入框
+                    this.$refs.inp.value = ''
                 } else {
-                    document.getElementById('bubble').innerHTML = "想和我交流吗？";
+                    this.$refs.bubble.innerHTML = "想和我交流吗？";
                 }
             },
         }
@@ -296,10 +307,9 @@
   }
 
   .fix-float-bottom {
-    position:fixed;
+    position: fixed;
     bottom: 20px;
-    width: 90%;
-    height: 450px;
+    height: 550px;
     z-index: 9999;
   }
 </style>

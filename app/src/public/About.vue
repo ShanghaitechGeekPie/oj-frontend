@@ -49,58 +49,18 @@
       <el-col :span="4" :offset="3" type="flex" justify="center" align="middle"><span class="title">Contributors</span>
       </el-col>
     </el-row>
-    <el-row class="margin-top-small">
+    <el-row class="margin-top-small" v-for="pro in profiles" :key="pro.title">
       <el-col :offset="3" :span="4" type="flex" justify="center" align="middle">
-        <img v-bind:src="imgXia" class="img"/>
+        <img v-bind:src="pro.img" class="img"/>
       </el-col>
       <el-col :span="5" type="flex" justify="center" align="left">
-        <span class="table-title black">Min.</span><br><span class="table-title-sub">philipxyc</span>
+        <span class="table-title black">{{ pro.title }}</span><br><span class="table-title-sub">{{ pro.subtitle }}</span>
       </el-col>
       <el-col :span="4" type="flex" justify="center" align="middle">
-        <img v-bind:src="imgDio" class="img"/>
+        <img v-bind:src="pro.img2" class="img"/>
       </el-col>
       <el-col :span="5" type="flex" justify="center" align="left">
-        <span class="table-title black">Diao Zihao</span><br><span class="table-title-sub">EricDiao</span>
-      </el-col>
-    </el-row>
-    <el-row class="margin-top-small">
-      <el-col :offset="3" :span="4" type="flex" justify="center" align="middle">
-        <img v-bind:src="imgWang" class="img"/>
-      </el-col>
-      <el-col :span="5" type="flex" justify="center" align="left">
-        <span class="table-title black">llk89</span><br><span class="table-title-sub"></span>
-      </el-col>
-      <el-col :span="4" type="flex" justify="center" align="middle">
-        <img v-bind:src="imgZhang" class="img"/>
-      </el-col>
-      <el-col :span="5" type="flex" justify="center" align="left">
-        <span class="table-title black">QixuanZhang</span><br><span class="table-title-sub">eEhyQx</span>
-      </el-col>
-    </el-row>
-    <el-row class="margin-top-small">
-      <el-col :offset="3" :span="4" type="flex" justify="center" align="middle">
-        <img v-bind:src="imgQiu" class="img"/>
-      </el-col>
-      <el-col :span="5" type="flex" justify="center" align="left">
-        <span class="table-title black">Artanic30</span><br><span class="table-title-sub"></span>
-      </el-col>
-      <el-col :span="4" type="flex" justify="center" align="middle">
-        <img v-bind:src="imgYao" class="img"/>
-      </el-col>
-      <el-col :span="5" type="flex" justify="center" align="left">
-        <span class="table-title black">nekowink</span><br><span class="table-title-sub"></span>
-      </el-col>
-    </el-row>
-    <el-row class="margin-top-small">
-      <el-col :offset="3" :span="4" type="flex" justify="center" align="middle">
-        <img v-bind:src="imgZhang2" class="img"/>
-      </el-col>
-      <el-col :span="5" type="flex" justify="center" align="left">
-        <span class="table-title black">ZoneLikeWonderland</span><br><span class="table-title-sub"></span>
-      </el-col>
-      <el-col :span="4" type="flex" justify="center" align="middle">
-      </el-col>
-      <el-col :span="5" type="flex" justify="center" align="left">
+        <span class="table-title black">{{ pro.title2 }}</span><br><span class="table-title-sub">{{ pro.subtitle2 }}</span>
       </el-col>
     </el-row>
     <el-row class="margin-top-small">
@@ -116,13 +76,48 @@
     export default {
         data() {
             return {
+                profiles: [
+                    {
+                        img: require('../assets/1.jpg'),
+                        title: 'Min.',
+                        subtitle: 'philipxyc',
+                        img2: require('../assets/2.jpg'),
+                        title2: 'Diao Zihao',
+                        subtitle2: 'EricDiao'
+                    },
+                    {
+                        img: require('../assets/3.jpg'),
+                        title: 'llk89',
+                        subtitle: '',
+                        img2: require('../assets/4.jpg'),
+                        title2: 'QixuanZhang',
+                        subtitle2: 'eEhyQx'
+                    },
+                    {
+                        img: require('../assets/5.jpg'),
+                        title: 'Artanic30',
+                        subtitle: '',
+                        img2: require('../assets/6.jpg'),
+                        title2: 'nekowink',
+                        subtitle2: ''
+                    },
+                    {
+                        img: require('../assets/7.jpg'),
+                        title: 'ZoneLikeWonderland',
+                        subtitle: '',
+                        img2: require('../assets/imgYou.jpg'),
+                        title2: 'Cunhan You',
+                        subtitle2: 'youcunhan'
+                    },
+                ],
                 imgXia: require('../assets/1.jpg'),
                 imgDio: require('../assets/2.jpg'),
                 imgWang: require('../assets/3.jpg'),
                 imgZhang: require('../assets/4.jpg'),
                 imgQiu: require('../assets/5.jpg'),
                 imgYao: require('../assets/6.jpg'),
-                imgZhang2: require('../assets/7.jpg')
+                imgZhang2: require('../assets/7.jpg'),
+                imgYou: require('../assets/imgYou.jpg'),
             }
         },
         components: {
