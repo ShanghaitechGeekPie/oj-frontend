@@ -252,5 +252,10 @@
 
   .code-box {
     min-height: 150px;
+    max-height: 450px;
+    overflow-y:auto;
+  }
+  .code-box::-webkit-scrollbar{
+    display:none;
   }
 </style>
