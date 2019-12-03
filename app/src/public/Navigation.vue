@@ -98,7 +98,10 @@
                 this.$router.go(-2)
             },
             backHome() {
-                this.showGulia = !this.showGulia
+                // avoid double gulia
+                if (!this.$route.path.includes('about')) {
+                    this.showGulia = !this.showGulia
+                }
                 if (this.getBase.isStudent && !this.getBase.isInstructor) {
                     this.$router.push('/home')
                 } else if (!this.getBase.isStudent && this.getBase.isInstructor) {

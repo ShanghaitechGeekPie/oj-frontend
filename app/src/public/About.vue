@@ -64,10 +64,16 @@
       </el-col>
     </el-row>
     <el-row class="margin-top-small">
+      <el-col type="flex" justify="center" align="middle">
+        <span class="about-sub-title">Special thanks to Yexin Zhang & Xinyi Cai for GuLia’s animation.</span>
+      </el-col>
+    </el-row>
+    <el-row class="margin-top-small">
       <el-col :span="18" :offset="3" type="flex" justify="center" align="middle">
         <hr/>
       </el-col>
     </el-row>
+
   </div>
 </template>
 <script>
@@ -110,14 +116,6 @@
                         subtitle2: 'youcunhan'
                     },
                 ],
-                imgXia: require('../assets/1.jpg'),
-                imgDio: require('../assets/2.jpg'),
-                imgWang: require('../assets/3.jpg'),
-                imgZhang: require('../assets/4.jpg'),
-                imgQiu: require('../assets/5.jpg'),
-                imgYao: require('../assets/6.jpg'),
-                imgZhang2: require('../assets/7.jpg'),
-                imgYou: require('../assets/imgYou.jpg'),
             }
         },
         components: {
