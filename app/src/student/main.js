@@ -10,8 +10,10 @@ import 'element-ui/lib/theme-chalk/base.css'
 import axios from 'axios'
 import store from './store'
 import VueCookies from 'vue-cookies'
+import VueClipboard from 'vue-clipboard2'
 
 Vue.use(VueCookies)
+Vue.use(VueClipboard)
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 if (window.location.hostname === 'localhost') {

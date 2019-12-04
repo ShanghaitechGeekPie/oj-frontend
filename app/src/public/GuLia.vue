@@ -11,10 +11,10 @@
            @mouseleave="mouse_move_out_img" align="center">想和我交流吗？
         <div class="arrow"></div>
       </div>
-      <form>
-        <input type="text" class="mytxt" ref="inp" placeholder="和咕凉交流" @keyup.enter='communicate'>
+      <div>
+        <input type="text" class="mytxt" ref="inp" placeholder="和咕凉交流" @keyup.enter="communicate">
         <button ref="but" type="button"  class="gulia-button" @click="communicate">talk</button>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -314,7 +314,7 @@
   }
 
   .gulia-button {
-    margin-top: 4px;
+    margin-top: 2px;
     width: 50px; /* 宽度 */
     height: 30px; /* 高度 */
     border-width: 0px; /* 边框宽度 */

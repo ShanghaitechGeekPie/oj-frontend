@@ -59,7 +59,7 @@ const returnSubmissionHistory = function () {
       'overall_score': Random.natural(10, 100),
       'submission_time': '2018-01-22T09:12:43.083Z',
       'delta': Random.natural(-20, 20),
-      'status': Random.natural(0, 3)
+      'state': Random.natural(0, 3)
     }
     submissionHistorys.push(submissionHistory)
   }
