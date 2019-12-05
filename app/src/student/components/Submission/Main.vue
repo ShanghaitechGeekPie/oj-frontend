@@ -170,8 +170,7 @@
                 return content.trim().replace(/\n/g, '<br/>')
             },
             getCommand() {
-                return `git clone git@oj.geekpie.club:${this.lower(this.getCoInfo.code)}-${this.lower(this.getCoInfo.year + this.getCoInfo.semester)}/${this.lower(this.getAss.short_name)}/
-                    ${this.lower(this.email)}.git ${this.getAss.short_name}`
+                return `git clone git@oj.geekpie.club:${this.lower(this.getCoInfo.code)}-${this.lower(this.getCoInfo.year + this.getCoInfo.semester)}/${this.lower(this.getAss.short_name)}/${this.lower(this.email)}.git ${this.getAss.short_name}`
             },
             onCopy() {
                 this.$notify.success({
