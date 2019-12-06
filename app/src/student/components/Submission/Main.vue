@@ -18,7 +18,7 @@
                 <span>
                   <span class="code-two">git@oj.geekpie.club:{{this.lower(this.getCoInfo.code)}}-{{this.lower(this.getCoInfo.year + this.getCoInfo.semester)}}/{{this.lower(this.getAss.short_name)}}/{{this.lower(this.email)}}.git </span>
                     is the repo for your homework. To access your repo and submit your homework, clone it use the command below and follow the instruction of your TAs in discussion.</span>
-                <el-button class="command-button" v-clipboard:copy="this.getCommand" v-clipboard:success="onCopy" v-clipboard:error="onError"><span class="code-two">{{ this.getCommand() }}</span></el-button>
+                <el-button class="command-button" v-clipboard:copy="this.getCommand()" v-clipboard:success="onCopy" v-clipboard:error="onError"><span class="code-two">{{ this.getCommand() }}</span></el-button>
               </el-col>
             </el-row>
           </el-card>
@@ -170,8 +170,7 @@
                 return content.trim().replace(/\n/g, '<br/>')
             },
             getCommand() {
-                return `git clone git@oj.geekpie.club:${this.lower(this.getCoInfo.code)}-${this.lower(this.getCoInfo.year + this.getCoInfo.semester)}/${this.lower(this.getAss.short_name)}/
-                    ${this.lower(this.email)}.git ${this.getAss.short_name}`
+                return `git clone git@oj.geekpie.club:${this.lower(this.getCoInfo.code)}-${this.lower(this.getCoInfo.year + this.getCoInfo.semester)}/${this.lower(this.getAss.short_name)}/${this.lower(this.email)}.git ${this.getAss.short_name}`
             },
             onCopy() {
                 this.$notify.success({
