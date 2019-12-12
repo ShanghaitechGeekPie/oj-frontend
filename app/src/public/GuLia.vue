@@ -74,7 +74,7 @@
                 but.style.left = "280px";
                 but.style.position = "absolute";
                 ji.style.top = "400px";
-                ji.style.left = "1400px";
+                ji.style.left = "1200px";
                 ji.style.position = "absolute";
                 crossji.style.top = "400px";
                 crossji.style.left = "1470px";
@@ -103,37 +103,37 @@
             let disX = e.clientX - odiv.offsetLeft;
             let disY = e.clientY - odiv.offsetTop;
 
-            let cdisX = this.cdisX 
-            let cdisY = this.cdisY 
+            let cdisX = this.cdisX
+            let cdisY = this.cdisY
             if(e.target.id=="ji"){cdisX=70;}
             let codisX =this.codisX
             let codisY =this.codisY
 
-            let bdisX = this.bdisX 
-            let bdisY = this.bdisY 
+            let bdisX = this.bdisX
+            let bdisY = this.bdisY
 
-            let idisX = this.idisX 
-            let idisY = this.idisY 
+            let idisX = this.idisX
+            let idisY = this.idisY
 
             let budisX =this.budisX
             let budisY =this.budisY
             document.onmousemove = (e)=>{       //鼠标按下并移动的事件
                 //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
-                let left = e.clientX - disX;    
+                let left = e.clientX - disX;
                 let top = e.clientY - disY;
 
-                let cleft = left + cdisX;    
+                let cleft = left + cdisX;
                 let ctop = top + cdisY;
 
-                let coleft = left + codisX;   
+                let coleft = left + codisX;
                 let cotop = top + codisY;
 
                 let bleft = left + bdisX;
                 let btop = top + bdisY;
 
-                let ileft = left + idisX;   
+                let ileft = left + idisX;
                 let itop = top + idisY;
-                
+
                 let buleft = left + budisX;
                 let butop = top + budisY;
 
@@ -165,7 +165,7 @@
 
                 bubble.style.left = bleft + 'px';
                 bubble.style.top = btop + 'px';
-                
+
             };
             document.onmouseup = (e) => {
                 document.onmousemove = null;
@@ -314,7 +314,7 @@
     color: white;
     font-family: "微软雅黑";
     position: absolute;
-    left: 1320px;
+    left: 1120px;
     top: 380px;
     width: 150px;
     height: auto;
